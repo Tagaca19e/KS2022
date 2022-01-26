@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      /* ========================DESKTOP CSS====================== */
+      * {
+        font-family: helvetica;
+      }
+
+      .item {
+        display: table;
+      }
+
+      .item-title {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .collection-1-name {
+        font-size: 32px;
+        font-size: 32px;
+      }
+
+      @import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
+
+      html,
+      body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .swiper-container {
+        width: 100%;
+        height: 90%;
+      }
+
+      .swiper-slide {
+        text-align: center;
+        background: #fff;
+        /* Center slide text vertically */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .container-general {
+        margin: 0 auto;
+        width: 1200px;
+      }
+
+      .container-general .gallery-wrap {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        height: 70vh;
+      }
+
+      .container-general .gallery-wrap .item {
+        flex: 1;
+        height: 50vh;
+        background-position: center;
+        background-size: cover;
+        background-repeat: none;
+        transition: all 0.6s ease;
+        /* Height goes here */
+      }
+
+      .container-general .gallery-wrap .item:hover {
+        flex: 7;
+      }
+
+      .wrap-effect-4 .item {
+        /* has filter when not hovered */
+        filter: brightness(0.7);
+      }
+
+      .wrap-effect-4 .item:hover {
+        box-shadow: 0px 14px 80px rgba(34, 35, 58, 0.2);
+        /* removes filter when hovered */
+        filter: brightness(1);
+      }
+
+      .collection-title {
+        font-size: 26px;
+        font-weight: 900;
+        color: white;
+        opacity: 1;
+      }
+
+      .collection-shop-now {
+        font-size: 20px;
+        color: white;
+        font-weight: 600;
+        text-decoration: solid underline white 1px;
+      }
+      /* ======================DESKTOP IMAGES================= */
+
+      .wrap-effect-4 .item:first-of-type {
+        background-image: url("hello5.jpg");
+      }
+
+      .wrap-effect-4 .item:nth-of-type(2) {
+        background-image: url("hello2.jpg");
+      }
+
+      .wrap-effect-4 .item:nth-of-type(3) {
+        background-image: url("hello3.jpg");
+      }
+
+      .wrap-effect-4 .item:nth-of-type(4) {
+        background-image: url("hello4.jpg");
+      }
+
+      /* ======================MOBILE CSS==================== */
+      .image-grid {
+        display: none !important;
+      }
+
+      @media (max-width: 768px) {
+        .swiper-container {
+          display: none;
+        }
+
+        .image-grid {
+          display: grid !important;
+        }
+      }
+
+      .image-grid {
+        --gap: 10px;
+        --num-cols: 4;
+        --row-height: 300px;
+        box-sizing: border-box;
+        padding: var(--gap);
+        display: grid;
+        grid-template-columns: repeat(var(--num-cols), 1fr);
+        grid-auto-rows: var(--row-height);
+        gap: var(--gap);
+      }
+
+      .image-grid > img {
+        width: 100%;
+        height: 100%;
+        background: blue;
+        object-fit: cover;
+      }
+
+      .image-grid-col-2 {
+        grid-column: span 2;
+      }
+
+      .image-grid-row-2 {
+        grid-row: span 2;
+      }
+
+      @media screen and (max-width: 1024px) {
+        .image-grid {
+          --num-cols: 2;
+          --row-height: 200px;
+        }
+      }
+
+      .image-grid > div {
+        width: 100%;
+        height: 100%;
+        background: white;
+        object-fit: cover;
+      }
+      /* ====================IMAGES FOR MOBILE====================== */
+      .image-grid > #f-col-1 {
+        background-image: url("hello2.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .image-grid > #f-col-2 {
+        background-image: url("hello3.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .image-grid > #f-col-3 {
+        background-image: url("hello4.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .image-grid > #f-col-4 {
+        background-image: url("hello5.jpg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      /* ================================================================ */
+
+      .image {
+        display: table;
+      }
+
+      .f-i-m {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+        margin: 20px;
+      }
+
+      #f-i-m-1 {
+        font-size: 24px;
+        color: white;
+      }
+
+      #f-i-m-2 {
+        font-size: 15px;
+        font-weight: 700;
+        color: white;
+        text-decoration: solid underline white 2px;
+      }
+
+      @media (max-width: 390px) {
+        #f-i-m-1 {
+          font-size: 18px;
+        }
+
+        #f-i-m-2 {
+          font-size: 12px;
+        }
+      }
+
+      .n-col-header {
+        text-align: center;
+        font-size: 3rem;
+        font-weight: bold;
+        letter-spacing: 1px;
+        font-family: Futura, sans-serif;
+        color: #595a5b;
+      }
+      #want {
+        color: #df7aad;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- =======================MOBILE========================== -->
+    <div class="image-grid">
+      <div class="image" id="f-col-1">
+        <div class="f-i-m">
+          <h3 id="f-i-m-1">collection1</h3>
+          <a id="f-i-m-2" href="https://kiarasky.com/products/heel-ing-kit">
+            SHOP NOW
+          </a>
+        </div>
+      </div>
+      <div class="image" id="f-col-2">
+        <div class="f-i-m">
+          <h3 id="f-i-m-1">collection1</h3>
+          <a id="f-i-m-2" href="https://kiarasky.com/products/heel-ing-kit">
+            SHOP NOW
+          </a>
+        </div>
+      </div>
+      <div class="image" id="f-col-3">
+        <div class="f-i-m">
+          <h3 id="f-i-m-1">collection1</h3>
+          <a id="f-i-m-2" href="https://kiarasky.com/products/heel-ing-kit">
+            SHOP NOW
+          </a>
+        </div>
+      </div>
+      <div class="image" id="f-col-4">
+        <div class="f-i-m">
+          <h3 id="f-i-m-1">collection1</h3>
+          <a id="f-i-m-2" href="https://kiarasky.com/products/heel-ing-kit">
+            SHOP NOW
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- =========================DESKTOP========================== -->
+    <div class="swiper-container">
+      <h1 class="n-col-header">I <span id="want"> WANT </span> TO SHOP FOR</h1>
+      <div class="swiper-slide">
+        <div class="container-general wrap-effect-4">
+          <div class="gallery-wrap">
+            <div class="item">
+              <div class="item-title">
+                <p class="collection-title">collection2</p>
+                <a
+                  class="collection-shop-now"
+                  href="https://kiarasky.com/products/heel-ing-kit"
+                >
+                  Shop Now</a
+                >
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-title">
+                <p class="collection-title">collection2</p>
+                <a
+                  class="collection-shop-now"
+                  href="https://kiarasky.com/products/heel-ing-kit"
+                >
+                  Shop Now</a
+                >
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-title">
+                <p class="collection-title">collection2</p>
+                <a
+                  class="collection-shop-now"
+                  href="https://kiarasky.com/products/heel-ing-kit"
+                >
+                  Shop Now</a
+                >
+              </div>
+            </div>
+            <div class="item">
+              <div class="item-title">
+                <p class="collection-title">collection2</p>
+                <a
+                  class="collection-shop-now"
+                  href="https://kiarasky.com/products/heel-ing-kit"
+                >
+                  Shop Now</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
