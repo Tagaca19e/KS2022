@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      * {
+        font-family: helvetica;
+      }
+      .wrap {
+        display: flex;
+        /* padding: 20px; */
+        /* max-width: 1280px; */
+        margin: auto;
+      }
+
+      @media (max-width: 1000px) {
+        .wrap {
+          flex-direction: column;
+        }
+
+        .one,
+        .two {
+          width: 100% !important;
+        }
+
+        #desk-video {
+          width: 100vw !important;
+        }
+
+        .l {
+          background-size: contain;
+        }
+
+        .head {
+          font-size: 100px !important;
+        }
+        .sub-head {
+          font-size: 50px !important;
+        }
+      }
+
+      @media (max-width: 500px) {
+        #icns {
+          width: 60px;
+        }
+
+        .head {
+          font-size: 60px !important;
+        }
+        .sub-head {
+          font-size: 30px !important;
+        }
+        .head-text {
+          font-size: 15px !important;
+        }
+
+        .l {
+          background-image: url("hello.png");
+        }
+      }
+
+      .one {
+        width: 100%;
+        height: 600px;
+
+        text-align: center;
+      }
+
+      .two {
+        /* width: 25%; */
+        overflow: hidden;
+        height: 600px;
+      }
+
+      .one {
+        position: relative;
+
+        background: pink;
+      }
+
+      .one .l {
+        display: flex;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        /* background-color: white; */
+        border-radius: 16px;
+      }
+
+      .l p {
+        width: 100%;
+        margin: 0;
+        position: relative;
+        top: 40%;
+      }
+
+      .head {
+        margin-bottom: 20px;
+      }
+
+      .head {
+        font-weight: bold;
+        font-size: 120px;
+        margin: 0;
+      }
+
+      .sub-head {
+        font-size: 60px;
+        margin: 0;
+        line-spacing: 10px;
+      }
+
+      .pro-space {
+        content: "";
+        margin: 5em;
+        display: block;
+        font-size: 30%;
+      }
+
+      .l .button-div {
+        margin: 0;
+        position: relative;
+        bottom: 5%;
+      }
+      #desk-video {
+        width: 500px;
+        object-fit: cover;
+        height: 600px;
+      }
+      .two {
+        background: pink;
+        object-fit: cover;
+        display: block;
+      }
+
+      /* ======================MOBILE========================= */
+
+      .three {
+        height: 600px;
+        background: pink;
+
+        background-size: cover;
+      }
+
+      #right-img {
+        object-fit: cover;
+        background-size: cover;
+        width: auto;
+
+        height: 100%;
+      }
+
+      .head-text {
+        font-size: 20px;
+        line-height: 30px;
+      }
+
+      .cont {
+        width: 80%;
+        margin: auto;
+        display: table;
+      }
+
+      .l {
+      }
+
+      .l {
+        background-repeat: no-repeat;
+        background-position: bottom;
+      }
+
+      #icon-cont {
+        display: flex;
+        justify-content: center;
+      }
+      #icns {
+        margin: 1vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="two">
+        <div class="r">
+          <div
+            style="
+              width: 100%;
+              height: 0;
+              padding-bottom: 100%;
+              position: relative;
+            "
+          >
+            <iframe
+              src="https://giphy.com/embed/6DzYRWAaz2moMGYfi3"
+              width="100%"
+              height="100%"
+              style="position: absolute"
+              frameborder="0"
+              class="giphy-embed"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <p>
+            <a href="https://giphy.com/gifs/6DzYRWAaz2moMGYfi3">via GIPHY</a>
+          </p>
+
+          <img src="" />
+        </div>
+      </div>
+      <div class="one">
+        <div class="l">
+          <div class="cont">
+            <h1 class="head">Beyond Pro</h1>
+            <h4 class="sub-head">DRILL BIT COLLECTION</h4>
+            <p class="head-text">
+              Introducing the Kiara Sky BeyondPro Drill Bit Collection. Step
+              into the future with ALL NEW Drill Bits to take you Beyond Pro
+              like never before.
+            </p>
+            <div id="icon-cont">
+              <img id="icns" src="sf.png" />
+
+              <img id="icns" src="sf.png" />
+              <img id="icns" src="sf.png" />
+              <img id="icns" src="sf.png" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==========Div max 1000px=========== -->
+
+    <script src="script.js"></script>
+  </body>
+</html>
