@@ -95,6 +95,21 @@
     		}]
     	});
     }
+
+<script src="https://foursixty.com/media/scripts/fs.embed.v2.5.js" data-feed-id="kiara-sky-nails" data-open-links-in-same-page="false" data-theme="sizes_v2_5" data-page-size="7" data-product-images="false"></script> 
+<script>
+</script>
+
+<style>
+
+@media(max-width: 500px){
+.fs-entry-container{
+width: 100% !important;
+
+}
+
+} 
+</style>
       
       
     
