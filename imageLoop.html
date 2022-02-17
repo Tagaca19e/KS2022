@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+        #acrylic_img_container{
+           animation: blink 5s linear infinite;
+                opacity:1;
+             transition:opacity 0.5s linear;
+             width: 500px;
+        }
+
+    </style>
+  </head>
+  <body>
+    <img id="acrylic_img_container" src="" />
+    <script >
+
+      let acrylicData = { 
+        0 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/1.jpg?v=1645060627", 
+        1 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/2.jpg?v=1645060627", 
+        2 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/3.jpg?v=1645060627",
+        3 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/4.jpg?v=1645060627",
+        4 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/5.jpg?v=1645060627",
+        5 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/6.jpg?v=1645060627",
+        6 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/7.jpg?v=1645060627",
+        7 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/8.jpg?v=1645060627",
+        8 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/9.jpg?v=1645060627",
+        9 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/10.jpg?v=1645060627",
+        10 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/11.jpg?v=1645060627",
+        11 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/12.jpg?v=1645060627",
+        12 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/13.jpg?v=1645060627",
+        13 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/14.jpg?v=1645060627",
+        14 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/15.jpg?v=1645060627",
+        15 : "https://cdn.shopify.com/s/files/1/0311/6551/3864/files/16.jpg?v=1645060627"
+      };
+
+      let i = 0;
+     
+
+      function hello (){
+       
+
+        let imgCont = document.getElementById('acrylic_img_container');
+        imgCont.src = acrylicData[i];
+        i++;
+
+        if (i==15){
+          i = 0;
+        }
+        setTimeout(hello, 500);
+      }
+
+      hello();
+
+    </script>
+  </body>
+</html>
