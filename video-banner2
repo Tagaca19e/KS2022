@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .acrylicBannerWrapper{
+      display: flex;
+      width: 100%;
+      aspect-ratio: 16 / 6.5;
+      height: auto;
+    } 
+
+    @media screen and (max-width: 500px){
+      .acrylicBannerWrapper {
+        flex-direction: column-reverse !important;
+      }
+
+      .acrylicBannerOne {
+        width: 100% !important;
+      }
+
+      .acrylicBannerTwo {
+        width: 100% !important;
+      }
+      
+      .acrylicBannerOneInner {
+        display: none;
+      }
+
+      .acrylicBannerOneInnerMobile {
+        display: block !important;
+      }
+    }
+
+    .acrylicBannerOne{
+      background: #FFF8F6;
+      width: 60%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 2vw;
+      position: relative;
+      font-family: "Avenir Next", sans-serif;
+    }
+
+    .acrylicBannerTwo{
+      width: 40%;
+    }
+
+    .acrylicBannerVideo{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .acrylicBannerOneInnerMobile{
+      display: none;
+    }
+
+    #acrylicBannerText1, #acrylicBannerText2, #acrylicBannerText3{
+      visibility: hidden;
+    }
+
+    #acrylicBannerText1, #acrylicBannerText2, #acrylicBannerText3, .acrylicBannerOneInnerMobile{
+      font-weight: bolder !important;
+      background-color: #FBDFE5;
+      -webkit-background-clip: text;
+      -moz-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      text-shadow: rgb(255 255 255 / 50%) 0px 3px 3px;
+    }
+
+    #acrylicBannerTextMobile{
+      font-size: 7vw !important;
+    }
+  </style> 
+
+</head>
+<body>
+  
+  <div class="acrylicBannerWrapper">
+    <div class="acrylicBannerOne">
+      <div class="acrylicBannerOneInner">
+        <h1 id="acrylicBannerText1"> SELF LEVELING </h1>
+        <h1 id="acrylicBannerText2"> FLAWLESS FINISH </h1>
+        <h1 id="acrylicBannerText3"> NO MARBLING </h1>
+      </div>
+      <div class="acrylicBannerOneInnerMobile">
+        <h1 id="acrylicBannerTextMobile">SELF LEVELING</h1>
+
+        <script>  
+          let acrylicTextData = {
+            0 : "SELF LEVELING",
+            1: "FLAWLESS FINISH",
+            2 : "NO MARBLING"
+          }
+
+          let acrylicCounter = 0;
+          //Infinite loop for displaying text on mobile
+          setInterval(function(){
+            let textMobileContainer = document.getElementById('acrylicBannerTextMobile');
+            console.log(acrylicCounter);
+            textMobileContainer.innerHTML = acrylicTextData[acrylicCounter];
+            if (acrylicCounter == 2 ) {
+              acrylicCounter = 0;
+            } else {
+              acrylicCounter+=1;              
+            }
+          }, 1000);
+          
+        </script>
+      </div>
+    </div>
+
+    <div class="acrylicBannerTwo">
+      <video preload="none" class="acrylicBannerVideo" autoplay="" playsinline="" muted="" loop="">
+        <source src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/acrylicCoverVideo.mp4?v=1645138880" type="video/mp4">
+      </video>
+    </div>
+  </div>
+
+<script>
+
+  let acrylicText = document.getElementById('acrylicBannerText1');
+  let acrylicText2 = document.getElementById('acrylicBannerText2');
+  let acrylicText3 = document.getElementById('acrylicBannerText3');
+
+  //Initial call for the function
+  acrylicRepeater();
+
+  //Calling repeater for infinite repition
+  let acrylicInterval = setInterval(acrylicRepeater, 5000)
+
+  function acrylicRepeater() {
+        let acrylicSetTimeout = setTimeout(function(){
+      acrylicText.style = 'visibility: visible';
+
+    }, 1000);
+
+    let acrylicSetTimeoutDone = setTimeout(function(){
+      acrylicText.style = 'visibility: hidden';
+
+    }, 5000);
+
+    let acrylicSetTimeout2 = setTimeout(function(){
+      acrylicText2.style = 'visibility: visible';
+
+    }, 2000);
+
+    let acrylicSetTimeout2Done = setTimeout(function(){
+      acrylicText2.style = 'visibility: hidden';
+
+    }, 5000);
+
+    let acrylicSetTimeout3 = setTimeout(function(){
+      acrylicText3.style = 'visibility: visible';
+
+    }, 3000);
+
+    let acrylicSetTimeout3Done = setTimeout(function(){
+      acrylicText3.style = 'visibility: hidden';
+
+    }, 5000);
+  }
+</script>
+</body>
+</html>
