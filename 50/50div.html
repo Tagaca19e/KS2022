@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      .custom_banner_main{
+        aspect-ratio: 16/6;
+        background: beige;
+        display: flex;
+      }
+      
+      .custom_banner_one{
+        width: 50%;
+        background: #ffe1e7;
+        text-align: center;
+        display: inherit;
+      }
+
+      .custom_banner_one_inner{
+        margin: 30px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .custom_banner_two{
+        width: 50%;
+        background: blue;
+      }
+
+      .custom_banner_imgsrc {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .custom_banner_subheading {
+        font-size: 1.2vw;
+        margin: 0;
+      }
+
+      .custom_banner_heading {
+        font-size: 2vw;
+      }
+
+      .custom_banner_content {
+        font-size: 1.2vw;
+      }
+
+      #custom-cont {
+        display: flex;
+        justify-content: center;
+  
+      }
+
+      #icns {
+        margin: 1vw;
+      }
+
+      #custom-icons-cont {
+        display: flex;
+        flex-wrap: wrap;
+        text-align: center;
+        flex-direction: column;
+        margin: 1.5vw;
+        width: 4.5vw;
+        text-decoration: none;
+        color: black;
+      }
+
+      #custom-icons-text{
+        font-size: 1.2vw;
+        line-height: 0;
+      }
+
+      @media screen and (max-width: 950px){
+        .custom_banner_main{
+          flex-direction: column;
+        }
+
+        .custom_banner_one{
+          width: 100%;
+        }
+
+        #custom-icons-cont {
+          width: 80px;
+        }        
+        .custom_banner_two{
+          width: 100%;
+        }
+        
+        #custom-icons-text{
+        font-size: 12px;
+        }
+
+
+        .custom_banner_subheading {
+          font-size: 24px;
+        }
+  
+        .custom_banner_heading {
+          font-size: 24px;
+        }
+
+        #custom_banner_img{
+          width: 60px !important;
+        }
+
+        #custom-cont{
+          flex-wrap: wrap;
+        }
+
+        .custom_banner_content {
+          font-size: 12px;
+        }
+      }
+
+      #custom_banner_img{
+        margin: auto;
+        width: 4.5vw;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="custom_banner_main">
+      <div class="custom_banner_one">
+        <div class="custom_banner_one_inner">
+          <h6 class="custom_banner_subheading"> Sub Heading </h6>
+          <h1 class="custom_banner_heading"> Heading </h1>
+          <p class="custom_banner_content"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Potenti nullam ac tortor vitae purus faucibus ornare suspendisse. Lectus proin nibh nisl condimentum. 
+          </p>
+
+            <div id="custom-cont">
+              <a id="custom-icons-cont" href="#">
+                <img id="custom_banner_img" alt="" src="1.png" />
+                <p id="custom-icons-text" >No Shaping</p>
+              </a>
+              <a id="custom-icons-cont" href="#">
+                <img id="custom_banner_img" alt="" src="2.png" />
+                <p id="custom-icons-text">Easy Apply</p>
+              </a>
+              <a id="custom-icons-cont" href="#">
+                <img id="custom_banner_img" alt="" src="3.png" />
+                <p id="custom-icons-text">No Monomer</p>
+              </a>
+              <a id="custom-icons-cont" href="#">
+                <img id="custom_banner_img" alt="" src="4.png" />
+                <p id="custom-icons-text">No Chipping</p>
+              </a>
+              <a id="custom-icons-cont" href="#">
+                <img id="custom_banner_img" alt="" src="5.png" />
+                <p id="custom-icons-text">Damage Free</p>
+              </a>
+              <a id="custom-icons-cont" href="#">
+                <img id="custom_banner_img" alt="" src="6.png" />
+                <p id="custom-icons-text">Lasts Weeks</p>
+              </a>
+            </div>
+            <button> VIEW NOW </button>
+        </div>
+      </div>
+      
+      <div class="custom_banner_two">
+        <img  class="custom_banner_imgsrc" src="gelly.png" />
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
