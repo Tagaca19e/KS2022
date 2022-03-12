@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+    <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+    <style>
+      body {
+        margn: 0;
+      }
+      .fs-main {
+        aspect-ratio: 16/5;
+        display: flex;
+      }
+
+      .fs-one {
+        background: #e6d0e6;
+        width: 50%;
+        display: table;
+      }
+
+      .fs-two {
+        background: yellow;
+        width: 50%;
+      }
+
+      .carousel-cell {
+        margin-right: 10px;
+        width: 100%;
+        height: 675px;
+        background: green;
+      }
+
+      .carousel-cell {
+        width: 100%;
+        
+      }
+
+      .flickity-viewport,
+      .carousel-cell {
+        display: flex;
+      }
+
+      .fs-one-inner {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .fs-one-inner-text {
+        margin: auto;
+        max-width: 600px;
+      }
+      .fs-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .flickity-page-dots .dot {
+        height: 4px;
+        width: 40px;
+        margin: 0;
+        border-radius: 0;
+        background: white;
+      }
+
+      @media screen and (max-width: 900px) {
+        .carousel-cell {
+          flex-direction: column;
+          aspect-ratio: unset !important;
+        }
+
+        .viewport {
+          aspect-ratio: none !important;
+          height: 675px !important;
+        }
+
+        .fs-one {
+          width: 100%;
+        }
+
+        .fs-two {
+          width: 100%;
+        }
+        .carousel-cell {
+          height: unset !important;
+        }
+      }
+
+      .flickity-page-dots {
+        bottom: 20px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="carousel" data-flickity='{ "wrapAround": true }'>
+      <div class="fs-slide carousel-cell">
+        <div class="fs-one">
+          <div class="fs-one-inner">
+            <div class="fs-one-inner-text">
+              <h2> THIS IS SUB HEADING </h2>
+              <h1> THIS IS THE TITLE </h1>
+              <p> saodjfoijdasfjo i sdfjasdjfio joisadjf asdfoijasiod fjsdafdji fjoisadfsadjfosoiadfjoidsjfoijsdioafjoisdjf as fjosidjfoisajd</p>
+            </div>
+          </div>
+        </div>
+        <div class="fs-two">
+          <img class="fs-image" src="cv.webp" />
+        </div>
+      </div>
+      <div class="fs-slide carousel-cell">
+        <div class="fs-one">
+          <div class="fs-one-inner">
+            <div class="fs-one-inner-text">
+              <h2> THIS IS SUB HEADING </h2>
+              <h1> THIS IS THE TITLE </h1>
+              <p> saodjfoijdasfjo i sdfjasdjfio joisadjf asdfoijasiod fjsdafdji fjoisadfsadjfosoiadfjoidsjfoijsdioafjoisdjf as fjosidjfoisajd</p>
+            </div>
+          </div>
+        </div>
+        <div class="fs-two">
+          <img class="fs-image" src="ks.png" />
+        </div>
+      </div>
+    </div>
+    <script>
+      console.log("hello world");
+      
+    </script>
+  </body>
+</html>
