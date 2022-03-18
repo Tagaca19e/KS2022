@@ -1,0 +1,465 @@
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+<style>
+ .fs-main {
+     aspect-ratio: 16/5;
+     display: flex;
+}
+ .fs-one {
+     width: 50%;
+ 	 display: flex;
+     justify-content: center;
+     align-items: center;
+}
+ .fs-two {
+     width: 50%;
+}
+ .carousel-cell {
+     margin-right: 10px;
+     width: 100%;
+     aspect-ratio: 16/6;
+}
+ .carousel-cell {
+     width: 100%;
+}
+ .flickity-viewport, .carousel-cell {
+     display: flex;
+}
+ .fs-one-inner {
+     display: table-cell;
+     vertical-align: middle;
+}
+ .fs-one-inner-text {
+     margin: auto;
+     padding: 30px;
+     max-width: 400px;
+}
+ .fs-image-desk {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+}
+ .flickity-page-dots .dot {
+     height: 4px !important;
+     width: 40px !important;
+     margin: 0 !important;
+     border-radius: 0 !important;
+     background: white !important;
+     color: white;
+}
+ .flickity-page-dots .dot.is-selected {
+     border-color: white;
+}
+ .flickity-page-dots {
+	 bottom: 20px !important;
+}
+/*  .fs-heading {
+     font-size: 40px;
+}
+ .fs-subheading {
+     font-size: 30px;
+}
+ .fs-content {
+     font-size: 18px;
+} */
+ .flickity-page-dots {
+     bottom: 20px;
+}
+ .flickity-prev-next-button:hover {
+     transform: none !important;
+}
+ .flickity-prev-next-button {
+     transform: none !important;
+}
+ .fs-image-mob {
+    display: none;
+}
+
+ .fs-left {
+    flex-direction: row-reverse;
+}
+  @media screen and (max-width: 900px) {
+    .carousel-cell {
+      aspect-ratio: 100% !important;
+    }
+    div.fs-slide-{{section.id}}{
+	  height: unset;
+    }
+    .fs-top {
+      flex-direction: column-reverse !important;
+    }
+    .fs-bot {
+      flex-direction: column !important;
+    }
+    
+    .fs-mobile-height {
+      height: 100% !important;
+    }
+
+
+    .fs-one, .fs-two {
+      width: 100% !important;
+    }
+
+    .fs-heading {
+      margin: 20px 0px;
+    }
+    .fs-content {
+      margin: 20px 0px;
+    }
+    .fs-subheading {
+      margin: 20px 0px;
+    }
+
+
+    {% for block in section.blocks %}
+    
+    h1.fs-mobile-head-{{section.id}}-{{block.id}} {
+      {{block.settings.heading_css_mobile}} 
+    }
+
+    h2.fs-mobile-sub-{{section.id}}-{{block.id}} {
+      {{block.settings.subheading_css_mobile}} 
+    }
+    p.fs-mobile-cont-{{section.id}}-{{block.id}} {
+      {{block.settings.content_css_mobile}} 
+    }
+    
+
+    {% endfor %}
+    
+    .fs-one-inner-text {
+      margin: auto;
+      padding: 30px;
+      text-align: center;
+    }
+    .fs-image-desk {
+      display: none;
+    }
+    .fs-image-mob {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  {% for block in section.blocks %}
+
+  .fs-mobile-head-{{section.id}}-{{block.id}} {
+    {{block.settings.heading_css}} 
+  }
+
+  .fs-mobile-sub-{{section.id}}-{{block.id}} {
+    {{block.settings.subheading_css}} 
+  }
+  .fs-mobile-cont-{{section.id}}-{{block.id}} {
+    {{block.settings.content_css}} 
+  }
+
+  {% endfor %}
+.test1 {
+    animation: vanishIn 1000ms both
+}
+  
+@keyframes vanishIn {
+    0% {
+        opacity: 0;
+        transform: scale3d(2, 2, 2);
+        filter: blur(90px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale3d(1, 1, 1);
+        filter: blur(0px); 
+    }
+}
+  
+  .fs-slide-{{section.id}}{
+    {{section.settings.viewport_height}}
+  }
+  
+  
+</style>
+{% if section.settings.show_section %}
+
+<section class="test1" style='{{section.settings.outer_css}}' data-section-id="{{section.id}}">
+     <div class="carousel" style="margin: auto; {{section.settings.main_css}}"  data-flickity='{ {{section.settings.flickity}} }'>
+
+  	  {% for block in section.blocks %}
+       
+      <div  class="fs-slide fs-slide-{{section.id}} carousel-cell {% if block.settings.full_image %} fs-mobile-height {% endif %} {% if section.settings.mobile_image_position == 'top' %} fs-top {% else %} fs-bot {% endif %} {% if section.settings.image_position == 'left' %} fs-left {% endif %} ">
+        <div class="fs-one" style='{{block.settings.background_css}} {% unless section.settings.overlay %} background: none !important; {% endunless %}{% if block.settings.full_image %} display:none !important; {% endif %}'>
+          <div class="fs-one-inner">
+            <div class="fs-one-inner-text">
+              <h2 class="fs-subheading fs-mobile-sub-{{section.id}}-{{block.id}}" style=""> {{block.settings.subheading}} </h2>
+              <h1 class="fs-heading fs-mobile-head-{{section.id}}-{{block.id}}"  style=""> {{block.settings.heading}} </h1>
+              
+              <p class="fs-content  fs-mobile-cont-{{section.id}}-{{block.id}}"  style="">{{block.settings.content}}</p>
+              
+              {% unless block.settings.button_text == blank %}
+              <a href="{{section.settings.link_url}}" class="Button Button--primary">{{block.settings.button_text}} </a>
+              {% endunless %}
+            </div>
+          </div>
+        </div>
+        <div class="fs-two {% if block.settings.full_image %} fs-mobile-height {% endif %}" style='{% if block.settings.full_image %} width: 100% !important; {% endif %} position: relative; '>
+          {% if block.settings.full_image_text and block.settings.full_image %}
+          <div style="margin:auto;position: absolute;position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%); text-align: center;">
+              <h2 class="fs-subheading fs-mobile-sub-{{section.id}}-{{block.id}}" style=""> {{block.settings.subheading}} </h2>
+              <h1 class="fs-heading fs-mobile-head-{{section.id}}-{{block.id}}"  style=""> {{block.settings.heading}} </h1>
+              <p class="fs-content  fs-mobile-cont-{{section.id}}-{{block.id}}"  style="">{{block.settings.content}}</p>
+              {% unless block.settings.button_text == blank %}
+              <a href="{{block.settings.link_url}}" class="Button Button--primary">{{block.settings.button_text}} </a>
+              {% endunless %}
+          </div>
+          {% endif %}
+		
+	
+          {% if block.settings.video == blank%}
+          
+          
+
+          <img loading="lazy" class="fs-image-desk" src="{{block.settings.image | img_url : 'master'}}" />
+          <img loading="lazy" class="fs-image-mob" src="{{block.settings.image_mobile | img_url : 'master'}}" />
+
+          
+          
+          {% endif %}
+          {% unless block.settings.video == blank %}
+          <video class="fs-image-desk" style="width: 100%; height: 100%; object-fit: cover;" preload="none" autoplay playsinline muted loop>
+            <source src="{{block.settings.video}}" type"video/mp4">
+          </video>
+          <video class="fs-image-mob" style="width: 100%; height: 100%; object-fit: cover;" preload="none" autoplay playsinline muted loop>
+            <source src="{{block.settings.video_mobile}}" type"video/mp4">
+          </video>
+          {% endunless %}
+	
+
+        </div>
+
+      </div>
+      {% endfor %}
+
+    </div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Featured Slider",
+    "settings": [
+	  {
+		"type" : "checkbox",
+		"id" : "show_section",
+		"label" : "Show Section",
+		"default" : true
+	  },
+	  {
+		"type" : "html",
+		"id" : "flickity",
+		"label" : "Slider Settings",
+		"default" : "\"wrapAround\": true, \"contain\": true, \"prevNextButtons\": true, \"pageDots\": true, \"autoPlay\" : 5000, \"pauseAutoPlayOnHover\" : false"
+	  },
+	  {
+		"type" : "checkbox",
+		"id" : "overlay",
+		"label" : "Overlay Text Area",
+		"default" : false
+	  },
+	  {
+		"type" : "html",
+		"id" : "viewport_height",
+		"label" : "Viewport Height",
+		"default" : "height: 800px;"
+	  },
+	  {
+		"type" : "html",
+		"id" : "viewport_height_mobile",
+		"label" : "Viewport Height Mobile",
+		"default" : "height: 700px;"
+	  },
+	  {
+		"type" : "html",
+		"id" : "outer_css",
+		"label" : "Outer CSS",
+		"default" : "background: white;"
+	  },
+	  {
+		"type" : "html",
+		"id" : "main_css",
+		"label" : "Main CSS",
+		"default" : "max-width: 2300px;"
+	  },
+	  {
+		"type" : "html",
+		"id" : "background_css",
+		"label" : "Text Area CSS",
+		"default" : "width: 50%; background: white; "
+	  },
+	  {
+		"type" : "html",
+		"id" : "two",
+		"label" : "Image Container CSS",
+		"default" : "width: 50%; "
+	  },
+      {
+        "type": "select",
+        "id": "image_position",
+        "label": "Image position",
+        "options": [
+          {
+            "value": "left",
+            "label": "Left"
+          },
+          {
+            "value": "right",
+            "label": "Right"
+          }
+        ],
+        "default": "right"
+      },
+      {
+        "type": "select",
+        "id": "mobile_image_position",
+        "label": "Mobile image position",
+        "options": [
+          {
+            "value": "top",
+            "label": "Top"
+          },
+          {
+            "value": "bottom",
+            "label": "Bottom"
+          }
+        ],
+        "default": "top"
+      }
+],
+ "blocks": [
+      {
+        "type": "image",
+        "name": "Image Banner",
+        "settings": [
+          {
+            "type" : "checkbox",
+            "id" : "full_image",
+            "label" : "Full Image",
+            "default" : false
+          },
+          {
+            "type" : "checkbox",
+            "id" : "full_image_text",
+            "label" : "Show Full Image Text",
+            "default" : true
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image",
+			"info" : "952 x 595px"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Image",
+			"info" : "380 x 460px"
+          },
+          {
+            "type": "text",
+            "id": "video",
+            "label": "Video CDN",
+			"info" : "952 x 595px"
+          },
+          {
+            "type": "text",
+            "id": "video_mobile",
+            "label": "Video CDN",
+			"info" : "380 x 460px"
+          },
+          {
+            "type": "html",
+            "id": "subheading",
+            "label": "Sub-heading"
+          },
+          {
+            "type": "html",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "html",
+            "id": "content",
+            "label": "Content"
+          },
+          {
+            "type" : "html",
+            "id" : "subheading_css",
+            "label" : "Sub Heading CSS",
+            "default" : " font-size: 30px; color: pink; font-weight: 400;"
+          },
+          {
+            "type" : "html",
+            "id" : "subheading_css_mobile",
+            "label" : "Sub Heading CSS Mobile",
+            "info" : "Use Important for Mobile",
+            "default" : "font-size: 28px;"
+          },
+          {
+            "type" : "html",
+            "id" : "heading_css",
+            "label" : "Heading CSS",
+            "default" : " font-size: 40px; color: pink; font-weight: 600;"
+          },
+          {
+            "type" : "html",
+            "id" : "heading_css_mobile",
+            "label" : "Heading CSS Mobile",
+            "info" : "Use Important for Mobile",
+            "default" : "font-size: 30px;"
+          },
+          {
+            "type" : "html",
+            "id" : "content_css",
+            "label" : "Content CSS",
+            "default" : "font-size: 18px; color: gray; font-weight: 400;"
+          },
+          {
+            "type" : "html",
+            "id" : "content_css_mobile",
+            "label" : "Content CSS Mobile",
+            "info" : "Use Important for Mobile",
+            "default" : "font-size: 16px;"
+          },
+          {
+            "type" : "text",
+            "id" : "button_text",
+            "label" : "Button",
+            "info" : "Buttons for Banner",
+            "default" : "Shop Now"
+          },
+          {
+            "type" : "url",
+            "id" : "link_url",
+            "label" : "Button Link",
+            "info" : "Links for the Buttons"
+          }
+        ]
+      }
+    ],
+
+    "presets": [
+      {
+        "category": "Text",
+        "name": "Featured Slider",
+        "settings": {}
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
