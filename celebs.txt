@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>replit</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      body {
+        margin: 0;
+      }
+
+      #carousel-loop-main {
+        height: 300px;
+        position: relative;
+        overflow: hidden;
+        margin: 10px 0px;
+      }
+
+      .carousel-secondary {
+        -webkit-animation: carousel_animation 15s linear infinite;
+        
+        animation: carousel_animation 15s linear infinite;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+      img {
+        margin: 0px 10px;
+      }
+
+      .carousel-secondary-reverse {
+        -webkit-animation: carousel_animation 15s linear infinite;
+        
+        animation: carousel_animation 15s linear infinite;
+        animation-direction: reverse;
+
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+
+        @keyframes carousel_animation {
+        100% { 
+          transform: translateX(-66.6666%);  
+        }
+
+      }
+
+/*       @keyframes carousel_animation {
+        0% {
+          -webkit-transform: translate(0, 0);
+        }
+
+        100% {
+          -webkit-transform: translate(-50%, 0);
+        }
+      } */
+
+
+
+      .carousel-primary {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .carousel-primary {
+        background: #fff3f5;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carousel-primary">
+      <h1> OUR PRODUCTS ARE LOVED! </h1>
+      <p> Beloved but the mdeia, celebs, nail pros & besties alike! Checkout some of our honorable mentions: </p>
+      <div id="carousel-loop-main">
+        <div class="carousel-secondary">
+          <img src="rihanna.png" alt="">
+          <img src="munn-and-alba.png" alt="">
+          <img src="lil-nas-x.png" alt="">
+          <img src="lauren-london.png" alt="">
+          <img src="kylie-jenner.png" alt="">
+          <img src="karol-g.png" alt="">
+          <img src="alicia-keyes.png" alt="">
+          <img src="rihanna.png" alt="">
+          <img src="munn-and-alba.png" alt="">
+          <img src="lil-nas-x.png" alt="">
+          <img src="lauren-london.png" alt="">
+          <img src="kylie-jenner.png" alt="">
+          <img src="karol-g.png" alt="">
+          <img src="alicia-keyes.png" alt="">
+        </div>
+      </div>
+      <div id="carousel-loop-main">
+        <div class="carousel-secondary-reverse">
+          <img src="becky-g.png" alt="">
+          <img src="camilla-cabello.png" alt="">
+          <img src="damelio-sisters.png" alt="">
+          <img src="hailey-beiber.png" alt="">
+          <img src="jessica-alba.png" alt="">
+          <img src="karol-g.png" alt="">
+          <img src="katy-perrry.png" alt="">
+          <img src="becky-g.png" alt="">
+          <img src="camilla-cabello.png" alt="">
+          <img src="damelio-sisters.png" alt="">
+          <img src="hailey-beiber.png" alt="">
+          <img src="jessica-alba.png" alt="">
+          <img src="karol-g.png" alt="">
+          <img src="katy-perrry.png" alt="">
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
