@@ -1,0 +1,5 @@
+Date: 3/30/22 
+Product-form: Added feature for teaser products Lines: [31-45]
+Product-meta: Showind description Lines: [150-154]
+
+Product-Default: 1.1 : This product template is for teaser products only!
