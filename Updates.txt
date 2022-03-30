@@ -3,3 +3,4 @@ Product-form: Added feature for teaser products Lines: [31-45]
 Product-meta: Showind description Lines: [150-154]
 
 Product-Default: 1.1 : This product template is for teaser products only!
+Featured-product-item : Added code for AJAX button. Lines: [491-499]
