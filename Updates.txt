@@ -4,3 +4,9 @@ Product-meta: Showing description. Lines: [150-154]
 
 Product-Default: 1.1 : This product template is for teaser products only!
 Featured-product-item : Added code for AJAX button. Lines: [491-499]
+
+Date: 3/31/22
+Product-form: Add to cart feature for that specific id and specific quantity. 
+Theme.js: Added bottom script for global function for posting two items at the same time.
+Product-recommendations: Changed render section from product-item to featured-product-item.
+Product-recently-viewed: Changed render section from product-item to featured-product-item.
