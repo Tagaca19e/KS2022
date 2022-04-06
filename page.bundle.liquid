@@ -1,0 +1,395 @@
+<div class="bundle-product-template page__bundle-page">
+  <div class="product_hero-section">
+    <div class="content">
+      <h2>Build your own gelly tips bundle</h2>
+
+      <div class="image-with-text">
+        <div class="image">
+          <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/new-bundle-desktop-concept2.jpg?v=1631176824">
+        </div>
+
+        <div class="text">
+          <p>Select the perfect shape and size of the soak-off Gelly Tip Kit along with your favorite gel polish color (we've included the top picks from our trending colors for you to choose from). Get everything you need to create the best set evety time, you won't believe it.</p>
+
+          <h3>You choose your</h3>
+          <div class="image-wrap">
+            <div class="image-wrap__item">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/35K-RPM_7c8768a3-6caa-4875-80ae-83484302e1ae.png?v=1628550345">
+              <span>Gelly Tips<br>
+                Starter Kit</span>
+            </div>
+            <div class="image-wrap__item">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/smooth-vibration_0ef809c4-2016-4ef4-96b6-f43dec6005e4.png?v=1628550345">
+              <span>2 Gel Colors</span>
+            </div>
+            <div class="image-wrap__item">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/10hr-battery_105fa28e-ee5e-4488-adae-00cdb16ded41.png?v=1628550344">
+              <span>Cuticle Oil</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section data-section-id="bundle-product-alternate-template">
+
+    <form action="/cart/add" method="post" id="ProductFormBundle" class="ProductForm BundleProductForm">
+      {% section 'page-bundle' %}
+    </form>
+  </section>
+
+  <script>
+
+    $(document).ready(function() { 
+      function formatMoney(cents, format) {
+        if (typeof cents === 'string') {
+          cents = cents.replace('.', '');
+        }
+
+        var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/,
+            formatString = format || '${{amount}}';
+
+            function defaultTo(value, defaultValue) {
+              return value == null || value !== value ? defaultValue : value;
+            }
+
+        function formatWithDelimiters(number, precision, thousands, decimal) {
+          precision = defaultTo(precision, 2);
+          thousands = defaultTo(thousands, ',');
+          decimal = defaultTo(decimal, '.');
+
+          if (isNaN(number) || number == null) {
+            return 0;
+          }
+
+          number = (number / 100.0).toFixed(precision);
+
+          var parts = number.split('.'),
+              dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+              centsAmount = parts[1] ? decimal + parts[1] : '';
+
+          return dollarsAmount + centsAmount;
+        }
+
+        var value = '';
+
+        switch (formatString.match(placeholderRegex)[1]) {
+          case 'amount':
+            value = formatWithDelimiters(cents, 2);
+            break;
+          case 'amount_no_decimals':
+            value = formatWithDelimiters(cents, 0);
+            break;
+          case 'amount_with_space_separator':
+            value = formatWithDelimiters(cents, 2, ' ', '.');
+            break;
+          case 'amount_no_decimals_with_comma_separator':
+            value = formatWithDelimiters(cents, 0, ',', '.');
+            break;
+          case 'amount_no_decimals_with_space_separator':
+            value = formatWithDelimiters(cents, 0, ' ');
+            break;
+          case 'amount_with_comma_separator':
+            value = formatWithDelimiters(cents, 2, '.', ',');
+            break;
+        }
+
+        if (formatString.indexOf('with_comma_separator') !== -1) {
+          return formatString.replace(placeholderRegex, value).replace(',00', '');
+        } else {
+          return formatString.replace(placeholderRegex, value).replace('.00', '');
+        }
+      };
+
+      $('.step').on('click','.bundle_button', function(e){
+        e.preventDefault();
+        
+        var productItem = $(this).data('value'),
+            currentPrice = $(this).siblings('.bundle-product-item').data('price');
+
+        var currentVal = $(this).data('value'),
+            currentStep = $(this).data('step'),
+            currentImg = $(this).siblings('img').attr('src'),
+            countProd = $(this).parents('.step').data('count'),
+            stepLength = $('[data-count-step="'+currentStep+'"]').length,
+            totalProd = countProd - 1;
+        
+         var itemPrice = $(this).attr('data-price'),
+             discountPrice = $(this).attr('data-compare-at-price');
+        
+	
+        var activeBtn = false;
+
+        if($(this).hasClass('active-item') == false) {
+          $(this).addClass('active-item');
+          
+          
+          $(this).html('Remove');
+          activeBtn = true;
+          
+          if(stepLength <= totalProd) {
+            $('<input type="hidden" class="property_input" 	data-price="'+itemPrice+'" data-compare-at-price="'+discountPrice+'" data-count-step="'+ currentStep  +'" value="'+currentVal+'" name="properties['+currentVal+']">').appendTo('.BundleProductForm');
+          } else {
+            var propertiesInputs = $('.property_input');
+
+            if(propertiesInputs.length) {
+              for(var i=0;i < propertiesInputs.length;i++) {
+                var propertiesInput = $(propertiesInputs[i]);
+                if(propertiesInput.val() == '') {
+                  propertiesInput.val(currentVal);
+                 
+                  propertiesInput.attr('data-count-step',currentStep);
+                  propertiesInput.attr('data-price',itemPrice);
+                  propertiesInput.attr('data-compare-at-price',discountPrice);
+                  
+                  var property_name = "properties["+currentVal+"]";
+                  propertiesInput.attr('name',property_name);
+                  break;
+                }
+              }
+            }
+          }
+            $('.option').find('img').each(function(){
+              if($(this).attr('src') == '') {
+                $(this).show().attr('src', currentImg);
+                $(this).parents('.option').siblings('.remove').show();
+                $(this).parents('.option').css('background', 'transparent').attr('data-option',currentVal);
+                return false; 
+              }
+            });
+              
+        } else {
+
+          $(this).removeClass('active-item');
+          $(this).html('Add');
+          
+          $('.product-details .ProductForm__AddToCart').css('pointer-events','none');
+          $('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+
+		var property_input = $('.property_input[value="' + currentVal + '"]');
+          
+          var parentEl =  $(this).parents('.step').data('count');
+
+          if(property_input.length) {
+            property_input.val('').attr('name', "").attr('data-current-step','').attr('data-price','').attr('data-compare-at-price','');
+          }
+
+          var activeOptionBlock = $('[data-option="'+ currentVal +'"]');
+          if(activeOptionBlock.length) {
+            activeOptionBlock.find('img').hide().attr('src','');
+            activeOptionBlock.css('background', '#ffeef3');
+            activeOptionBlock.siblings('.remove').hide();
+            activeOptionBlock.attr('data-option','');
+          }
+
+          var other_items =  $(this).closest('.steps-wrap').find('.bundle_button');
+          if(other_items.length) {
+            other_items.each(function(index,item) {
+              $(item).removeClass('disabled');
+            });
+          }
+        }
+
+        let sum = 0,
+            discountedAmount = 0;
+
+        var property_inputS = $('.property_input');
+        if(property_inputS.length) {
+          property_inputS.each(function(index,item) {
+            if($(item).val() != '') {
+              var itemPrice = $(this).attr('data-price') * 1,
+                  discountPrice = $(this).attr('data-compare-at-price') * 1;
+              sum = sum + itemPrice;
+              sum = sum * 0.9;
+
+              discountedAmount = discountedAmount + discountPrice;
+            }
+          });
+        }
+
+        $('.bundle-price').html(formatMoney(sum, window.theme.moneyFormat));
+        $('.bundle-compare-at-price').html(formatMoney(discountedAmount, window.theme.moneyFormat));
+
+
+        var checkedItems = $(this).closest('.steps-wrap').find('.active-item');
+        if(checkedItems.length >=countProd) {      
+
+          var other_items =  $(this).closest('.steps-wrap').find('.bundle_button:not(.active-item)');
+          if(other_items.length) {
+            other_items.each(function(index,item) {
+              $(item).addClass('disabled');
+            });
+          }
+        }
+
+        $('.product-option img').each(function() {
+          if ($(this).attr('src') != '') {
+            $('.product-details .ProductForm__AddToCart').css('pointer-events','auto');
+            $('.product-details .ProductForm__AddToCart').removeClass('btn-disabled');
+          }
+          else{
+            $('.product-details .ProductForm__AddToCart').css('pointer-events','none');
+            $('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+            return false;
+          }
+        });
+
+        if(activeBtn) {
+          if(checkedItems.length >=countProd) {      
+            var newStepEl = $(this).parents('.step').next('.step');
+            if(newStepEl.length) {
+              newStepEl.show();
+              if(!newStepEl.hasClass('show_block')) {
+                newStepEl.addClass('show_block');
+                $([document.documentElement, document.body]).animate({
+                  scrollTop: newStepEl.offset().top
+                }, 1000);
+              }
+            }
+          }
+        }
+      });
+
+
+      $('#ProductFormBundle button').on('click', function(e) {
+        e.preventDefault();
+
+        var variantsArr = [];
+
+        var property_inputS = $('.property_input');
+        if(property_inputS.length) {
+          property_inputS.each(function(index,item) {
+            if($(item).val() != '') {
+              var itemID = $(this).val() * 1;
+             variantsArr.push(itemID);
+            }
+          });
+        }
+		console.log("This is tasklonbuilder: ", variantsArr);
+
+        function addItemToCart(variant_id) {
+
+          var data = {
+            "id": variantsArr
+          }
+
+          
+          
+          jQuery.ajax({
+            type: 'POST',
+            url: '/cart/add.js',
+            dataType: 'json',
+            data: data,
+            success: function(lineitem) { 
+              console.log(lineitem);
+
+              document.dispatchEvent(
+                new CustomEvent("product:added", {
+                  bubbles: !0,
+                  detail: {
+                    variant: variant_id,
+                    quantity: 1
+                  }
+                })
+              );
+            }
+          }); 
+        }
+        
+        function addItemToCart(variant_id) {
+
+          var data = {
+            "id": variantsArr
+          }
+
+          
+          
+          jQuery.ajax({
+            type: 'POST',
+            url: '/cart/add.js',
+            dataType: 'json',
+            data: data,
+            success: function(lineitem) { 
+              console.log(lineitem);
+
+              document.dispatchEvent(
+                new CustomEvent("product:added", {
+                  bubbles: !0,
+                  detail: {
+                    variant: variant_id,
+                    quantity: 1
+                  }
+                })
+              );
+            }
+          }); 
+        }
+        
+        if(variantsArr.length) {
+          addItemToCart();
+        }
+      });
+
+
+      $(document).on('click','.product-option .remove', function(e){
+     
+        var productOptionParent = $(this).closest('.product-option');
+        var productOptionBlock = productOptionParent.find('.option')
+        var currentVal = productOptionBlock.attr('data-option') * 1;
+        var activeProductButton = $('[data-value="'+ currentVal +'"]');
+
+        productOptionBlock.css('background', '#ffeef3');
+        productOptionBlock.find('img').hide().attr('src', '');
+        productOptionBlock.attr('data-option','');
+        $(this).hide();
+
+        $('[data-count-step][value="' + currentVal + '"]').val('').attr('name', "");
+        $('[data-value="'+ currentVal +'"]').text('ADD');
+       
+        if(activeProductButton.length) {
+          activeProductButton.text('ADD');
+          activeProductButton.removeClass('active-item');
+          
+        }
+        var other_items = activeProductButton.closest('.steps-wrap').find('.bundle_button');
+        if(other_items.length) {
+          other_items.each(function(index,item) {
+            $(item).removeClass('disabled');
+          });
+        }
+
+        $('.product-option img').each(function() {
+          if ($(this).attr('src') != '') {
+            $('.product-details .ProductForm__AddToCart').css('pointer-events','auto');
+            $('.product-details .ProductForm__AddToCart').removeClass('btn-disabled');
+          }
+          else{
+            $('.product-details .ProductForm__AddToCart').css('pointer-events','none');
+            $('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+            return false
+          }
+        });
+   
+        let sum = 0,
+            discountedAmount = 0;
+
+        var property_inputS = $('.property_input');
+        if(property_inputS.length) {
+          property_inputS.each(function(index,item) {
+            if($(item).val() != '') {
+              var itemPrice = $(this).attr('data-price') * 1,
+                  discountPrice = $(this).attr('data-compare-at-price') * 1;
+              sum = sum + itemPrice;
+              sum = sum * 0.9;
+              discountedAmount = discountedAmount + discountPrice;
+            }
+          });
+        }
+        $('.bundle-price').html(formatMoney(sum, window.theme.moneyFormat));
+        $('.bundle-compare-at-price').html(formatMoney(discountedAmount, window.theme.moneyFormat));
+      });
+    });
+
+  </script>
+</div>
