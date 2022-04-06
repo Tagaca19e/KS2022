@@ -1,3 +1,5 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
 <div class="bundle-product-template page__bundle-page">
   <div class="product_hero-section">
     <div class="content">
@@ -41,6 +43,8 @@
 
   <script>
 
+
+    
     $(document).ready(function() { 
       function formatMoney(cents, format) {
         if (typeof cents === 'string') {
@@ -102,6 +106,8 @@
         }
       };
 
+      let global_sum = "";
+      
       $('.step').on('click','.bundle_button', function(e){
         e.preventDefault();
         
@@ -192,7 +198,8 @@
         }
 
         let sum = 0,
-            discountedAmount = 0;
+        
+        discountedAmount = 0;
 
         var property_inputS = $('.property_input');
         if(property_inputS.length) {
@@ -202,15 +209,16 @@
                   discountPrice = $(this).attr('data-compare-at-price') * 1;
               sum = sum + itemPrice;
               sum = sum * 0.9;
-
+			
               discountedAmount = discountedAmount + discountPrice;
             }
           });
         }
 
-        $('.bundle-price').html(formatMoney(sum, window.theme.moneyFormat));
-        $('.bundle-compare-at-price').html(formatMoney(discountedAmount, window.theme.moneyFormat));
-
+        $('.bundle-price').html(formatMoney(sum * 0.9, window.theme.moneyFormat));
+        $('.bundle-compare-at-price').html(formatMoney(sum, window.theme.moneyFormat));
+        
+		global_sum = formatMoney(sum, window.theme.moneyFormat);
 
         var checkedItems = $(this).closest('.steps-wrap').find('.active-item');
         if(checkedItems.length >=countProd) {      
@@ -257,73 +265,75 @@
 
         var variantsArr = [];
 
+
         var property_inputS = $('.property_input');
         if(property_inputS.length) {
           property_inputS.each(function(index,item) {
             if($(item).val() != '') {
               var itemID = $(this).val() * 1;
+              console.log("This is itemId: ", itemID);
              variantsArr.push(itemID);
             }
           });
         }
-		console.log("This is tasklonbuilder: ", variantsArr);
-
-        function addItemToCart(variant_id) {
-
-          var data = {
-            "id": variantsArr
-          }
-
-          
-          
-          jQuery.ajax({
-            type: 'POST',
-            url: '/cart/add.js',
-            dataType: 'json',
-            data: data,
-            success: function(lineitem) { 
-              console.log(lineitem);
-
-              document.dispatchEvent(
-                new CustomEvent("product:added", {
-                  bubbles: !0,
-                  detail: {
-                    variant: variant_id,
-                    quantity: 1
-                  }
-                })
-              );
-            }
-          }); 
-        }
         
-        function addItemToCart(variant_id) {
+
+        
+		console.log("This is tasklonbuilder: ", variantsArr);
+        console.log("This is title tasklonbuilder: ", variantsTitle);
+
+
+        
+        function addItemToCart() {
 
           var data = {
             "id": variantsArr
           }
 
           
-          
-          jQuery.ajax({
-            type: 'POST',
-            url: '/cart/add.js',
-            dataType: 'json',
-            data: data,
-            success: function(lineitem) { 
-              console.log(lineitem);
+          console.log("This is Executed: ", variantsArr);
 
-              document.dispatchEvent(
-                new CustomEvent("product:added", {
-                  bubbles: !0,
-                  detail: {
-                    variant: variant_id,
-                    quantity: 1
+          
+          
+          axios.post('/cart/add.js', {
+              items: [{
+                      id: variantsArr[3],
+                      quantity: 1,
+                	  properties : {
+                        "top" : "bundle",
+                        "amount" : global_sum,
+                        "bundle-products" : []
+                      }
+                  },
+                  {
+                      id: variantsArr[2],
+                      quantity: 1,
+                      properties : {
+                        "body" : "bundle"
+                      }
+                  },
+                  {
+                      id: variantsArr[1],
+                      quantity: 1,
+                      properties : {
+                        "body" : "bundle"
+                      }
+                  },
+                  {
+                      id: variantsArr[0],
+                      quantity: 1,
+                      properties : {
+                        "body" : "bundle"
+                      }
                   }
-                })
-              );
-            }
-          }); 
+              ]
+          }).then(function(res) {
+              document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+                  bubbles: true
+              }));
+          })
+    
+    
         }
         
         if(variantsArr.length) {
@@ -386,8 +396,9 @@
             }
           });
         }
-        $('.bundle-price').html(formatMoney(sum, window.theme.moneyFormat));
-        $('.bundle-compare-at-price').html(formatMoney(discountedAmount, window.theme.moneyFormat));
+        //Multiplied by 0.9 for the 10% off the total price
+        $('.bundle-price').html(formatMoney(sum * 0.9, window.theme.moneyFormat));
+        $('.bundle-compare-at-price').html(formatMoney(sum, window.theme.moneyFormat));
       });
     });
 
