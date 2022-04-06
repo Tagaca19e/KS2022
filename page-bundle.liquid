@@ -1,0 +1,687 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--    Step 1    -->
+{% assign product1 = section.settings.product1 %}
+{% assign product2 = section.settings.product2 %}
+{% assign product3 = section.settings.product3 %}
+{% assign product4 = section.settings.product4 %}
+{% assign product5 = section.settings.product5 %}
+{% assign product6 = section.settings.product6 %}
+{% assign product7 = section.settings.product7 %}
+{% assign product8 = section.settings.product8 %}
+{% assign product9 = section.settings.product9 %}
+
+<!--    Step 2    -->
+{% assign product10 = section.settings.product10 %}
+{% assign product11 = section.settings.product11 %}
+{% assign product12 = section.settings.product12 %}
+{% assign product13 = section.settings.product13 %}
+{% assign product14 = section.settings.product14 %}
+{% assign product15 = section.settings.product15 %}
+{% assign product16 = section.settings.product16 %}
+{% assign product17 = section.settings.product17 %}
+{% assign product18 = section.settings.product18 %}
+{% assign product19 = section.settings.product19 %}
+{% assign product20 = section.settings.product20 %}
+{% assign product21 = section.settings.product21 %}
+{% assign product22 = section.settings.product22 %}
+{% assign product23 = section.settings.product23 %}
+{% assign product24 = section.settings.product24 %}
+{% assign product25 = section.settings.product25 %}
+{% assign product26 = section.settings.product26 %}
+{% assign product27 = section.settings.product27 %}
+{% assign product28 = section.settings.product28 %}
+{% assign product29 = section.settings.product29 %}
+{% assign product30 = section.settings.product30 %}
+{% assign product31 = section.settings.product31 %}
+{% assign product32 = section.settings.product32 %}
+{% assign product33 = section.settings.product33 %}
+
+<!--    Step 3    -->
+{% assign product34 = section.settings.product34 %}
+{% assign product35 = section.settings.product35 %}
+{% assign product36 = section.settings.product36 %}    
+
+<div class="steps">
+  <div class="step step-1" data-count="1">
+    <div class="title">
+      <h3>Step 1</h3>
+      <span class="text">Choose your shape, pick your Starter Kit</span>
+    </div>
+
+    <div class="steps-wrap">
+      {% if section.settings.product1 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product1.featured_image | img_url: 'master' }}">
+        <h4>{{ product1.title }}</h4>
+        {{product1.first_available_variant.id}}
+        <a href="/" class="bundle_button" data-price="{{ product1.price  }}" data-compare-at-price="{{ product1.compare_at_price }}" data-value="{{ product1.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% if product2 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product2.featured_image | img_url: 'master' }}">
+        <h4>{{ product2.title }}</h4>
+        {{product2.first_available_variant.id}}
+
+        <a href="/" class="bundle_button" data-price="{{ product2.price }}" data-compare-at-price="{{ product2.compare_at_price }}" data-value="{{ product2.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% if product3 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product3.featured_image | img_url: 'master' }}">
+        <h4>{{ product3.title }}</h4>
+        {{product3.first_available_variant.id}}
+
+        <a href="/" class="bundle_button" data-price="{{ product3.price }}" data-compare-at-price="{{ product3.compare_at_price }}" data-value="{{ product3.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% if product4 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product4.featured_image | img_url: 'master' }}">
+        <h4>{{ product4.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product4.price  }}" data-compare-at-price="{{ product4.compare_at_price }}" data-value="{{ product4.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% comment %}
+      {% if product5 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product5.featured_image | img_url: 'master' }}">
+        <h4>{{ product5.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product5.price  }}" data-compare-at-price="{{ product5.compare_at_price }}" data-value="{{ product5.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% if product6 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product6.featured_image | img_url: 'master' }}">
+        <h4>{{ product6.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product6.price  }}" data-compare-at-price="{{ product6.compare_at_price }}" data-value="{{ product6.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% if product7 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product7.featured_image | img_url: 'master' }}">
+        <h4>{{ product7.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product7.price }}" data-compare-at-price="{{ product7.compare_at_price }}" data-value="{{ product7.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% if product8 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product8.featured_image | img_url: 'master' }}">
+        <h4>{{ product8.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product8.price  }}" data-compare-at-price="{{ product8.compare_at_price }}" data-value="{{ product8.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% if product9 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product9.featured_image | img_url: 'master' }}">
+        <h4>{{ product9.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product9.price }}" data-compare-at-price="{{ product9.compare_at_price }}" data-value="{{ product9.variants.first.id }}" data-step="1">ADD</a>
+      </div>
+      {% endif %}
+      {% endcomment %}
+    </div>
+  </div>
+
+  <div class="step step-2" style="display: none;" data-count="2">
+    <div class="title">
+      <h3>Step 2</h3>
+      <span class="text">Choose 2 gel polish colors</span>
+    </div>
+    <div class="steps-wrap">
+      {% if product10 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product10.featured_image | img_url: 'master' }}">
+        <h4>{{ product10.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product10.price  }}" data-compare-at-price="{{ product10.compare_at_price }}" data-value="{{ product10.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product11 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product11.featured_image | img_url: 'master' }}">
+        <h4>{{ product11.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product11.price }}" data-compare-at-price="{{ product11.compare_at_price }}" data-value="{{ product11.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product12 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product12.featured_image | img_url: 'master' }}">
+        <h4>{{ product12.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product12.price }}" data-compare-at-price="{{ product12.compare_at_price }}" data-value="{{ product12.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product13 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product13.featured_image | img_url: 'master' }}">
+        <h4>{{ product13.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product13.price  }}" data-compare-at-price="{{ product13.compare_at_price }}" data-value="{{ product13.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product14 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product14.featured_image | img_url: 'master' }}">
+        <h4>{{ product14.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product14.price  }}" data-compare-at-price="{{ product14.compare_at_price }}" data-value="{{ product14.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product15 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product15.featured_image | img_url: 'master' }}">
+        <h4>{{ product15.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product15.price  }}" data-compare-at-price="{{ product15.compare_at_price }}" data-value="{{ product15.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product16 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product16.featured_image | img_url: 'master' }}">
+        <h4>{{ product16.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product16.price }}" data-compare-at-price="{{ product16.compare_at_price }}" data-value="{{ product16.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product17 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product17.featured_image | img_url: 'master' }}">
+        <h4>{{ product17.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product17.price  }}" data-compare-at-price="{{ product17.compare_at_price }}" data-value="{{ product17.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product18 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product18.featured_image | img_url: 'master' }}">
+        <h4>{{ product18.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product18.price }}" data-compare-at-price="{{ product18.compare_at_price }}" data-value="{{ product18.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product19 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product19.featured_image | img_url: 'master' }}">
+        <h4>{{ product19.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product19.price  }}" data-compare-at-price="{{ product19.compare_at_price }}" data-value="{{ product19.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product20 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product20.featured_image | img_url: 'master' }}">
+        <h4>{{ product20.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product20.price }}" data-compare-at-price="{{ product20.compare_at_price }}" data-value="{{ product20.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product21 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product21.featured_image | img_url: 'master' }}">
+        <h4>{{ product21.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product21.price }}" data-compare-at-price="{{ product21.compare_at_price }}" data-value="{{ product21.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product22 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product22.featured_image | img_url: 'master' }}">
+        <h4>{{ product22.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product22.price  }}" data-compare-at-price="{{ product22.compare_at_price }}" data-value="{{ product22.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product23 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product23.featured_image | img_url: 'master' }}">
+        <h4>{{ product23.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product23.price  }}" data-compare-at-price="{{ product23.compare_at_price }}" data-value="{{ product23.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product24 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product24.featured_image | img_url: 'master' }}">
+        <h4>{{ product24.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product24.price  }}" data-compare-at-price="{{ product24.compare_at_price }}" data-value="{{ product24.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product25 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product25.featured_image | img_url: 'master' }}">
+        <h4>{{ product25.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product25.price }}" data-compare-at-price="{{ product25.compare_at_price }}" data-value="{{ product25.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product26 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product26.featured_image | img_url: 'master' }}">
+        <h4>{{ product26.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product26.price  }}" data-compare-at-price="{{ product26.compare_at_price }}" data-value="{{ product26.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product27 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product27.featured_image | img_url: 'master' }}">
+        <h4>{{ product27.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product27.price }}" data-compare-at-price="{{ product27.compare_at_price }}" data-value="{{ product27.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product28 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product28.featured_image | img_url: 'master' }}">
+        <h4>{{ product28.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product28.price }}" data-compare-at-price="{{ product28.compare_at_price }}" data-value="{{ product28.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product29 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product29.featured_image | img_url: 'master' }}">
+        <h4>{{ product29.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product29.price  }}" data-compare-at-price="{{ product29.compare_at_price }}" data-value="{{ product29.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product30 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product30.featured_image | img_url: 'master' }}">
+        <h4>{{ product30.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product30.price }}" data-compare-at-price="{{ product30.compare_at_price }}" data-value="{{ product30.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product31 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product31.featured_image | img_url: 'master' }}">
+        <h4>{{ product31.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product31.price }}" data-compare-at-price="{{ product31.compare_at_price }}" data-value="{{ product31.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product32 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product32.featured_image | img_url: 'master' }}">
+        <h4>{{ product32.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product32.price  }}" data-compare-at-price="{{ product32.compare_at_price }}" data-value="{{ product32.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+      {% if product33 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product33.featured_image | img_url: 'master' }}">
+        <h4>{{ product33.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product33.price  }}" data-compare-at-price="{{ product33.compare_at_price }}" data-value="{{ product33.variants.first.id }}" data-step="2">ADD</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="step step-3" style="display: none;" data-count="1">
+    <div class="title">
+      <h3>Step 3</h3>
+      <span class="text">Choose your cuticle oil</span>
+    </div>
+
+    <div class="steps-wrap">
+      {% if product34 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product34.featured_image | img_url: 'master' }}">
+        <h4>{{ product34.title }}</h4>
+        {{product34.first_available_variant.id}}
+
+        <a href="/" class="bundle_button" data-price="{{ product34.price  }}" data-compare-at-price="{{ product34.compare_at_price }}" data-value="{{ product34.variants.first.id }}" data-step="3">ADD</a>
+      </div>
+      {% endif %}
+      {% if product35 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product35.featured_image | img_url: 'master' }}">
+        <h4>{{ product35.title }}</h4>
+        {{product35.first_available_variant.id}}
+
+        <a href="/" class="bundle_button" data-price="{{ product35.price }}" data-compare-at-price="{{ product35.compare_at_price }}" data-value="{{ product35.variants.first.id }}" data-step="3">ADD</a>
+      </div>
+      {% endif %}
+      {% if product36 != blank %}
+      <div class="steps-wrap__item">
+        <img src="{{ product36.featured_image | img_url: 'master' }}">
+        <h4>{{ product36.title }}</h4>
+        <a href="/" class="bundle_button" data-price="{{ product36.price  }}" data-compare-at-price="{{ product36.compare_at_price }}" data-value="{{ product36.variants.first.id }}" data-step="3">ADD</a>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+
+<div class="bundle-builder-products custom-bundle-builder-products">
+  <h3 class="hide-title">view your kit +</h3>
+  <h3 class="show-title">your kit</h3>
+
+  <div class="wrap">
+    <div class="product-options">
+
+      {% assign preselected_product_handles_size = 0 %}
+      {% assign bundle_total_price = 0 %}
+      {% assign bundle_total_compare_at_price = 0 %}
+
+      {% if section.settings.preselected_product1 != blank %}
+     
+      {% for x in (1..3) %}
+
+      {% capture handle_Str %}preselected_product{{x}}{% endcapture %}
+      {% assign handle = section.settings[handle_Str] %}
+      {% if handle != blank %}
+      {% assign preselected_product =  all_products[handle] %}
+      {% if preselected_product.handle != blank  %}
+      {% if preselected_product.available %}
+      {% assign preselected_product_handles_size = preselected_product_handles_size | plus: 1 %}
+      {% assign bundle_total_price = bundle_total_price | plus: preselected_product.selected_or_first_available_variant.price %}            
+      {% assign bundle_total_compare_at_price = bundle_total_compare_at_price | plus: preselected_product.selected_or_first_available_variant.compare_at_price %}
+
+      {% unless forloop.first  %}
+      <span class="need-add-plus">+</span>
+      {% endunless %}
+
+      <div class="product-option preselected_product" data-price="{{ preselected_product.price  }}" data-compare-at-price="{{ preselected_product.compare_at_price }}" data-value="{{preselected_product.selected_or_first_available_variant.id}}">
+        <div class="option option-1">
+          <img src="{{ preselected_product.featured_media | img_url:'master' }}">
+        </div>
+      </div>
+      <input type="hidden" class="property_input" 
+
+             data-count-step="" 
+             data-price="{{ preselected_product.price  }}"
+             data-name="{{preselected_product.selected_or_first_available_variant.title}}"
+
+             data-compare-at-price="{{ preselected_product.compare_at_price  }}"
+             value="{{preselected_product.selected_or_first_available_variant.id}}" 
+             name="properties[{{preselected_product.selected_or_first_available_variant.id}}]" />
+
+
+      {% endif %}
+      {% endif%}
+      {% endif%}
+      {% endfor %}
+
+      {% endif %}
+
+      {% assign productOptionsCount = 4 %}
+     
+      {% for i in (1..productOptionsCount) %}
+      
+      {% if preselected_product_handles_size == 0 and i == 1 %}      
+      {% else %}
+      {% if i != 1 and preselected_product_handles_size == 0   %}
+      <span class="need-add-plus">+</span>
+      {% else %}
+      <span class="need-add-plus">+</span>
+      {% endif %}
+      {% endif %}
+      <div class="product-option"><div class="remove remove-{{i}}" data-item="">x</div><div class="option option-{{i}}"><img src=""></div></div>           
+      {% endfor %}
+    </div>
+
+    <div class="product-details">
+      <div class="price bundle-total-compare-at-price">
+        <p><span class="bundle-compare-at-price">{{ bundle_total_price | money }}</span></p>
+      </div>
+
+      <div class="price regular-price">
+        <p><span class="bundle-price">{{ bundle_total_price | times: 0.9 }}</span></p>
+      </div>
+
+      <button type="submit" aria-expanded="false" aria-label="Open cart" data-action="open-drawer" data-drawer-id="sidebar-cart" class="ProductForm__AddToCart Button Button--primary Button--secondary Button--full btn-disabled" >
+        <span>{{ 'product.form.add_to_cart' | t }}</span>
+      </button>
+      
+      
+      <button aria-expanded="false" aria-label="Open cart"  class="" data-action="open-drawer" data-drawer-id="sidebar-cart" onclick="addCart_ex()">
+        ADD TO CART
+      </button>
+    </div>
+  </div>
+  <script>
+
+
+	function addCart_ex() {
+// 		e.preventDefault();
+
+		var variantsArr = [];
+
+		var property_inputS = $('.property_input');
+		if (property_inputS.length) {
+			property_inputS.each(function(index, item) {
+				if ($(item).val() != '') {
+					var itemID = $(this).val() * 1;
+					variantsArr.push(itemID);
+
+				}
+			});
+		}
+		addCart_Collection_t(variantsArr);
+	};
+    
+
+ function addCart_Collection_t(variants) {
+   console.log("Received: ", variants);
+	axios.post('/cart/add.js', {
+		items: [{
+				id: 39986663719048,
+				quantity: 1
+			},
+			{
+				id: 40188642328712,
+				quantity: 1
+			}
+		]
+	}).then(function(res) {
+		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+			bubbles: true
+		}));
+	})
+}
+    
+// function addCart_Collection_t() 
+	
+// 	axios.post('/cart/add.js', {
+// 		items: [{
+// 				id: 39986663719048,
+// 				quantity: 1
+// 			},
+// 			{
+// 				id: 40188642328712,
+// 				quantity: 1
+// 			}
+// 		]
+// 	}).then(function(res) {
+// 		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+// 			bubbles: true
+// 		}));
+// 	})
+// 
+    
+  </script>
+  
+</div>
+
+
+{% schema %}
+  {
+    "name": "Page Bundle",
+    "settings": [
+	{
+		"type":"header",
+		"content":"PreSelected Products"
+	},
+{
+        "type": "product",
+        "id": "preselected_product1",
+        "label": "Product 1"
+      },
+      {
+        "type": "product",
+        "id": "preselected_product2",
+        "label": "Product 2"
+      },
+      {
+        "type": "product",
+        "id": "preselected_product3",
+        "label": "Product 3"
+      },
+	{
+		"type":"header",
+		"content":"Step 1"
+	},
+      {
+        "type": "product",
+        "id": "product1",
+        "label": "Product 1"
+      },
+      {
+        "type": "product",
+        "id": "product2",
+        "label": "Product 2"
+      },
+      {
+        "type": "product",
+        "id": "product3",
+        "label": "Product 3"
+      },
+      {
+        "type": "product",
+        "id": "product4",
+        "label": "Product 4"
+      },
+
+{
+		"type":"header",
+		"content":"Step 2"
+	},
+
+      {
+        "type": "product",
+        "id": "product10",
+        "label": "Product 1"
+      },
+      {
+        "type": "product",
+        "id": "product11",
+        "label": "Product 2"
+      },
+      {
+        "type": "product",
+        "id": "product12",
+        "label": "Product 3"
+      },
+      {
+        "type": "product",
+        "id": "product13",
+        "label": "Product 4"
+      },
+      {
+        "type": "product",
+        "id": "product14",
+        "label": "Product 5"
+      },
+      {
+        "type": "product",
+        "id": "product15",
+        "label": "Product 6"
+      },
+      {
+        "type": "product",
+        "id": "product16",
+        "label": "Product 7"
+      },
+      {
+        "type": "product",
+        "id": "product17",
+        "label": "Product 8"
+      },
+      {
+        "type": "product",
+        "id": "product18",
+        "label": "Product 9"
+      },
+      {
+        "type": "product",
+        "id": "product19",
+        "label": "Product 10"
+      },
+      {
+        "type": "product",
+        "id": "product20",
+        "label": "Product 11"
+      },
+      {
+        "type": "product",
+        "id": "product21",
+        "label": "Product 12"
+      },
+      {
+        "type": "product",
+        "id": "product22",
+        "label": "Product 13"
+      },
+      {
+        "type": "product",
+        "id": "product23",
+        "label": "Product 14"
+      },
+      {
+        "type": "product",
+        "id": "product24",
+        "label": "Product 15"
+      },
+      {
+        "type": "product",
+        "id": "product25",
+        "label": "Product 16"
+      },
+      {
+        "type": "product",
+        "id": "product26",
+        "label": "Product 17"
+      },
+      {
+        "type": "product",
+        "id": "product27",
+        "label": "Product 18"
+      },
+      {
+        "type": "product",
+        "id": "product28",
+        "label": "Product 19"
+      },
+      {
+        "type": "product",
+        "id": "product29",
+        "label": "Product 20"
+      },
+      {
+        "type": "product",
+        "id": "product30",
+        "label": "Product 21"
+      },
+      {
+        "type": "product",
+        "id": "product31",
+        "label": "Product 22"
+      },
+      {
+        "type": "product",
+        "id": "product32",
+        "label": "Product 23"
+      },
+      {
+        "type": "product",
+        "id": "product33",
+        "label": "Product 24"
+      },
+	{
+		"type":"header",
+		"content":"Step 3"
+	},
+      {
+        "type": "product",
+        "id": "product34",
+        "label": "Product 1"
+      },
+      {
+        "type": "product",
+        "id": "product35",
+        "label": "Product 2"
+      },
+      {
+        "type": "product",
+        "id": "product36",
+        "label": "Product 3"
+      }
+    ]
+  }
+{% endschema %}
