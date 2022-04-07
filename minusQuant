@@ -1,0 +1,54 @@
+ function minusQuantity(p1, p2, p3, p4, t1, t2, t3, t4, sum) {
+ 	console.log("addQuantity fired: ", p1, p2, p3, p4);
+ 	console.log("addQuantity title fired: ", t1, t2, t3, t4);
+ 	console.log("addQuantity SUM fired: ", sum);
+ 	let target_quant = 0;
+
+ 	jQuery.getJSON('/cart.js', function(cart) {
+
+ 		let items = cart.items;
+ 		let updated_quant = [];
+ 		let target_idx = 0;
+ 		console.log("this is items: ", items);
+
+ 		for (let i = 0; i < items.length; i++) {
+ 			let id = items[i].id;
+ 			if (id == p1 && items[i].properties["top"] !== undefined) {
+ 				target_quant = items[i].quantity - 1;
+ 				target_idx = i;
+ 				console.log("This is target_quant: ", target_quant);
+ 				console.log("This is target_idx: ", target_idx);
+
+ 				//             minQuantExecute(target_quant, target_idx);
+ 			}
+
+ 			if (items[i].properties["top"] !== undefined || items[i].properties["body"] !== undefined) {
+ 				updated_quant[i] = target_quant;
+ 			} else {
+ 				updated_quant[i] = 0;
+ 			}
+
+ 		}
+ 		console.log("THIS IS UPDATED QUANT: ", updated_quant);
+ 		minQuantExecute(updated_quant);
+
+
+ 	});
+
+
+ }
+
+ function minQuantExecute(updated_quant) {
+
+ 	axios.post('/cart/update.js', {
+ 		updates: updated_quant;
+
+
+ 	}).then(function(res) {
+ 		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+ 			bubbles: true
+ 		}));
+ 	})
+
+ } 
+  
