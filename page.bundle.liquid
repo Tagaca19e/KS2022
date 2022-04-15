@@ -1,5 +1,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+<style>
+  .bundle-compare-color {
+  	color: #45454594;
+  }
+</style>
+  
+  
 <div class="bundle-product-template page__bundle-page">
   <div class="product_hero-section">
     <div class="content">
@@ -46,6 +53,9 @@
 
     
     $(document).ready(function() { 
+	  $('.bundle-price').css('display', 'none');
+
+      
       function formatMoney(cents, format) {
         if (typeof cents === 'string') {
           cents = cents.replace('.', '');
@@ -106,11 +116,12 @@
         }
       };
 
-      let global_sum = "";
+      let global_sum = 0;
       
       $('.step').on('click','.bundle_button', function(e){
         e.preventDefault();
-        
+        var productTitle = $(this).data('name');
+
         var productItem = $(this).data('value'),
             currentPrice = $(this).siblings('.bundle-product-item').data('price');
 
@@ -135,7 +146,7 @@
           activeBtn = true;
           
           if(stepLength <= totalProd) {
-            $('<input type="hidden" class="property_input" 	data-price="'+itemPrice+'" data-compare-at-price="'+discountPrice+'" data-count-step="'+ currentStep  +'" value="'+currentVal+'" name="properties['+currentVal+']">').appendTo('.BundleProductForm');
+            $('<input type="hidden" class="property_input" data-name="'+productTitle+'" data-price="'+itemPrice+'" data-compare-at-price="'+discountPrice+'" data-count-step="'+ currentStep  +'" value="'+currentVal+'" name="properties['+currentVal+']">').appendTo('.BundleProductForm');
           } else {
             var propertiesInputs = $('.property_input');
 
@@ -148,7 +159,8 @@
                   propertiesInput.attr('data-count-step',currentStep);
                   propertiesInput.attr('data-price',itemPrice);
                   propertiesInput.attr('data-compare-at-price',discountPrice);
-                  
+                  propertiesInput.attr('data-name',productTitle);
+
                   var property_name = "properties["+currentVal+"]";
                   propertiesInput.attr('name',property_name);
                   break;
@@ -172,13 +184,21 @@
           
           $('.product-details .ProductForm__AddToCart').css('pointer-events','none');
           $('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+          $('.bundle-price').css('display', 'none');
+          $('.bundle1-compare-at-price').css('text-decoration', 'none');
+          $('.bundle-cont').css('display', 'block');
+
+
+
+
+
 
 		var property_input = $('.property_input[value="' + currentVal + '"]');
           
           var parentEl =  $(this).parents('.step').data('count');
 
           if(property_input.length) {
-            property_input.val('').attr('name', "").attr('data-current-step','').attr('data-price','').attr('data-compare-at-price','');
+            property_input.val('').attr('name', "").attr('data-current-step','').attr('data-price','').attr('data-compare-at-price','').attr('data-name', '');
           }
 
           var activeOptionBlock = $('[data-option="'+ currentVal +'"]');
@@ -208,17 +228,38 @@
               var itemPrice = $(this).attr('data-price') * 1,
                   discountPrice = $(this).attr('data-compare-at-price') * 1;
               sum = sum + itemPrice;
-              sum = sum * 0.9;
+              sum = sum ;
 			
               discountedAmount = discountedAmount + discountPrice;
             }
           });
         }
 
-        $('.bundle-price').html(formatMoney(sum * 0.9, window.theme.moneyFormat));
-        $('.bundle-compare-at-price').html(formatMoney(sum, window.theme.moneyFormat));
+        let master = 0;
+   
+        function compute(){
+            const input_currency1 = "USD";
+          const output_currency1 = "{{cart.currency.iso_code}}";
+            console.log("This is the input currency: ", input_currency1);
+            console.log("This is the output currency: ", output_currency1);
+            let new_amt = 0;
+            fetch(`https://api.exchangerate-api.com/v4/latest/${input_currency1}`)
+            .then(res => res.json())
+            .then(res => {
+                const new_rate = res.rates[output_currency1];
+               
+                let o_amount = (120 * new_rate).toFixed(2);
+              $('.bundle-price').html("{{cart.currency.symbol}}" + o_amount);
+            })
+        }
+                  
+        compute();
+        let price_sum = (Math.round((sum * 0.010 ) * 100) / 100).toFixed(2);
+        let price_str = "{{cart.currency.symbol}}" + price_sum;
+
+        $('.bundle1-compare-at-price').html(price_str);
         
-		global_sum = formatMoney(sum, window.theme.moneyFormat);
+		global_sum = sum;
 
         var checkedItems = $(this).closest('.steps-wrap').find('.active-item');
         if(checkedItems.length >=countProd) {      
@@ -235,10 +276,23 @@
           if ($(this).attr('src') != '') {
             $('.product-details .ProductForm__AddToCart').css('pointer-events','auto');
             $('.product-details .ProductForm__AddToCart').removeClass('btn-disabled');
+            $('.bundle-price').css('display', 'block');
+            $('.bundle1-compare-at-price').css('text-decoration', 'line-through');
+            $('.bundle-cont').css('display', 'flex');
+            $('.bundle1-compare-at-price').addClass('bundle-compare-color');
+
+
           }
           else{
             $('.product-details .ProductForm__AddToCart').css('pointer-events','none');
             $('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+            $('.bundle-price').css('display', 'none');
+            $('.bundle1-compare-at-price').css('text-decoration', 'none');
+            $('.bundle-cont').css('display', 'block');
+            $('.bundle1-compare-at-price').removeClass('bundle-compare-color');
+
+
+
             return false;
           }
         });
@@ -264,7 +318,7 @@
         e.preventDefault();
 
         var variantsArr = [];
-
+		var variantsTitle = [];
 
         var property_inputS = $('.property_input');
         if(property_inputS.length) {
@@ -277,6 +331,13 @@
           });
         }
         
+       var property_inputT = $('.property_input');
+        if(property_inputT.length) {
+          property_inputT.each(function(index,item) {
+            console.log("This is a titles: ", item.getAttribute('data-name'));
+            variantsTitle.push(item.getAttribute('data-name'));
+          });
+        }
 
         
 		console.log("This is tasklonbuilder: ", variantsArr);
@@ -289,43 +350,76 @@
           var data = {
             "id": variantsArr
           }
+//           variantsArr.push(34471994753160);
+//           variantsArr.push(34471986299016);
+
 
           
           console.log("This is Executed: ", variantsArr);
-
-          
-          
+		  let top = [40215618322568];
+          let bundle_amount = global_sum;
+          let unique_id = variantsArr.join('');
+          let u_amount = global_sum;
+          global_sum = (Math.round((global_sum * 0.010 ) * 100) / 100).toFixed(2);
           axios.post('/cart/add.js', {
-              items: [{
+              items: [
+
+                  {
                       id: variantsArr[3],
                       quantity: 1,
-                	  properties : {
-                        "top" : "bundle",
-                        "amount" : global_sum,
-                        "bundle-products" : []
+                      properties : {
+                        "_body" : unique_id
                       }
                   },
                   {
                       id: variantsArr[2],
                       quantity: 1,
                       properties : {
-                        "body" : "bundle"
+                        "_body" : unique_id
                       }
                   },
                   {
                       id: variantsArr[1],
                       quantity: 1,
                       properties : {
-                        "body" : "bundle"
+                        "_body" : unique_id
                       }
                   },
                   {
                       id: variantsArr[0],
                       quantity: 1,
                       properties : {
-                        "body" : "bundle"
+                        "_body" : unique_id
                       }
-                  }
+                  },
+                  {
+                      id: 34471986299016,
+                      quantity: 1,
+                      properties : {
+                        "_body" : unique_id
+                      }
+                  },
+                  {
+                      id: 34471994753160,
+                      quantity: 1,
+                      properties : {
+                        "_body" : unique_id
+                      }
+                  },
+				  {
+                      id: top[0],
+                      quantity: 1,
+                	  properties : {
+                        "4" : variantsTitle[0],
+                        "3" : variantsTitle[1],
+                        "2" : variantsTitle[2],
+                        "1" : variantsTitle[3],
+                        "_bundle-products" : [variantsTitle[0], variantsTitle[1], variantsTitle[2], variantsTitle[3]],
+                        "_bundle-products-ids" : [variantsArr[0], variantsArr[1], variantsArr[2], variantsArr[3]],
+                        "_top" : unique_id
+                      }
+                  },
+                 
               ]
           }).then(function(res) {
               document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
@@ -354,7 +448,7 @@
         productOptionBlock.attr('data-option','');
         $(this).hide();
 
-        $('[data-count-step][value="' + currentVal + '"]').val('').attr('name', "");
+        $('[data-count-step][value="' + currentVal + '"]').val('').attr('name', "").attr('data-name', "");
         $('[data-value="'+ currentVal +'"]').text('ADD');
        
         if(activeProductButton.length) {
@@ -373,10 +467,27 @@
           if ($(this).attr('src') != '') {
             $('.product-details .ProductForm__AddToCart').css('pointer-events','auto');
             $('.product-details .ProductForm__AddToCart').removeClass('btn-disabled');
+            $('.bundle-price').css('display', 'block');
+            $('.bundle1-compare-at-price').css('text-decoration', 'line-through');
+            $('.bundle-cont').css('display', 'flex');
+            $('.bundle1-compare-at-price').addClass('bundle-compare-color');
+
+
+
+
+
           }
           else{
             $('.product-details .ProductForm__AddToCart').css('pointer-events','none');
             $('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+            $('.bundle-price').css('display', 'none');
+            $('.bundle1-compare-at-price').css('text-decoration', 'none');
+            $('.bundle-cont').css('display', 'block');
+            $('.bundle1-compare-at-price').removeClass('bundle-compare-color');
+
+
+
+
             return false
           }
         });
@@ -391,13 +502,13 @@
               var itemPrice = $(this).attr('data-price') * 1,
                   discountPrice = $(this).attr('data-compare-at-price') * 1;
               sum = sum + itemPrice;
-              sum = sum * 0.9;
+              sum = sum ;
               discountedAmount = discountedAmount + discountPrice;
             }
           });
         }
         //Multiplied by 0.9 for the 10% off the total price
-        $('.bundle-price').html(formatMoney(sum * 0.9, window.theme.moneyFormat));
+        $('.bundle-price').html(formatMoney(sum, window.theme.moneyFormat));
         $('.bundle-compare-at-price').html(formatMoney(sum, window.theme.moneyFormat));
       });
     });
