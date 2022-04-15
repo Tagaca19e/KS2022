@@ -322,7 +322,7 @@ try{
 
   
   
-{% render 'mbc-bundles' %}  <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
+ <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
   {% if content_for_header contains 'pickystory' %}
     {% render 'pickystory-combos-prerender' %}
   {% endif %}
@@ -338,68 +338,50 @@ try{
     
 <script>
 
-//  function addCart_Collection(product_id) {
-//  	axios.post('/cart/add.js', {
-//  		items: [{
-//  				id: 39986663719048,
-//  				quantity: 1
-//  			},
-//  			{
-//  				id: product_id,
-//  				quantity: 1
-//  			}
-//  		]
-//  	}).then(function(res) {
-//  		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
-//  			bubbles: true
-//  		}));
-//  	})
-//  }
- //pass in the object too lol
 
- function addQuantity(p1, p2, p3, p4, t1, t2, t3, t4, sum, unique_id) {
+ function addQuantity(p1, p2, p3, p4, t1, t2, t3, t4, unique_id, newamount) {
  	console.log("addQuantity fired: ", p1, p2, p3, p4);
  	console.log("addQuantity title fired: ", t1, t2, t3, t4); 
- 	console.log("addQuantity SUM fired: ", sum);
 	console.log("addQuantity unique id fired: ", unique_id);
 
 
  	axios.post('/cart/add.js', {
  		items: [
-
  			{
  				id: p4,
  				quantity: 1,
  				properties: {
- 					"body": unique_id,
-                    "_lineItemPropertyKeyHere" : 90
+ 					"_body": unique_id
  				}
  			},
  			{
  				id: p3,
  				quantity: 1,
  				properties: {
- 					"body": unique_id,
-                    "_lineItemPropertyKeyHere" : 90
+ 					"_body": unique_id
  				}
  			},
  			{
  				id: p2,
  				quantity: 1,
  				properties: {
- 					"body": unique_id,
-                    "_lineItemPropertyKeyHere" : 90
+ 					"_body": unique_id
  				}
  			},
  			{
  				id: p1,
  				quantity: 1,
  				properties: {
- 					"top": unique_id,
- 					"amount": sum,
- 					"bundle-products": [t1, t2, t3, t4],
- 					"bundle-products-ids": [p1, p2, p3, p4],
-                    "_lineItemPropertyKeyHere" : 90
+ 					"_body": unique_id
+ 				}
+ 			},
+           	{
+ 				id: 40215618322568,
+ 				quantity: 1,
+ 				properties: {
+ 					"_bundle-products": [t1, t2, t3, t4],
+ 					"_bundle-products-ids": [p1, p2, p3, p4],
+                  	"_top": unique_id
  				}
  			}
  		]
@@ -410,10 +392,9 @@ try{
  	})
  }
 
-   function minusQuantity(p1, p2, p3, p4, t1, t2, t3, t4, sum, unique_id) {
+   function minusQuantity(p1, p2, p3, p4, t1, t2, t3, t4, unique_id, newamount) {
  	console.log("min Quantity fired: ", p1, p2, p3, p4);
  	console.log("minQuantity title fired: ", t1, t2, t3, t4);
- 	console.log("minQuantity SUM fired: ", sum);
  	let target_quant = 0;
  	let updated_quant = [];
 
@@ -425,12 +406,13 @@ try{
 
  		for (let i = 0; i < items.length; i++) {
  			let id = items[i].id;
- 
+ 			let isMatched = false;
           
  			if (id == p1 && items[i].properties !== null && items[i].properties['top'] !== null) {
                 let g_id = items[i].properties['top'];
               
               if (g_id == unique_id) {
+                isMatched = true; 
                 console.log("UNIQUE ID AND ITEM ID MATCHED: ", unique_id, g_id);
  				target_quant = items[i].quantity - 1;
  				target_idx = i;
@@ -453,9 +435,9 @@ try{
                	console.log("This is third i: ", i);
 
  				updated_quant[i] = items[i].quantity;
-            } else {
+            } else if((items[i].properties['top'] != null && items[i].properties['top'] == unique_id) || (items[i].properties['body'] != null && items[i].properties['body'] == unique_id)){
                	console.log("This is fourth i: ", i);
-             	updated_quant[i] = target_quant;
+             	updated_quant[i] = items[i].quantity - 1;
             }
           
     
@@ -485,6 +467,62 @@ try{
 
  } 
   
+  
+  function removeQuantity(p1, p2, p3, p4, t1, t2, t3, t4, unique_id, newamount) {
+   	let target_quant = 0;
+ 	let updated_quant = [];
+
+ 	jQuery.getJSON('/cart.js', function(cart) {
+
+ 		let items = cart.items;
+ 		let target_idx = 0;
+ 		console.log("this is items: ", items);
+
+ 		for (let i = 0; i < items.length; i++) {
+ 			let id = items[i].id;
+ 			let isMatched = false;
+          
+ 			if (id == p1 && items[i].properties !== null && items[i].properties['top'] !== null) {
+                let g_id = items[i].properties['top'];
+              
+              if (g_id == unique_id) {
+                isMatched = true; 
+                console.log("UNIQUE ID AND ITEM ID MATCHED: ", unique_id, g_id);
+ 				target_quant = items[i].quantity - 1;
+ 				target_idx = i;
+              	top = 0;
+ 				console.log("This is target_quant: ", target_quant);
+ 				console.log("This is target_idx: ", target_idx);
+              }
+ 			}
+          	
+          
+			if (items[i].properties == null) {
+ 				console.log("This is first i: ", i);
+
+ 				updated_quant[i] = items[i].quantity;
+            } else if (items[i].properties['top'] == null && items[i].properties['body'] == null) {
+               	console.log("This is second i: ", i);
+
+ 				updated_quant[i] = items[i].quantity;
+            } else if ((items[i].properties['top'] != null && items[i].properties['top'] != unique_id) || (items[i].properties['body'] != null && items[i].properties['body'] != unique_id)) {
+               	console.log("This is third i: ", i);
+
+ 				updated_quant[i] = items[i].quantity;
+            } else if((items[i].properties['top'] != null && items[i].properties['top'] == unique_id) || (items[i].properties['body'] != null && items[i].properties['body'] == unique_id)){
+               	console.log("This is fourth i: ", i);
+             	updated_quant[i] = 0;
+            }
+          
+    
+
+ 		}
+  		minQuantExecute(updated_quant);
+
+
+ 	});
+  	
+  }
 
 </script>
   
