@@ -45,10 +45,10 @@ The theme currency converter is used in lot of different places so to simply the
  - UNCOMMENT FOR TESTING -
 ---------------------------
 {% endcomment %}
-.MegaMenu--grid {
+/* .MegaMenu--grid {
   opacity: 1;
   visibility: visible;
-}
+} */
 .MegaMenu--grid .MegaMenu__Inner {
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
 }
@@ -60,27 +60,6 @@ The theme currency converter is used in lot of different places so to simply the
   margin: 0 auto;
   padding: 0 10px;
 }
-/* .GelPolish,
-.NailLacquer,
-.Acrylic,
-.NailElectronics,
-.GellyTips,
-.NailArt,
-.Pedicure,
-.NailAccessories {
-  display: none;
-} */
-/* .GelPolish,
-.NailPolish,
-.Acrylic,
-.NailSupplies,
-.GellyTips,
-.NailArt,
-.Pedicure,
-.Collections,
-.Kits+Bundles {
-  display: none;
-}  */
 {%- assign main_menu_handle = section.settings.navigation_menu | default: 'main-menu' -%}
 {%- assign main_menu = linklists[main_menu_handle] -%}
 
@@ -93,7 +72,8 @@ The theme currency converter is used in lot of different places so to simply the
     }
   {% endif %}
   {% unless forloop.first %}
-    .{{sub_link.title  | remove:" "}} {
+    {% assign none = sub_link.title  | remove:" "%} 
+   .{{none}}{
       display: none;
     }
   {% endunless %}
@@ -102,37 +82,10 @@ The theme currency converter is used in lot of different places so to simply the
     }
   {% endfor %}
 {%  endfor %}
-
-/* .DipPowder,
-.GelPolish,
-.NailLacquer,
-.Acrylic,
-.NailElectronics,
-.GellyTips,
-.NailArt,
-.Pedicure,
-.NailAccessories {
-  width: 100%;
-} */
-/* .DipPowderNails,
-.GelPolish,
-.NailPolish,
-.Acrylic,
-.NailSupplies,
-.GellyTips,
-.NailArt,
-.Pedicure,
-.Collections,
-.Kits+Bundles {
-  width: 100%;
-}  */
   
-/* .DipPowder {
-  display: flex;
-} */
-/* .DipPowderNails {
-  display: flex;
-} */
+.Kits\+Bundles {
+	display: none;  
+}
 .list-wrap {
   flex-wrap: wrap;
 }
