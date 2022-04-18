@@ -14,7 +14,7 @@
     	CSS FOR DOOFINDER STYLING
        	------------------------------
     {% endcomment %}
-    <style> 
+    <style>
       .dfd-footer{
         display: none !important;
       }
@@ -117,7 +117,7 @@
     {{ content_for_header }}
 
 
-    <script src="{{ 'jquery.min.js' | asset_url }}"></script>
+    <script src="{{ 'jquery.min.js' | asset_url }} async"></script>
     <link rel="stylesheet" href="{{ 'theme.scss.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
     
@@ -176,7 +176,7 @@
     
 
     {% if settings.currency_conversion_enabled %}
-      <script src="//cdn.shopify.com/s/javascripts/currencies.js" defer></script>
+      <script src="//cdn.shopify.com/s/javascripts/currencies.js" async></script>
     {% endif %}
 
     {%- if template == 'customers/addresses' -%}
@@ -211,7 +211,7 @@
     </script>
 
     {% render 'microdata-schema' %}
-<script src='https://affilo.io/libs/affiliate.lib.js'></script> 
+<script src='https://affilo.io/libs/affiliate.lib.js' async></script> 
     
 <!-- Global site tag (gtag.js) - Google Ads: 853368055 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-853368055"></script>
@@ -291,7 +291,7 @@ try{
     
     
 <!---K Back in Stock--->
-<script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+<script src="https://a.klaviyo.com/media/js/onsite/onsite.js" async></script>
 <script>
     var klaviyo = klaviyo || [];
     klaviyo.init({
@@ -345,7 +345,7 @@ try{
  src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WWqy8V"></script>    
     
 <!---Attentive Tag--->
-<script src="https://cdn.attn.tv/kiarasky/dtag.js"></script>
+<script src="https://cdn.attn.tv/kiarasky/dtag.js" async ></script>
 
 
 <!-- **BEGIN** Hextom QAB Integration // Main Include - DO NOT MODIFY -->
@@ -362,11 +362,11 @@ try{
   <!-- PickyStory code end -->
   <!-- PickyStory snippet "main_widget_script", do not modify. Safe to remove after the app is uninstalled -->
   {% if content_for_header contains 'pickystory' %}
-    <script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
+    <script async src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
   {% endif %}
   <!-- PickyStory end snippet "main_widget_script" -->
 <!--Gorgias Chat Widget Start-->
-    <script type="text/javascript" async defer id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=9316"></script>
+    <script type="text/javascript" async id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=9316"></script>
 <script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
 {% render 'th-subscription-scripts' %}
 
