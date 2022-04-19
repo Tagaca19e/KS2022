@@ -1,0 +1,5 @@
+Controlling the Required Products
+  - data-count = "num"
+  
+Controlling the length of the displayed products
+  -  lines 408 [page-bundle.liquid]: productOptionsCount 
