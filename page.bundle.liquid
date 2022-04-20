@@ -1,12 +1,15 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <style>
   .bundle-compare-color {
   	color: #45454594;
   }
+/*   .bundle-product-template .bundle-builder-products {
+  	height: 400px !important; 
+  } */
 </style>
   
   
+
 <div class="bundle-product-template page__bundle-page">
   <div class="product_hero-section">
     <div class="content">
@@ -23,7 +26,7 @@
           <h3>You choose your</h3>
           <div class="image-wrap">
             <div class="image-wrap__item">
-              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/35K-RPM_7c8768a3-6caa-4875-80ae-83484302e1ae.png?v=1628550345">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/products/Gelly-Starter-Kit_335887a7-0725-40ae-b9bc-b281bc2ecd06.png?v=1595636580">
               <span>Gelly Tips<br>
                 Starter Kit</span>
             </div>
@@ -334,8 +337,11 @@
        var property_inputT = $('.property_input');
         if(property_inputT.length) {
           property_inputT.each(function(index,item) {
+            
             console.log("This is a titles: ", item.getAttribute('data-name'));
+            if (item.getAttribute('data-name') != null) {
             variantsTitle.push(item.getAttribute('data-name'));
+            }
           });
         }
 
@@ -350,10 +356,19 @@
           var data = {
             "id": variantsArr
           }
-//           variantsArr.push(34471994753160);
-//           variantsArr.push(34471986299016);
+          
+          let data_att = document.getElementsByClassName('product-option');
+          console.log("THIS IS Data Att: ", data_att);
+          for (let i = 0; i < data_att.length; i++) {
+            let getAtt = data_att[i].getAttribute('data-title');
+           	console.log("Data Att: ", getAtt);
 
-
+            if (getAtt != null) {
+            	variantsTitle.push(getAtt); 
+              console.log(variantsTitle);
+            }
+          }
+          
           
           console.log("This is Executed: ", variantsArr);
 		  let top = [40215618322568];
@@ -361,73 +376,115 @@
           let unique_id = variantsArr.join('');
           let u_amount = global_sum;
           global_sum = (Math.round((global_sum * 0.010 ) * 100) / 100).toFixed(2);
-          axios.post('/cart/add.js', {
-              items: [
+			
+          
+          //push every item on the array then add the last top 
+		  let values = [];
+          
+          for (let i of variantsArr) {
+            let temp = {
+              id : i,
+              quantity: 1,
+              properties: {
+                "_bundle_id" : unique_id
+              }
+            }
 
-                  {
-                      id: variantsArr[3],
-                      quantity: 1,
-                      properties : {
-                        "_body" : unique_id
-                      }
-                  },
-                  {
-                      id: variantsArr[2],
-                      quantity: 1,
-                      properties : {
-                        "_body" : unique_id
-                      }
-                  },
-                  {
-                      id: variantsArr[1],
-                      quantity: 1,
-                      properties : {
-                        "_body" : unique_id
-                      }
-                  },
-                  {
-                      id: variantsArr[0],
-                      quantity: 1,
-                      properties : {
-                        "_body" : unique_id
-                      }
-                  },
-                  {
-                      id: 34471986299016,
-                      quantity: 1,
-                      properties : {
-                        "_body" : unique_id
-                      }
-                  },
-                  {
-                      id: 34471994753160,
-                      quantity: 1,
-                      properties : {
-                        "_body" : unique_id
-                      }
-                  },
-				  {
-                      id: top[0],
-                      quantity: 1,
-                	  properties : {
-                        "4" : variantsTitle[0],
-                        "3" : variantsTitle[1],
-                        "2" : variantsTitle[2],
-                        "1" : variantsTitle[3],
-                        "_bundle-products" : [variantsTitle[0], variantsTitle[1], variantsTitle[2], variantsTitle[3]],
-                        "_bundle-products-ids" : [variantsArr[0], variantsArr[1], variantsArr[2], variantsArr[3]],
-                        "_top" : unique_id
-                      }
-                  },
+            values.push(temp); 
+          }
+          
+          let top_obj = {
+            id: top[0],
+            quantity: 1,
+          };
+          
+          let properties = {};
+          
+          for (let i = 0; i < variantsTitle.length; i++) {
+            let idx = i + 1;
+            idx = idx.toString();
+            properties[idx] = variantsTitle[i];
+          }
+          
+          properties["_bundle_idt"] = unique_id; 
+          
+          top_obj["properties"] = properties;
+          
+          values.push(top_obj);
+          
+          console.log("This is the values", values);
+          console.log("This is the valuesTitle", variantsTitle);
+
+          
+          
+          axios.post('/cart/add.js', {
+//               items: [
+//                   {
+//                       id: variantsArr[5],
+//                       quantity: 1,
+//                       properties : {
+//                         "_bundle_id" : unique_id
+//                       }
+//                   },
+//                   {
+//                       id: variantsArr[4],
+//                       quantity: 1,
+//                       properties : {
+//                         "_bundle_id" : unique_id
+//                       }
+//                   },
+//                   {
+//                       id: variantsArr[3],
+//                       quantity: 1,
+//                       properties : {
+//                         "_bundle_id" : unique_id
+//                       }
+//                   },
+//                   {
+//                       id: variantsArr[2],
+//                       quantity: 1,
+//                       properties : {                 
+//                         "_bundle_id" : unique_id
+//                       }
+//                   },
+//                   {
+//                       id: variantsArr[1],
+//                       quantity: 1,
+//                       properties : {
+//                         "_bundle_id" : unique_id
+//                       }
+//                   },
+//                   {
+//                       id: variantsArr[0],
+//                       quantity: 1,
+//                       properties : {
+//                         "_bundle_id" : unique_id
+//                       }
+//                   },
+//                   //There was a bug on this array
+// 				          {
+//                       id: top[0],
+//                       quantity: 1,
+//                 	  properties : {
+//                         "6" : variantsTitle[7],
+//                         "5" : variantsTitle[6],
+//                         "4" : variantsTitle[5],
+//                         "3" : variantsTitle[4],
+// 						"2" : variantsTitle[3],
+//                         "1" : variantsTitle[2],
+//                         "_bundle_idt" : unique_id
+//                       }
+//                   },
                  
-              ]
+//               ]
+            
+            items : values
           }).then(function(res) {
               document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
                   bubbles: true
               }));
           })
-    
-    
+
         }
         
         if(variantsArr.length) {
