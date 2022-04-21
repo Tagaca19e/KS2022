@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html class="no-js" lang="{{ shop.locale }}">
+<html class="" lang="{{ shop.locale }}">
   <head>
     <meta charset="utf-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -9,8 +9,15 @@
     <meta name="google-site-verification" content="iPyblCMQ11fUnICDlYgxMGfrJdZaM-ncX3DI5AaXW5Q" />
     <meta name="google-site-verification" content="wkYIYynBxB7U9hQySbA0ngANMws-YgWSWAsQbqJZkhs" />
     <meta name="google-site-verification" content="1vgoY1IPZJZ4rhsJwkwkSovAqM32yNBpzNXvJqOy9rY" />
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--     <script type="text/javascript" defer> document.documentElement.className = document.documentElement.className.replace('no-js', 'js'); </script> -->
+
     {% comment %}
+    	------------------------------
     	CSS FOR DOOFINDER STYLING
+       	------------------------------
     {% endcomment %}
     <style>
       .dfd-footer{
@@ -46,8 +53,35 @@
       .dfd-mobile .dfd-results-grid {
         background: white;
       }
+      .okeReviews-reviews-main {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .okeReviews-reviews-review {
+        max-width: 500px;
+        padding: 20px !important;
+        margin: 5px !important;
+        min-width: 330px;
+        max-width: 500px;
+        border: 1px solid #e3e3e3 !important;
+      }
+      .okeReviews-reviewsAggregate-primary {
+      	max-width: 450px;
+      }
+      .okeReviews.okeReviews--theme .okeReviews-reviews-showMore {
+      	border: 1px solid #e3e3e3 !important;
+      }
+      .okeReviews .okeReviews-reviewsWidget {
+      	padding: 0px !important;
+      }
+      .okeReviews.okeReviews--theme .okeReviews-reviewsAggregate-side {
+      	display: block !important;	
+      }
+      .okeReviews .okeReviews-reviewsWidget--minimal.is-okeReviews-reviewsWidget-large .okeReviews-reviewsAggregate-primary-inner {
+       	align-items: center;
+      }
     </style>
-
     
     {% if page_title.size < 35 %}
         <title>
@@ -87,10 +121,59 @@
 
     {{ content_for_header }}
 
-
-    <script src="{{ 'jquery.min.js' | asset_url }}"></script>
     <link rel="stylesheet" href="{{ 'theme.scss.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+
+   
+    
+  {% include "loyaltylion" %}
+
+  {{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
+  {{ shop.metafields.okendo.StyleCustomizations }}
+  {% render 'okendo-reviews-json-ld' %}
+  {% if template contains 'product' or page.title == "Reviews" %}
+  	{{ 'okendo-reviews.js' | asset_url | script_tag }}
+  {% endif %}
+  
+<!-- Start klevu-snippets DO NOT EDIT -->
+<!-- End klevu-snippets DO NOT EDIT -->
+</head>
+
+  
+  <!--DOOFINDER-SHOPIFY-->
+        {% if content_for_header contains 'doofinder-installed.js' %}
+        {% render 'doofinder-script-tag' %}
+        {% endif %}
+  <!--/DOOFINDER-SHOPIFY--></head>
+  
+  <body class="prestige--v4 {% if template.directory %}template-{{ template.directory | handle }}{% endif %} template-{{ template.name | handle }} template_suffix-{{ template.suffix | handle }}">
+
+        <a class="PageSkipLink u-visually-hidden" href="#main">{{ 'header.navigation.skip_to_content' | t }}</a>
+    <span class="LoadingBar"></span>
+    <div class="PageOverlay"></div>
+<!--     <div class="PageTransition"></div> -->
+
+    {% section 'popup' %}
+    {% section 'sidebar-menu' %}
+
+    {%- if template != 'cart' -%}
+      {% render 'cart-drawer' %}
+    {%- endif -%}
+
+    <div class="PageContainer">
+      {% section 'announcement' %}
+      {% section 'header' %}
+
+      <main id="main" role="main">
+        {{ content_for_layout }}
+      </main>
+
+      {% section 'footer' %}
+    </div>
+<!--         <script type="text/javascript" defer> document.documentElement.className = document.documentElement.className.replace('no-js', 'js'); </script> -->
+
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+
     
     <script>
       // This allows to expose several variables to the global scope, to be used in scripts
@@ -133,7 +216,7 @@
         loadedClass: 'Image--lazyLoaded'
       };
 
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+//       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       document.documentElement.style.setProperty('--window-height', window.innerHeight + 'px');
 
       // We do a quick detection of some features (we could use Modernizr but for so little...)
@@ -143,7 +226,7 @@
       }());
     </script>
 
-    <script src="{{ 'lazysizes.min.js' | asset_url }}" async></script>
+    <script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
     
 
     {% if settings.currency_conversion_enabled %}
@@ -182,10 +265,11 @@
     </script>
 
     {% render 'microdata-schema' %}
-<script src='https://affilo.io/libs/affiliate.lib.js'></script> 
+<script src='https://affilo.io/libs/affiliate.lib.js' ></script> 
     
 <!-- Global site tag (gtag.js) - Google Ads: 853368055 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-853368055"></script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -193,50 +277,12 @@
 
   gtag('config', 'AW-853368055');
 </script>
-    
-<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"17214689"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>    
-    
-  {% include "loyaltylion" %}
-
-  {{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
-  {{ shop.metafields.okendo.StyleCustomizations }}
-  {% render 'okendo-reviews-json-ld' %}
-  {% if template contains 'product' or page.title == "Reviews" %}
-  	{{ 'okendo-reviews.js' | asset_url | script_tag }}
-  {% endif %}
-  
-<!-- Start klevu-snippets DO NOT EDIT -->
-<!-- End klevu-snippets DO NOT EDIT -->
-</head>
-
-  <body class="prestige--v4 {% if template.directory %}template-{{ template.directory | handle }}{% endif %} template-{{ template.name | handle }} template_suffix-{{ template.suffix | handle }}">
-
+    <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"17214689"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>    
     
 
-    <a class="PageSkipLink u-visually-hidden" href="#main">{{ 'header.navigation.skip_to_content' | t }}</a>
-    <span class="LoadingBar"></span>
-    <div class="PageOverlay"></div>
-    <div class="PageTransition"></div>
 
-    {% section 'popup' %}
-    {% section 'sidebar-menu' %}
-
-    {%- if template != 'cart' -%}
-      {% render 'cart-drawer' %}
-    {%- endif -%}
-
-    <div class="PageContainer">
-      {% section 'announcement' %}
-      {% section 'header' %}
-
-      <main id="main" role="main">
-        {{ content_for_layout }}
-      </main>
-
-      {% section 'footer' %}
-    </div>
     
-    <script type="text/javascript" src="https://s3.amazonaws.com/lastsecondcoupon/js/quickannouncementbar.js?shop=kiara-sky-professional-nails.myshopify.com"></script>
+<!--     <script type="text/javascript" src="https://s3.amazonaws.com/lastsecondcoupon/js/quickannouncementbar.js?shop=kiara-sky-professional-nails.myshopify.com"></script> -->
     
     {% render 'back-to-the-top' %}
     
@@ -322,7 +368,7 @@ try{
 
   
   
- <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
+  <!-- PickyStory code, do not modify. Safe to remove after the app is uninstalled -->
   {% if content_for_header contains 'pickystory' %}
     {% render 'pickystory-combos-prerender' %}
   {% endif %}
@@ -332,200 +378,154 @@ try{
     <script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
   {% endif %}
   <!-- PickyStory end snippet "main_widget_script" -->
-{% render 'th-subscription-scripts' %} 
-    
-    
-    
-<script>
+<!--Gorgias Chat Widget Start-->
+    <script type="text/javascript" async defer id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=9316"></script>
+<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
+{% render 'th-subscription-scripts' %}
 
+  {% render 'mbc-bundles' %}
+    {{ 'bundles.js' | asset_url | script_tag }}
 
- function addQuantity(p1, p2, p3, p4, t1, t2, t3, t4, unique_id, newamount) {
- 	console.log("addQuantity fired: ", p1, p2, p3, p4);
- 	console.log("addQuantity title fired: ", t1, t2, t3, t4); 
-	console.log("addQuantity unique id fired: ", unique_id);
-
-
- 	axios.post('/cart/add.js', {
- 		items: [
- 			{
- 				id: p4,
- 				quantity: 1,
- 				properties: {
- 					"_body": unique_id
- 				}
- 			},
- 			{
- 				id: p3,
- 				quantity: 1,
- 				properties: {
- 					"_body": unique_id
- 				}
- 			},
- 			{
- 				id: p2,
- 				quantity: 1,
- 				properties: {
- 					"_body": unique_id
- 				}
- 			},
- 			{
- 				id: p1,
- 				quantity: 1,
- 				properties: {
- 					"_body": unique_id
- 				}
- 			},
-           	{
- 				id: 40215618322568,
- 				quantity: 1,
- 				properties: {
- 					"_bundle-products": [t1, t2, t3, t4],
- 					"_bundle-products-ids": [p1, p2, p3, p4],
-                  	"_top": unique_id
- 				}
- 			}
- 		]
- 	}).then(function(res) {
- 		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
- 			bubbles: true
- 		}));
- 	})
- }
-
-   function minusQuantity(p1, p2, p3, p4, t1, t2, t3, t4, unique_id, newamount) {
- 	console.log("min Quantity fired: ", p1, p2, p3, p4);
- 	console.log("minQuantity title fired: ", t1, t2, t3, t4);
- 	let target_quant = 0;
- 	let updated_quant = [];
-
- 	jQuery.getJSON('/cart.js', function(cart) {
-
- 		let items = cart.items;
- 		let target_idx = 0;
- 		console.log("this is items: ", items);
-
- 		for (let i = 0; i < items.length; i++) {
- 			let id = items[i].id;
- 			let isMatched = false;
+        <script>
+      
           
- 			if (id == p1 && items[i].properties !== null && items[i].properties['top'] !== null) {
-                let g_id = items[i].properties['top'];
-              
-              if (g_id == unique_id) {
-                isMatched = true; 
-                console.log("UNIQUE ID AND ITEM ID MATCHED: ", unique_id, g_id);
- 				target_quant = items[i].quantity - 1;
- 				target_idx = i;
-              	top = 0;
- 				console.log("This is target_quant: ", target_quant);
- 				console.log("This is target_idx: ", target_idx);
-              }
- 			}
-          	
           
-			if (items[i].properties == null) {
- 				console.log("This is first i: ", i);
-
- 				updated_quant[i] = items[i].quantity;
-            } else if (items[i].properties['top'] == null && items[i].properties['body'] == null) {
-               	console.log("This is second i: ", i);
-
- 				updated_quant[i] = items[i].quantity;
-            } else if ((items[i].properties['top'] != null && items[i].properties['top'] != unique_id) || (items[i].properties['body'] != null && items[i].properties['body'] != unique_id)) {
-               	console.log("This is third i: ", i);
-
- 				updated_quant[i] = items[i].quantity;
-            } else if((items[i].properties['top'] != null && items[i].properties['top'] == unique_id) || (items[i].properties['body'] != null && items[i].properties['body'] == unique_id)){
-               	console.log("This is fourth i: ", i);
-             	updated_quant[i] = items[i].quantity - 1;
-            }
-          
-    
-
- 		}
-  		minQuantExecute(updated_quant);
-
-
- 	});
-
-
- }
-
+      let global_gel_present = 0;
   
-   function minQuantExecute(updated_quant) {
- 		console.log("THIS IS UPDATED QUANT: ", updated_quant);
+      console.log("clicked");
+      let total_gel = 0;
+      let lamp_present = [0, 0];
+      jQuery.getJSON('/cart.js', function(cart) {
+      	let items = cart.items;
+      	console.log("THIS IS CART ORDER: ", items);
 
- 	axios.post('/cart/update.js', {
- 		updates: updated_quant
+      	let cart_array = [];
 
 
- 	}).then(function(res) {
- 		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
- 			bubbles: true
- 		}));
- 	})
+      	let gel_builder_present = 0;
+      	let gel_builder_total = 0;
 
- } 
-  
-  
-  function removeQuantity(p1, p2, p3, p4, t1, t2, t3, t4, unique_id, newamount) {
-   	let target_quant = 0;
- 	let updated_quant = [];
 
- 	jQuery.getJSON('/cart.js', function(cart) {
+      	for (let item of items) {
+      		console.log(item.product_type);
 
- 		let items = cart.items;
- 		let target_idx = 0;
- 		console.log("this is items: ", items);
+      		if (item.id == 34589049290888) {
+      			lamp_present[0] = 1;
+      			lamp_present[1] += item.quantity;
+      		}
 
- 		for (let i = 0; i < items.length; i++) {
- 			let id = items[i].id;
- 			let isMatched = false;
-          
- 			if (id == p1 && items[i].properties !== null && items[i].properties['top'] !== null) {
-                let g_id = items[i].properties['top'];
-              
-              if (g_id == unique_id) {
-                isMatched = true; 
-                console.log("UNIQUE ID AND ITEM ID MATCHED: ", unique_id, g_id);
- 				target_quant = items[i].quantity - 1;
- 				target_idx = i;
-              	top = 0;
- 				console.log("This is target_quant: ", target_quant);
- 				console.log("This is target_idx: ", target_idx);
-              }
- 			}
-          	
-          
-			if (items[i].properties == null) {
- 				console.log("This is first i: ", i);
+      		if (item.product_type == "GEL POLISH" || item.product_type == "GEL EFFECT" || item.product_type == "gel essential" || item.product_type == "Gel Essential") {
+      			total_gel += item.quantity;
+      		}
 
- 				updated_quant[i] = items[i].quantity;
-            } else if (items[i].properties['top'] == null && items[i].properties['body'] == null) {
-               	console.log("This is second i: ", i);
 
- 				updated_quant[i] = items[i].quantity;
-            } else if ((items[i].properties['top'] != null && items[i].properties['top'] != unique_id) || (items[i].properties['body'] != null && items[i].properties['body'] != unique_id)) {
-               	console.log("This is third i: ", i);
+      		if (item.product_id == 4670444896392 && item.final_price == 0) {
+      			gel_builder_present += item.quantity;
+      		} else if (item.product_id == 4670444896392 && item.final_price > 0) {
+      			gel_builder_total += item.quantity;
+      		}
 
- 				updated_quant[i] = items[i].quantity;
-            } else if((items[i].properties['top'] != null && items[i].properties['top'] == unique_id) || (items[i].properties['body'] != null && items[i].properties['body'] == unique_id)){
-               	console.log("This is fourth i: ", i);
-             	updated_quant[i] = 0;
-            }
-          
+
+      	}
+
+
+
+      	let gel_required = gel_builder_total - gel_builder_present;
+
+
+
+      	//only add in the item when there is no lamp in the cart or there is a difference
+
+      	console.log("This is total gel: ", gel_builder_total);
+      	console.log("This is gel present: ", gel_builder_present);
+      	console.log("This is gel supposed: ", gel_required);
+
+
+
+      	console.log("This is total gel: ", total_gel);
+      	console.log("This is lamp present: ", lamp_present);
+
+      	let lamp_needed = Math.trunc(total_gel / 10);
+
+      	console.log("This is lamp needed: ", lamp_needed);
+
+      	let lamp_supposed = lamp_needed - lamp_present[1];
+
+      	console.log("This is lamp supposed: ", lamp_supposed);
+
+
+        global_gel_present = gel_builder_total;
+        
+      	if (lamp_present[1] == 0 || lamp_supposed > 0) {
+
+
+      		axios.post('/cart/add.js', {
+      			items: [{
+      				id: 34589049290888,
+      				quantity: lamp_supposed
+      			}]
+      		}).then(function(res) {
+      			document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+      				bubbles: true
+      			}));
+      		})
+      	}
+
+
+      	if (gel_required > 0) {
+
+
+      		axios.post('/cart/add.js', {
+      			items: [{
+      				id: 32764401287304,
+      				quantity: gel_required
+      			}]
+      		}).then(function(res) {
+      			document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+      				bubbles: true
+      			}));
+      		})
+      	}
+
+
+      });
+
+
+
+      function minusQuantityGels(id) {
+        console.log("This is the minus quant for the bundle");
+        
+      
+        
+        
+            
+              jQuery.getJSON('/cart.js', function(cart) {
+
+                
+                let items = cart.items;
+               	
+                let gel_builder_quant = 0;
+                
+                for (let item of items) {
+                  if (item.id == 32764401287304 && item.final_price > 0) {
+                    gel_builder_quant += item.quantity;
+                  }
+                }
+                
+        
+            jQuery.post('/cart/change.js', { quantity: gel_builder_quant-1, id: 32764401287304 }).then(function(res) {
+      			document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+      				bubbles: true
+      			}));
+      		});
+
+
+                
+              });
+      }
+        
+        
+  </script>
     
-
- 		}
-  		minQuantExecute(updated_quant);
-
-
- 	});
-  	
-  }
-
-</script>
-  
-  
-  </body>
+</body>
 </html>
