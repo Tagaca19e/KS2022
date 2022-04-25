@@ -1,4 +1,7 @@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<!--    Bundles    -->
+{% assign Bundle1 = section.settings.selected_product1 %}
+{% assign Bundle2 = section.settings.selected_product2 %}
+{% assign Bundle3 = section.settings.selected_product3 %}
 
 <!--    Step 1    -->
 {% assign product1 = section.settings.product1 %}
@@ -41,6 +44,18 @@
 {% assign product34 = section.settings.product34 %}
 {% assign product35 = section.settings.product35 %}
 {% assign product36 = section.settings.product36 %}    
+{% assign product37 = section.settings.product37 %}
+{% assign product38 = section.settings.product38 %}
+{% assign product39 = section.settings.product39 %}    
+{% assign product40 = section.settings.product40 %}    
+{% assign product41 = section.settings.product41 %}    
+{% assign product42 = section.settings.product42 %}    
+{% assign product43 = section.settings.product43 %}    
+{% assign product44 = section.settings.product44 %}    
+{% assign product45 = section.settings.product45 %}    
+{% assign product46 = section.settings.product46 %}    
+{% assign product47 = section.settings.product47 %}    
+{% assign product48 = section.settings.product48 %}    
 
 <style>
   @media and (max-width: 600px) {
@@ -57,673 +72,470 @@
 </style>
 
 <div class="steps">
-  <div class="step step-1" data-count="1">
-    <div class="title">
-      <h3>Step 1</h3>
-      <span class="text">Choose your shape, pick your Starter Kit</span>
-    </div>
-
-    <div class="steps-wrap">
-      {% if section.settings.product1 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product1.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product1.title }}</h4>
-<!--         {{product1.first_available_variant.id}} -->
-        <a href="/" class="bundle_button" data-name="{{product1.title}}" data-price="{{ product1.price  }}" data-compare-at-price="{{ product1.compare_at_price }}" data-value="{{ product1.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-      {% if product2 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product2.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product2.title }}</h4>
-<!--         {{product2.first_available_variant.id}} -->
-
-        <a href="/" class="bundle_button" data-name="{{product2.title}}" data-price="{{ product2.price }}" data-compare-at-price="{{ product2.compare_at_price }}" data-value="{{ product2.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-      {% if product3 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product3.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product3.title }}</h4>
-<!--         {{product3.first_available_variant.id}} -->
-
-        <a href="/" class="bundle_button" data-name="{{product3.title}}" data-price="{{ product3.price }}" data-compare-at-price="{{ product3.compare_at_price }}" data-value="{{ product3.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-      {% if product4 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product4.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product4.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product4.title}}" data-price="{{ product4.price  }}" data-compare-at-price="{{ product4.compare_at_price }}" data-value="{{ product4.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-
-      {% if product5 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product5.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product5.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product5.title}}" data-price="{{ product5.price  }}" data-compare-at-price="{{ product5.compare_at_price }}" data-value="{{ product5.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-      {% if product6 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product6.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product6.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product6.title}}" data-price="{{ product6.price  }}" data-compare-at-price="{{ product6.compare_at_price }}" data-value="{{ product6.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-      {% if product7 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product7.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product7.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product7.title}}" data-price="{{ product7.price }}" data-compare-at-price="{{ product7.compare_at_price }}" data-value="{{ product7.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-      {% if product8 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product8.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product8.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product8.title}}" data-price="{{ product8.price  }}" data-compare-at-price="{{ product8.compare_at_price }}" data-value="{{ product8.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-      {% if product9 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product9.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product9.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product9.title}}" data-price="{{ product9.price }}" data-compare-at-price="{{ product9.compare_at_price }}" data-value="{{ product9.variants.first.id }}" data-step="1">ADD</a>
-      </div>
-      {% endif %}
-
-    </div>
-  </div>
-
-  <div class="step step-2" style="display: none;" data-count="2">
-    <div class="title">
-      <h3>Step 2</h3>
-      <span class="text">Choose 2 gel polish colors</span>
-    </div>
-    <div class="steps-wrap">
-      {% if product10 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product10.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product10.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product10.title}}" data-price="{{ product10.price  }}" data-compare-at-price="{{ product10.compare_at_price }}" data-value="{{ product10.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product11 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product11.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product11.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product11.title}}" data-price="{{ product11.price }}" data-compare-at-price="{{ product11.compare_at_price }}" data-value="{{ product11.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product12 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product12.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product12.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product12.title}}" data-price="{{ product12.price }}" data-compare-at-price="{{ product12.compare_at_price }}" data-value="{{ product12.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product13 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product13.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product13.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product13.title}}" data-price="{{ product13.price  }}" data-compare-at-price="{{ product13.compare_at_price }}" data-value="{{ product13.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product14 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product14.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product14.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product14.title}}" data-price="{{ product14.price  }}" data-compare-at-price="{{ product14.compare_at_price }}" data-value="{{ product14.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product15 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product15.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product15.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product15.title}}" data-price="{{ product15.price  }}" data-compare-at-price="{{ product15.compare_at_price }}" data-value="{{ product15.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product16 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product16.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product16.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product16.title}}" data-price="{{ product16.price }}" data-compare-at-price="{{ product16.compare_at_price }}" data-value="{{ product16.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product17 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product17.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product17.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product17.title}}" data-price="{{ product17.price  }}" data-compare-at-price="{{ product17.compare_at_price }}" data-value="{{ product17.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product18 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product18.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product18.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product18.title}}" data-price="{{ product18.price }}" data-compare-at-price="{{ product18.compare_at_price }}" data-value="{{ product18.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product19 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product19.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product19.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product19.title}}" data-price="{{ product19.price  }}" data-compare-at-price="{{ product19.compare_at_price }}" data-value="{{ product19.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product20 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product20.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product20.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product20.title}}" data-price="{{ product20.price }}" data-compare-at-price="{{ product20.compare_at_price }}" data-value="{{ product20.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product21 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product21.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product21.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product21.title}}" data-price="{{ product21.price }}" data-compare-at-price="{{ product21.compare_at_price }}" data-value="{{ product21.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product22 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product22.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product22.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product22.title}}" data-price="{{ product22.price  }}" data-compare-at-price="{{ product22.compare_at_price }}" data-value="{{ product22.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product23 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product23.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product23.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product23.title}}" data-price="{{ product23.price  }}" data-compare-at-price="{{ product23.compare_at_price }}" data-value="{{ product23.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product24 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product24.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product24.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product24.title}}" data-price="{{ product24.price  }}" data-compare-at-price="{{ product24.compare_at_price }}" data-value="{{ product24.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product25 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product25.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product25.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product25.title}}" data-price="{{ product25.price }}" data-compare-at-price="{{ product25.compare_at_price }}" data-value="{{ product25.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product26 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product26.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product26.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product26.title}}" data-price="{{ product26.price  }}" data-compare-at-price="{{ product26.compare_at_price }}" data-value="{{ product26.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product27 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product27.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product27.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product27.title}}" data-price="{{ product27.price }}" data-compare-at-price="{{ product27.compare_at_price }}" data-value="{{ product27.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product28 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product28.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product28.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product28.title}}" data-price="{{ product28.price }}" data-compare-at-price="{{ product28.compare_at_price }}" data-value="{{ product28.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product29 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product29.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product29.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product29.title}}" data-price="{{ product29.price  }}" data-compare-at-price="{{ product29.compare_at_price }}" data-value="{{ product29.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product30 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product30.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product30.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product30.title}}" data-price="{{ product30.price }}" data-compare-at-price="{{ product30.compare_at_price }}" data-value="{{ product30.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product31 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product31.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product31.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product31.title}}" data-price="{{ product31.price }}" data-compare-at-price="{{ product31.compare_at_price }}" data-value="{{ product31.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product32 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product32.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product32.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product32.title}}" data-price="{{ product32.price  }}" data-compare-at-price="{{ product32.compare_at_price }}" data-value="{{ product32.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-      {% if product33 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product33.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product33.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product33.title}}" data-price="{{ product33.price  }}" data-compare-at-price="{{ product33.compare_at_price }}" data-value="{{ product33.variants.first.id }}" data-step="2">ADD</a>
-      </div>
-      {% endif %}
-    </div>
-  </div>
-
-  <div class="step step-3" style="display: none;" data-count="1">
-    <div class="title">
-      <h3>Step 3</h3>
-      <span class="text">Choose your cuticle oil</span>
-    </div>
-
-    <div class="steps-wrap">
-      {% if product34 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product34.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product34.title }}</h4>
-<!--         {{product34.first_available_variant.id}} -->
-
-        <a href="/" class="bundle_button" data-name="{{product34.title}}" data-price="{{ product34.price  }}" data-compare-at-price="{{ product34.compare_at_price }}" data-value="{{ product34.variants.first.id }}" data-step="3">ADD</a>
-      </div>
-      {% endif %}
-      {% if product35 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product35.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product35.title }}</h4>
-<!--         {{product35.first_available_variant.id}} -->
-        
-
-        <a href="/" class="bundle_button" data-name="{{product35.title}}" data-price="{{ product35.price }}" data-compare-at-price="{{ product35.compare_at_price }}" data-value="{{ product35.variants.first.id }}" data-step="3">ADD</a>
-      </div>
-      {% endif %}
-      {% if product36 != blank %}
-      <div class="steps-wrap__item">
-        <img src="{{ product36.images[1] | img_url: 'master' }}">
-        <h4 class="ProductItem__Title Heading">{{ product36.title }}</h4>
-        <a href="/" class="bundle_button" data-name="{{product36.title}}" data-price="{{ product36.price  }}" data-compare-at-price="{{ product36.compare_at_price }}" data-value="{{ product36.variants.first.id }}" data-step="3">ADD</a>
-      </div>
-      {% endif %}
-    </div>
-  </div>
-</div>
-
-
-
-<div class="bundle-builder-products custom-bundle-builder-products">
-  <h3 class="hide-title">view your kit +</h3>
-  <h3 class="show-title">your kit</h3>
-
-  <div class="wrap">
-    <div class="product-options">
-
-      {% assign preselected_product_handles_size = 0 %}
-      {% assign bundle_total_price = 0 %}
-      {% assign bundle_total_compare_at_price = 0 %}
-
-      {% if section.settings.preselected_product1 != blank %}
-     
-      {% for x in (1..3) %}
-
-      {% capture handle_Str %}preselected_product{{x}}{% endcapture %}
-      {% assign handle = section.settings[handle_Str] %}
-      {% if handle != blank %}
-      {% assign preselected_product =  all_products[handle] %}
-      {% if preselected_product.handle != blank  %}
-      {% if preselected_product.available %}
-      {% assign preselected_product_handles_size = preselected_product_handles_size | plus: 1 %}
-      {% assign bundle_total_price = bundle_total_price | plus: preselected_product.selected_or_first_available_variant.price %}            
-      {% assign bundle_total_compare_at_price = bundle_total_compare_at_price | plus: preselected_product.selected_or_first_available_variant.compare_at_price %}
-
-      {% unless forloop.first  %}
-      <span class="need-add-plus">+</span>
-      {% endunless %}
-
-      <div class="product-option preselected_product" data-title="{{ preselected_product.title}}"  data-price="{{ preselected_product.price  }}" data-compare-at-price="{{ preselected_product.compare_at_price }}" data-value="{{preselected_product.selected_or_first_available_variant.id}}">
-        <div class="option option-1">
-          <img src="{{ preselected_product.featured_media | img_url:'master' }}">
+    <div class="step step-1" data-count="1">
+        <div class="title">
+            <h3>Step 1</h3>
+            <span class="text">Choose your shape, pick your Starter Kit</span>
         </div>
-      </div>
-      <input type="hidden" class="property_input" 
 
-             data-count-step="" 
-             data-price="{{ preselected_product.price  }}"
-             data-title="{{preselected_product.selected_or_first_available_variant.title}}"
-
-             data-compare-at-price="{{ preselected_product.compare_at_price  }}"
-             value="{{preselected_product.selected_or_first_available_variant.id}}" 
-             name="properties[{{preselected_product.selected_or_first_available_variant.id}}]" />
-
-
-      {% endif %}
-      {% endif%}
-      {% endif%}
-      {% endfor %}
-
-      {% endif %}
-
-      {% assign productOptionsCount = 4 %}
-     
-      {% for i in (1..productOptionsCount) %}
-      
-      {% if preselected_product_handles_size == 0 and i == 1 %}      
-      {% else %}
-      {% if i != 1 and preselected_product_handles_size == 0   %}
-      <span class="need-add-plus">+</span>
-      {% else %}
-      <span class="need-add-plus">+</span>
-      {% endif %}
-      {% endif %}
-      <div class="product-option"><div class="remove remove-{{i}}" data-item="">x</div><div class="option option-{{i}}"><img src=""></div></div>           
-      {% endfor %}
+        <div class="steps-wrap">
+            {% if section.settings.product1!= blank %} <div class='steps-wrap__item'> <img src='{{ product1.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product1.title }}</h4> {% if product1.available %} <a href='/' class='bundle_button' data-name='{{product1.title}}' data-price='{{ product1.price }}' data-compare-at-price='{{ product1.compare_at_price }}' data-value='{{ product1.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product1.title}}' data-price='{{ product1.price }}' data-compare-at-price='{{ product1.compare_at_price }}' data-value='{{ product1.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product2!= blank %} <div class='steps-wrap__item'> <img src='{{ product2.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product2.title }}</h4> {% if product2.available %} <a href='/' class='bundle_button' data-name='{{product2.title}}' data-price='{{ product2.price }}' data-compare-at-price='{{ product2.compare_at_price }}' data-value='{{ product2.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product2.title}}' data-price='{{ product2.price }}' data-compare-at-price='{{ product2.compare_at_price }}' data-value='{{ product2.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product3!= blank %} <div class='steps-wrap__item'> <img src='{{ product3.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product3.title }}</h4> {% if product3.available %} <a href='/' class='bundle_button' data-name='{{product3.title}}' data-price='{{ product3.price }}' data-compare-at-price='{{ product3.compare_at_price }}' data-value='{{ product3.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product3.title}}' data-price='{{ product3.price }}' data-compare-at-price='{{ product3.compare_at_price }}' data-value='{{ product3.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product4!= blank %} <div class='steps-wrap__item'> <img src='{{ product4.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product4.title }}</h4> {% if product4.available %} <a href='/' class='bundle_button' data-name='{{product4.title}}' data-price='{{ product4.price }}' data-compare-at-price='{{ product4.compare_at_price }}' data-value='{{ product4.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product4.title}}' data-price='{{ product4.price }}' data-compare-at-price='{{ product4.compare_at_price }}' data-value='{{ product4.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product5!= blank %} <div class='steps-wrap__item'> <img src='{{ product5.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product5.title }}</h4> {% if product5.available %} <a href='/' class='bundle_button' data-name='{{product5.title}}' data-price='{{ product5.price }}' data-compare-at-price='{{ product5.compare_at_price }}' data-value='{{ product5.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product5.title}}' data-price='{{ product5.price }}' data-compare-at-price='{{ product5.compare_at_price }}' data-value='{{ product5.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product6!= blank %} <div class='steps-wrap__item'> <img src='{{ product6.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product6.title }}</h4> {% if product6.available %} <a href='/' class='bundle_button' data-name='{{product6.title}}' data-price='{{ product6.price }}' data-compare-at-price='{{ product6.compare_at_price }}' data-value='{{ product6.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product6.title}}' data-price='{{ product6.price }}' data-compare-at-price='{{ product6.compare_at_price }}' data-value='{{ product6.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product7!= blank %} <div class='steps-wrap__item'> <img src='{{ product7.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product7.title }}</h4> {% if product7.available %} <a href='/' class='bundle_button' data-name='{{product7.title}}' data-price='{{ product7.price }}' data-compare-at-price='{{ product7.compare_at_price }}' data-value='{{ product7.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product7.title}}' data-price='{{ product7.price }}' data-compare-at-price='{{ product7.compare_at_price }}' data-value='{{ product7.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product8!= blank %} <div class='steps-wrap__item'> <img src='{{ product8.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product8.title }}</h4> {% if product8.available %} <a href='/' class='bundle_button' data-name='{{product8.title}}' data-price='{{ product8.price }}' data-compare-at-price='{{ product8.compare_at_price }}' data-value='{{ product8.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product8.title}}' data-price='{{ product8.price }}' data-compare-at-price='{{ product8.compare_at_price }}' data-value='{{ product8.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product9!= blank %} <div class='steps-wrap__item'> <img src='{{ product9.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product9.title }}</h4> {% if product9.available %} <a href='/' class='bundle_button' data-name='{{product9.title}}' data-price='{{ product9.price }}' data-compare-at-price='{{ product9.compare_at_price }}' data-value='{{ product9.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product9.title}}' data-price='{{ product9.price }}' data-compare-at-price='{{ product9.compare_at_price }}' data-value='{{ product9.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+        </div>
     </div>
 
-    <div class="product-details">
-
-	  <div class="bundle-cont">
-
-      <div class="price bundle-total-compare-at-price">
-        <p><span class="bundle1-compare-at-price">{{ bundle_total_price | money }}</span></p>
-      </div>
-      <div style="margin-left: 10px;" class="price regular-price">
-        <p><span class="bundle-price">{{ bundle_total_price | times: 0.9 }}</span></p>
-      </div>
-	  </div>
-
-      <button type="submit" aria-expanded="false" aria-label="Open cart" data-action="open-drawer" data-drawer-id="sidebar-cart" class="ProductForm__AddToCart Button Button--primary Button--secondary Button--full btn-disabled" >
-        <span>{{ 'product.form.add_to_cart' | t }}</span>
-      </button>
-      
-<!--       <button aria-expanded="false" aria-label="Open cart"  class="" data-action="open-drawer" data-drawer-id="sidebar-cart" onclick="addCart_ex()">
-        ADD TO CART
-      </button> -->
+    <div class="step step-2" style="display: none;" data-count="2">
+        <div class="title">
+            <h3>Step 2</h3>
+            <span class="text">Choose 2 gel polish colors</span>
+        </div>
+        <div class="steps-wrap">
+            {% if section.settings.product10!= blank %} <div class='steps-wrap__item'> <img src='{{ product10.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product10.title }}</h4> {% if product10.available %} <a href='/' class='bundle_button' data-name='{{product10.title}}' data-price='{{ product10.price }}' data-compare-at-price='{{ product10.compare_at_price }}' data-value='{{ product10.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product10.title}}' data-price='{{ product10.price }}' data-compare-at-price='{{ product10.compare_at_price }}' data-value='{{ product10.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product11!= blank %} <div class='steps-wrap__item'> <img src='{{ product11.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product11.title }}</h4> {% if product11.available %} <a href='/' class='bundle_button' data-name='{{product11.title}}' data-price='{{ product11.price }}' data-compare-at-price='{{ product11.compare_at_price }}' data-value='{{ product11.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product11.title}}' data-price='{{ product11.price }}' data-compare-at-price='{{ product11.compare_at_price }}' data-value='{{ product11.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product12!= blank %} <div class='steps-wrap__item'> <img src='{{ product12.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product12.title }}</h4> {% if product12.available %} <a href='/' class='bundle_button' data-name='{{product12.title}}' data-price='{{ product12.price }}' data-compare-at-price='{{ product12.compare_at_price }}' data-value='{{ product12.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product12.title}}' data-price='{{ product12.price }}' data-compare-at-price='{{ product12.compare_at_price }}' data-value='{{ product12.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product13!= blank %} <div class='steps-wrap__item'> <img src='{{ product13.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product13.title }}</h4> {% if product13.available %} <a href='/' class='bundle_button' data-name='{{product13.title}}' data-price='{{ product13.price }}' data-compare-at-price='{{ product13.compare_at_price }}' data-value='{{ product13.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product13.title}}' data-price='{{ product13.price }}' data-compare-at-price='{{ product13.compare_at_price }}' data-value='{{ product13.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product14!= blank %} <div class='steps-wrap__item'> <img src='{{ product14.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product14.title }}</h4> {% if product14.available %} <a href='/' class='bundle_button' data-name='{{product14.title}}' data-price='{{ product14.price }}' data-compare-at-price='{{ product14.compare_at_price }}' data-value='{{ product14.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product14.title}}' data-price='{{ product14.price }}' data-compare-at-price='{{ product14.compare_at_price }}' data-value='{{ product14.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product15!= blank %} <div class='steps-wrap__item'> <img src='{{ product15.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product15.title }}</h4> {% if product15.available %} <a href='/' class='bundle_button' data-name='{{product15.title}}' data-price='{{ product15.price }}' data-compare-at-price='{{ product15.compare_at_price }}' data-value='{{ product15.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product15.title}}' data-price='{{ product15.price }}' data-compare-at-price='{{ product15.compare_at_price }}' data-value='{{ product15.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product16!= blank %} <div class='steps-wrap__item'> <img src='{{ product16.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product16.title }}</h4> {% if product16.available %} <a href='/' class='bundle_button' data-name='{{product16.title}}' data-price='{{ product16.price }}' data-compare-at-price='{{ product16.compare_at_price }}' data-value='{{ product16.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product16.title}}' data-price='{{ product16.price }}' data-compare-at-price='{{ product16.compare_at_price }}' data-value='{{ product16.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product17!= blank %} <div class='steps-wrap__item'> <img src='{{ product17.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product17.title }}</h4> {% if product17.available %} <a href='/' class='bundle_button' data-name='{{product17.title}}' data-price='{{ product17.price }}' data-compare-at-price='{{ product17.compare_at_price }}' data-value='{{ product17.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product17.title}}' data-price='{{ product17.price }}' data-compare-at-price='{{ product17.compare_at_price }}' data-value='{{ product17.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product18!= blank %} <div class='steps-wrap__item'> <img src='{{ product18.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product18.title }}</h4> {% if product18.available %} <a href='/' class='bundle_button' data-name='{{product18.title}}' data-price='{{ product18.price }}' data-compare-at-price='{{ product18.compare_at_price }}' data-value='{{ product18.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product18.title}}' data-price='{{ product18.price }}' data-compare-at-price='{{ product18.compare_at_price }}' data-value='{{ product18.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product19!= blank %} <div class='steps-wrap__item'> <img src='{{ product19.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product19.title }}</h4> {% if product19.available %} <a href='/' class='bundle_button' data-name='{{product19.title}}' data-price='{{ product19.price }}' data-compare-at-price='{{ product19.compare_at_price }}' data-value='{{ product19.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product19.title}}' data-price='{{ product19.price }}' data-compare-at-price='{{ product19.compare_at_price }}' data-value='{{ product19.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product20!= blank %} <div class='steps-wrap__item'> <img src='{{ product20.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product20.title }}</h4> {% if product20.available %} <a href='/' class='bundle_button' data-name='{{product20.title}}' data-price='{{ product20.price }}' data-compare-at-price='{{ product20.compare_at_price }}' data-value='{{ product20.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product20.title}}' data-price='{{ product20.price }}' data-compare-at-price='{{ product20.compare_at_price }}' data-value='{{ product20.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product21!= blank %} <div class='steps-wrap__item'> <img src='{{ product21.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product21.title }}</h4> {% if product21.available %} <a href='/' class='bundle_button' data-name='{{product21.title}}' data-price='{{ product21.price }}' data-compare-at-price='{{ product21.compare_at_price }}' data-value='{{ product21.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product21.title}}' data-price='{{ product21.price }}' data-compare-at-price='{{ product21.compare_at_price }}' data-value='{{ product21.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product22!= blank %} <div class='steps-wrap__item'> <img src='{{ product22.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product22.title }}</h4> {% if product22.available %} <a href='/' class='bundle_button' data-name='{{product22.title}}' data-price='{{ product22.price }}' data-compare-at-price='{{ product22.compare_at_price }}' data-value='{{ product22.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product22.title}}' data-price='{{ product22.price }}' data-compare-at-price='{{ product22.compare_at_price }}' data-value='{{ product22.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product23!= blank %} <div class='steps-wrap__item'> <img src='{{ product23.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product23.title }}</h4> {% if product23.available %} <a href='/' class='bundle_button' data-name='{{product23.title}}' data-price='{{ product23.price }}' data-compare-at-price='{{ product23.compare_at_price }}' data-value='{{ product23.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product23.title}}' data-price='{{ product23.price }}' data-compare-at-price='{{ product23.compare_at_price }}' data-value='{{ product23.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product24!= blank %} <div class='steps-wrap__item'> <img src='{{ product24.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product24.title }}</h4> {% if product24.available %} <a href='/' class='bundle_button' data-name='{{product24.title}}' data-price='{{ product24.price }}' data-compare-at-price='{{ product24.compare_at_price }}' data-value='{{ product24.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product24.title}}' data-price='{{ product24.price }}' data-compare-at-price='{{ product24.compare_at_price }}' data-value='{{ product24.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product25!= blank %} <div class='steps-wrap__item'> <img src='{{ product25.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product25.title }}</h4> {% if product25.available %} <a href='/' class='bundle_button' data-name='{{product25.title}}' data-price='{{ product25.price }}' data-compare-at-price='{{ product25.compare_at_price }}' data-value='{{ product25.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product25.title}}' data-price='{{ product25.price }}' data-compare-at-price='{{ product25.compare_at_price }}' data-value='{{ product25.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product26!= blank %} <div class='steps-wrap__item'> <img src='{{ product26.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product26.title }}</h4> {% if product26.available %} <a href='/' class='bundle_button' data-name='{{product26.title}}' data-price='{{ product26.price }}' data-compare-at-price='{{ product26.compare_at_price }}' data-value='{{ product26.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product26.title}}' data-price='{{ product26.price }}' data-compare-at-price='{{ product26.compare_at_price }}' data-value='{{ product26.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product27!= blank %} <div class='steps-wrap__item'> <img src='{{ product27.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product27.title }}</h4> {% if product27.available %} <a href='/' class='bundle_button' data-name='{{product27.title}}' data-price='{{ product27.price }}' data-compare-at-price='{{ product27.compare_at_price }}' data-value='{{ product27.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product27.title}}' data-price='{{ product27.price }}' data-compare-at-price='{{ product27.compare_at_price }}' data-value='{{ product27.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product28!= blank %} <div class='steps-wrap__item'> <img src='{{ product28.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product28.title }}</h4> {% if product28.available %} <a href='/' class='bundle_button' data-name='{{product28.title}}' data-price='{{ product28.price }}' data-compare-at-price='{{ product28.compare_at_price }}' data-value='{{ product28.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product28.title}}' data-price='{{ product28.price }}' data-compare-at-price='{{ product28.compare_at_price }}' data-value='{{ product28.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product29!= blank %} <div class='steps-wrap__item'> <img src='{{ product29.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product29.title }}</h4> {% if product29.available %} <a href='/' class='bundle_button' data-name='{{product29.title}}' data-price='{{ product29.price }}' data-compare-at-price='{{ product29.compare_at_price }}' data-value='{{ product29.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product29.title}}' data-price='{{ product29.price }}' data-compare-at-price='{{ product29.compare_at_price }}' data-value='{{ product29.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product30!= blank %} <div class='steps-wrap__item'> <img src='{{ product30.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product30.title }}</h4> {% if product30.available %} <a href='/' class='bundle_button' data-name='{{product30.title}}' data-price='{{ product30.price }}' data-compare-at-price='{{ product30.compare_at_price }}' data-value='{{ product30.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product30.title}}' data-price='{{ product30.price }}' data-compare-at-price='{{ product30.compare_at_price }}' data-value='{{ product30.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product31!= blank %} <div class='steps-wrap__item'> <img src='{{ product31.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product31.title }}</h4> {% if product31.available %} <a href='/' class='bundle_button' data-name='{{product31.title}}' data-price='{{ product31.price }}' data-compare-at-price='{{ product31.compare_at_price }}' data-value='{{ product31.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product31.title}}' data-price='{{ product31.price }}' data-compare-at-price='{{ product31.compare_at_price }}' data-value='{{ product31.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product32!= blank %} <div class='steps-wrap__item'> <img src='{{ product32.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product32.title }}</h4> {% if product32.available %} <a href='/' class='bundle_button' data-name='{{product32.title}}' data-price='{{ product32.price }}' data-compare-at-price='{{ product32.compare_at_price }}' data-value='{{ product32.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product32.title}}' data-price='{{ product32.price }}' data-compare-at-price='{{ product32.compare_at_price }}' data-value='{{ product32.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product33!= blank %} <div class='steps-wrap__item'> <img src='{{ product33.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product33.title }}</h4> {% if product33.available %} <a href='/' class='bundle_button' data-name='{{product33.title}}' data-price='{{ product33.price }}' data-compare-at-price='{{ product33.compare_at_price }}' data-value='{{ product33.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product33.title}}' data-price='{{ product33.price }}' data-compare-at-price='{{ product33.compare_at_price }}' data-value='{{ product33.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+        </div>
     </div>
-  </div>
-  <script>
 
+    <div class="step step-3" style="display: none;" data-count="1">
+        <div class="title">
+            <h3>Step 3</h3>
+            <span class="text">Choose between a gel art or the matte velvet top coat</span>
+        </div>
 
-	function addCart_ex() {
-// 		e.preventDefault();
+        <div class="steps-wrap">
+            {% if section.settings.product34!= blank %} <div class='steps-wrap__item'> <img src='{{ product34.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product34.title }}</h4> {% if product34.available %} <a href='/' class='bundle_button' data-name='{{product34.title}}' data-price='{{ product34.price }}' data-compare-at-price='{{ product34.compare_at_price }}' data-value='{{ product34.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product34.title}}' data-price='{{ product34.price }}' data-compare-at-price='{{ product34.compare_at_price }}' data-value='{{ product34.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product35!= blank %} <div class='steps-wrap__item'> <img src='{{ product35.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product35.title }}</h4> {% if product35.available %} <a href='/' class='bundle_button' data-name='{{product35.title}}' data-price='{{ product35.price }}' data-compare-at-price='{{ product35.compare_at_price }}' data-value='{{ product35.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product35.title}}' data-price='{{ product35.price }}' data-compare-at-price='{{ product35.compare_at_price }}' data-value='{{ product35.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product36!= blank %} <div class='steps-wrap__item'> <img src='{{ product36.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product36.title }}</h4> {% if product36.available %} <a href='/' class='bundle_button' data-name='{{product36.title}}' data-price='{{ product36.price }}' data-compare-at-price='{{ product36.compare_at_price }}' data-value='{{ product36.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product36.title}}' data-price='{{ product36.price }}' data-compare-at-price='{{ product36.compare_at_price }}' data-value='{{ product36.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product37!= blank %} <div class='steps-wrap__item'> <img src='{{ product37.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product37.title }}</h4> {% if product37.available %} <a href='/' class='bundle_button' data-name='{{product37.title}}' data-price='{{ product37.price }}' data-compare-at-price='{{ product37.compare_at_price }}' data-value='{{ product37.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product37.title}}' data-price='{{ product37.price }}' data-compare-at-price='{{ product37.compare_at_price }}' data-value='{{ product37.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product38!= blank %} <div class='steps-wrap__item'> <img src='{{ product38.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product38.title }}</h4> {% if product38.available %} <a href='/' class='bundle_button' data-name='{{product38.title}}' data-price='{{ product38.price }}' data-compare-at-price='{{ product38.compare_at_price }}' data-value='{{ product38.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product38.title}}' data-price='{{ product38.price }}' data-compare-at-price='{{ product38.compare_at_price }}' data-value='{{ product38.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product39!= blank %} <div class='steps-wrap__item'> <img src='{{ product39.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product39.title }}</h4> {% if product39.available %} <a href='/' class='bundle_button' data-name='{{product39.title}}' data-price='{{ product39.price }}' data-compare-at-price='{{ product39.compare_at_price }}' data-value='{{ product39.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product39.title}}' data-price='{{ product39.price }}' data-compare-at-price='{{ product39.compare_at_price }}' data-value='{{ product39.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product40!= blank %} <div class='steps-wrap__item'> <img src='{{ product40.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product40.title }}</h4> {% if product40.available %} <a href='/' class='bundle_button' data-name='{{product40.title}}' data-price='{{ product40.price }}' data-compare-at-price='{{ product40.compare_at_price }}' data-value='{{ product40.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product40.title}}' data-price='{{ product40.price }}' data-compare-at-price='{{ product40.compare_at_price }}' data-value='{{ product40.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product41!= blank %} <div class='steps-wrap__item'> <img src='{{ product41.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product41.title }}</h4> {% if product41.available %} <a href='/' class='bundle_button' data-name='{{product41.title}}' data-price='{{ product41.price }}' data-compare-at-price='{{ product41.compare_at_price }}' data-value='{{ product41.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product41.title}}' data-price='{{ product41.price }}' data-compare-at-price='{{ product41.compare_at_price }}' data-value='{{ product41.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product42!= blank %} <div class='steps-wrap__item'> <img src='{{ product42.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product42.title }}</h4> {% if product42.available %} <a href='/' class='bundle_button' data-name='{{product42.title}}' data-price='{{ product42.price }}' data-compare-at-price='{{ product42.compare_at_price }}' data-value='{{ product42.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product42.title}}' data-price='{{ product42.price }}' data-compare-at-price='{{ product42.compare_at_price }}' data-value='{{ product42.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product43!= blank %} <div class='steps-wrap__item'> <img src='{{ product43.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product43.title }}</h4> {% if product43.available %} <a href='/' class='bundle_button' data-name='{{product43.title}}' data-price='{{ product43.price }}' data-compare-at-price='{{ product43.compare_at_price }}' data-value='{{ product43.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product43.title}}' data-price='{{ product43.price }}' data-compare-at-price='{{ product43.compare_at_price }}' data-value='{{ product43.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product44!= blank %} <div class='steps-wrap__item'> <img src='{{ product44.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product44.title }}</h4> {% if product44.available %} <a href='/' class='bundle_button' data-name='{{product44.title}}' data-price='{{ product44.price }}' data-compare-at-price='{{ product44.compare_at_price }}' data-value='{{ product44.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product44.title}}' data-price='{{ product44.price }}' data-compare-at-price='{{ product44.compare_at_price }}' data-value='{{ product44.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product45!= blank %} <div class='steps-wrap__item'> <img src='{{ product45.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product45.title }}</h4> {% if product45.available %} <a href='/' class='bundle_button' data-name='{{product45.title}}' data-price='{{ product45.price }}' data-compare-at-price='{{ product45.compare_at_price }}' data-value='{{ product45.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product45.title}}' data-price='{{ product45.price }}' data-compare-at-price='{{ product45.compare_at_price }}' data-value='{{ product45.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+        </div>
+    </div>
+  
+      <div class="step step-4" style="display: none;" data-count="1">
+        <div class="title">
+            <h3>Step 3</h3>
+            <span class="text">Choose your cuticle oil</span>
+        </div>
 
-		var variantsArr = [];
-
-		var property_inputS = $('.property_input');
-		if (property_inputS.length) {
-			property_inputS.each(function(index, item) {
-				if ($(item).val() != '') {
-					var itemID = $(this).val() * 1;
-					variantsArr.push(itemID);
-
-				}
-			});
-		}
-		addCart_Collection_t(variantsArr);
-	};
-    
-
- function addCart_Collection_t(variants) {
-   console.log("Received: ", variants);
-	axios.post('/cart/add.js', {
-		items: [{
-				id: 39986663719048,
-				quantity: 1
-			},
-			{
-				id: 40188642328712,
-				quantity: 1
-			}
-		]
-	}).then(function(res) {
-		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
-			bubbles: true
-		}));
-	})
-}
-    
-// function addCart_Collection_t() 
-	
-// 	axios.post('/cart/add.js', {
-// 		items: [{
-// 				id: 39986663719048,
-// 				quantity: 1
-// 			},
-// 			{
-// 				id: 40188642328712,
-// 				quantity: 1
-// 			}
-// 		]
-// 	}).then(function(res) {
-// 		document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
-// 			bubbles: true
-// 		}));
-// 	})
-// 
-    
-  </script>
+        <div class="steps-wrap">
+            {% if section.settings.product46!= blank %} <div class='steps-wrap__item'> <img src='{{ product46.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product46.title }}</h4> {% if product46.available %} <a href='/' class='bundle_button' data-name='{{product46.title}}' data-price='{{ product46.price }}' data-compare-at-price='{{ product46.compare_at_price }}' data-value='{{ product46.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product46.title}}' data-price='{{ product46.price }}' data-compare-at-price='{{ product46.compare_at_price }}' data-value='{{ product46.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product47!= blank %} <div class='steps-wrap__item'> <img src='{{ product47.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product47.title }}</h4> {% if product47.available %} <a href='/' class='bundle_button' data-name='{{product47.title}}' data-price='{{ product47.price }}' data-compare-at-price='{{ product47.compare_at_price }}' data-value='{{ product47.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product47.title}}' data-price='{{ product47.price }}' data-compare-at-price='{{ product47.compare_at_price }}' data-value='{{ product47.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+            {% if section.settings.product48!= blank %} <div class='steps-wrap__item'> <img src='{{ product48.images[1] | img_url: 'master' }}' /> <h4 class='ProductItem__Title Heading'>{{ product48.title }}</h4> {% if product48.available %} <a href='/' class='bundle_button' data-name='{{product48.title}}' data-price='{{ product48.price }}' data-compare-at-price='{{ product48.compare_at_price }}' data-value='{{ product48.variants.first.id }}' data-step='1'>ADD</a> {% else %} <a class='bundle_button' style='background: #9d9d9d; pointer-events: none;  ;  color: white; font-weight: 400; border: 1px #9d9d9d solid;' data-name='{{product48.title}}' data-price='{{ product48.price }}' data-compare-at-price='{{ product48.compare_at_price }}' data-value='{{ product48.variants.first.id }}' data-step='1'>SOLD OUT</a> {% endif %} </div> {% endif %}
+        </div>
+    </div>
+  
   
 </div>
 
+<div class="bundle-builder-products custom-bundle-builder-products">
+    <h3 class="hide-title">view your kit +</h3>
+    <h3 class="show-title">your kit</h3>
+
+    <div class="wrap">
+        <div class="product-options">
+            {% assign preselected_product_handles_size = 0 %} {% assign bundle_total_price = 0 %} {% assign bundle_total_compare_at_price = 0 %} {% if section.settings.preselected_product1 != blank %} {% for x in (1..3) %} {% capture
+            handle_Str %}preselected_product{{x}}{% endcapture %} {% assign handle = section.settings[handle_Str] %} {% if handle != blank %} {% assign preselected_product = all_products[handle] %} {% if preselected_product.handle != blank
+            %} {% if preselected_product.available %} {% assign preselected_product_handles_size = preselected_product_handles_size | plus: 1 %} {% assign bundle_total_price = bundle_total_price | plus:
+            preselected_product.selected_or_first_available_variant.price %} {% assign bundle_total_compare_at_price = bundle_total_compare_at_price | plus: preselected_product.selected_or_first_available_variant.compare_at_price %} {%
+            unless forloop.first %}
+            <span class="need-add-plus">+</span>
+            {% endunless %}
+
+            <div
+                class="product-option preselected_product"
+                data-title="{{ preselected_product.title}}"
+                data-price="{{ preselected_product.price  }}"
+                data-compare-at-price="{{ preselected_product.compare_at_price }}"
+                data-value="{{preselected_product.selected_or_first_available_variant.id}}"
+            >
+                <div class="option option-1">
+                    <img src="{{ preselected_product.featured_media | img_url:'master' }}" />
+                </div>
+            </div>
+            <input
+                type="hidden"
+                class="property_input"
+                data-count-step=""
+                data-price="{{ preselected_product.price  }}"
+                data-title="{{preselected_product.selected_or_first_available_variant.title}}"
+                data-compare-at-price="{{ preselected_product.compare_at_price  }}"
+                value="{{preselected_product.selected_or_first_available_variant.id}}"
+                name="properties[{{preselected_product.selected_or_first_available_variant.id}}]"
+            />
+
+            {% endif %} {% endif%} {% endif%} {% endfor %} {% endif %} {% assign productOptionsCount = 5 %} {% for i in (1..productOptionsCount) %} {% if preselected_product_handles_size == 0 and i == 1 %} {% else %} {% if i != 1 and
+            preselected_product_handles_size == 0 %}
+            <span class="need-add-plus">+</span>
+            {% else %}
+            <span class="need-add-plus">+</span>
+            {% endif %} {% endif %}
+            <div class="product-option">
+                <div class="remove remove-{{i}}" data-item="">x</div>
+                <div class="option option-{{i}}"><img src="" /></div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <div class="product-details">
+            <div class="bundle-cont">
+                <div class="price bundle-total-compare-at-price">
+                    <p><span class="bundle1-compare-at-price">{{ bundle_total_price | money }}</span></p>
+                </div>
+                <div style="margin-left: 10px;" class="price regular-price">
+                    <p><span class="bundle-price">{{ bundle_total_price | times: 0.9 }}</span></p>
+                </div>
+            </div>
+
+            <button type="submit" aria-expanded="false" aria-label="Open cart" data-action="open-drawer" data-drawer-id="sidebar-cart" class="ProductForm__AddToCart Button Button--primary Button--secondary Button--full btn-disabled">
+                <span>{{ 'product.form.add_to_cart' | t }}</span>
+            </button>
+          
+          {% if Bundle1 != blank %}
+          <input id="bundle_hidden1" type="hidden" value="{{Bundle1.price | money}}" data-name="{{Bundle1.selected_or_first_available_variant.id}}">
+          {% endif %}
+          {% if Bundle2 != blank %}
+          <input id="bundle_hidden2" type="hidden" value="{{Bundle2.price | money}}" data-name="{{Bundle2.selected_or_first_available_variant.id}}">
+          {% endif %}
+          {% if Bundle3 != blank %}
+          <input id="bundle_hidden3" type="hidden" value="{{Bundle3.price | money}}" data-name="{{Bundle3.selected_or_first_available_variant.id}}">
+          {% endif %}
+        </div>
+    </div>
+</div>
 
 {% schema %}
-  {
-    "name": "Page Bundle",
-    "settings": [
-	{
-		"type":"header",
-		"content":"PreSelected Products"
-	},
 {
-        "type": "product",
-        "id": "preselected_product1",
-        "label": "Product 1"
+   "name":"Page Bundle",
+   "settings":[
+ 	  {
+         "type":"header",
+         "content":"Products to be added"
       },
       {
-        "type": "product",
-        "id": "preselected_product2",
-        "label": "Product 2"
+         "type":"product",
+         "id":"selected_product1",
+         "label":"Bundle 1"
       },
       {
-        "type": "product",
-        "id": "preselected_product3",
-        "label": "Product 3"
-      },
-	{
-		"type":"header",
-		"content":"Step 1"
-	},
-      {
-        "type": "product",
-        "id": "product1",
-        "label": "Product 1"
+         "type":"product",
+         "id":"selected_product2",
+         "label":"Bundle 2"
       },
       {
-        "type": "product",
-        "id": "product2",
-        "label": "Product 2"
+         "type":"product",
+         "id":"selected_product3",
+         "label":"Bundle 3"
       },
       {
-        "type": "product",
-        "id": "product3",
-        "label": "Product 3"
+         "type":"header",
+         "content":"PreSelected Products"
       },
       {
-        "type": "product",
-        "id": "product4",
-        "label": "Product 4"
+         "type":"product",
+         "id":"preselected_product1",
+         "label":"Product 1"
       },
       {
-        "type": "product",
-        "id": "product5",
-        "label": "Product 5"
+         "type":"product",
+         "id":"preselected_product2",
+         "label":"Product 2"
       },
       {
-        "type": "product",
-        "id": "product6",
-        "label": "Product 6"
+         "type":"product",
+         "id":"preselected_product3",
+         "label":"Product 3"
       },
       {
-        "type": "product",
-        "id": "product7",
-        "label": "Product 7"
+         "type":"header",
+         "content":"Step 1"
       },
       {
-        "type": "product",
-        "id": "product8",
-        "label": "Product 8"
-      },
-     {
-        "type": "product",
-        "id": "product9",
-        "label": "Product 9"
-      },
-
-      {
-		"type":"header",
-		"content":"Step 2"
-	  },
-
-      {
-        "type": "product",
-        "id": "product10",
-        "label": "Product 21"
+         "type":"product",
+         "id":"product1",
+         "label":"Product 1"
       },
       {
-        "type": "product",
-        "id": "product11",
-        "label": "Product 22"
+         "type":"product",
+         "id":"product2",
+         "label":"Product 2"
       },
       {
-        "type": "product",
-        "id": "product12",
-        "label": "Product 23"
+         "type":"product",
+         "id":"product3",
+         "label":"Product 3"
       },
       {
-        "type": "product",
-        "id": "product13",
-        "label": "Product 24"
+         "type":"product",
+         "id":"product4",
+         "label":"Product 4"
       },
       {
-        "type": "product",
-        "id": "product14",
-        "label": "Product 25"
+         "type":"product",
+         "id":"product5",
+         "label":"Product 5"
       },
       {
-        "type": "product",
-        "id": "product15",
-        "label": "Product 26"
+         "type":"product",
+         "id":"product6",
+         "label":"Product 6"
       },
       {
-        "type": "product",
-        "id": "product16",
-        "label": "Product 27"
+         "type":"product",
+         "id":"product7",
+         "label":"Product 7"
       },
       {
-        "type": "product",
-        "id": "product17",
-        "label": "Product 28"
+         "type":"product",
+         "id":"product8",
+         "label":"Product 8"
       },
       {
-        "type": "product",
-        "id": "product18",
-        "label": "Product 29"
+         "type":"product",
+         "id":"product9",
+         "label":"Product 9"
       },
       {
-        "type": "product",
-        "id": "product19",
-        "label": "Product 210"
+         "type":"header",
+         "content":"Step 2"
       },
       {
-        "type": "product",
-        "id": "product20",
-        "label": "Product 211"
+         "type":"product",
+         "id":"product10",
+         "label":"Product 21"
       },
       {
-        "type": "product",
-        "id": "product21",
-        "label": "Product 212"
+         "type":"product",
+         "id":"product11",
+         "label":"Product 22"
       },
       {
-        "type": "product",
-        "id": "product22",
-        "label": "Product 213"
+         "type":"product",
+         "id":"product12",
+         "label":"Product 23"
       },
       {
-        "type": "product",
-        "id": "product23",
-        "label": "Product 214"
+         "type":"product",
+         "id":"product13",
+         "label":"Product 24"
       },
       {
-        "type": "product",
-        "id": "product24",
-        "label": "Product 215"
+         "type":"product",
+         "id":"product14",
+         "label":"Product 25"
       },
       {
-        "type": "product",
-        "id": "product25",
-        "label": "Product 216"
+         "type":"product",
+         "id":"product15",
+         "label":"Product 26"
       },
       {
-        "type": "product",
-        "id": "product26",
-        "label": "Product 217"
+         "type":"product",
+         "id":"product16",
+         "label":"Product 27"
       },
       {
-        "type": "product",
-        "id": "product27",
-        "label": "Product 218"
+         "type":"product",
+         "id":"product17",
+         "label":"Product 28"
       },
       {
-        "type": "product",
-        "id": "product28",
-        "label": "Product 219"
+         "type":"product",
+         "id":"product18",
+         "label":"Product 29"
       },
       {
-        "type": "product",
-        "id": "product29",
-        "label": "Product 220"
+         "type":"product",
+         "id":"product19",
+         "label":"Product 210"
       },
       {
-        "type": "product",
-        "id": "product30",
-        "label": "Product 221" 
+         "type":"product",
+         "id":"product20",
+         "label":"Product 211"
       },
       {
-        "type": "product",
-        "id": "product31",
-        "label": "Product 222"
+         "type":"product",
+         "id":"product21",
+         "label":"Product 212"
       },
       {
-        "type": "product",
-        "id": "product32",
-        "label": "Product 223"
+         "type":"product",
+         "id":"product22",
+         "label":"Product 213"
       },
       {
-        "type": "product",
-        "id": "product33",
-        "label": "Product 224"
-      },
-	{
-		"type":"header",
-		"content":"Step 3"
-	},
-      {
-        "type": "product",
-        "id": "product34",
-        "label": "Product 1"
+         "type":"product",
+         "id":"product23",
+         "label":"Product 214"
       },
       {
-        "type": "product",
-        "id": "product35",
-        "label": "Product 2"
+         "type":"product",
+         "id":"product24",
+         "label":"Product 215"
       },
       {
-        "type": "product",
-        "id": "product36",
-        "label": "Product 3"
+         "type":"product",
+         "id":"product25",
+         "label":"Product 216"
+      },
+      {
+         "type":"product",
+         "id":"product26",
+         "label":"Product 217"
+      },
+      {
+         "type":"product",
+         "id":"product27",
+         "label":"Product 218"
+      },
+      {
+         "type":"product",
+         "id":"product28",
+         "label":"Product 219"
+      },
+      {
+         "type":"product",
+         "id":"product29",
+         "label":"Product 220"
+      },
+      {
+         "type":"product",
+         "id":"product30",
+         "label":"Product 221"
+      },
+      {
+         "type":"product",
+         "id":"product31",
+         "label":"Product 222"
+      },
+      {
+         "type":"product",
+         "id":"product32",
+         "label":"Product 223"
+      },
+      {
+         "type":"product",
+         "id":"product33",
+         "label":"Product 224"
+      },
+      {
+         "type":"header",
+         "content":"Step 3"
+      },
+      {
+         "type":"product",
+         "id":"product34",
+         "label":"Product 1"
+      },
+          {
+         "type":"product",
+         "id":"product35",
+         "label":"Product -2"
+      },
+      {
+         "type":"product",
+         "id":"product36",
+         "label":"Product -3"
+      },
+      {
+         "type":"product",
+         "id":"product37",
+         "label":"Product -4"
+      },
+      {
+         "type":"product",
+         "id":"product38",
+         "label":"Product -6"
+      },
+      {
+         "type":"product",
+         "id":"product39",
+         "label":"Product -7"
+      },
+      {
+         "type":"product",
+         "id":"product40",
+         "label":"Product -8"
+      },
+      {
+         "type":"product",
+         "id":"product41",
+         "label":"Product -9"
+      },
+      {
+         "type":"product",
+         "id":"product42",
+         "label":"Product -10"
+      },
+      {
+         "type":"product",
+         "id":"product43",
+         "label":"Product -11"
+      },
+      {
+         "type":"product",
+         "id":"product44",
+         "label":"Product -12"
+      },
+      {
+         "type":"product",
+         "id":"product45",
+         "label":"Product -13"
+      },
+      {
+         "type":"header",
+         "content":"Step 4"
+      },
+      {
+         "type":"product",
+         "id":"product46",
+         "label":"Product -14"
+      },
+      {
+         "type":"product",
+         "id":"product47",
+         "label":"Product -15"
+      },
+      {
+         "type":"product",
+         "id":"product48",
+         "label":"Product -16"
       }
-    ]
-  }
+   ]
+}
 {% endschema %}
