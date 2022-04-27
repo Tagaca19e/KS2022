@@ -1,0 +1,461 @@
+ 
+<style>
+  .bundle-compare-color {
+  	color: #45454594;
+  }
+  
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<div class="bundle-product-template page__bundle-page" >
+  <div class="product_hero-section" style="background:#ffffff;">
+    <div class="content">
+      <h2>Build your own gelly tips bundle</h2>
+
+      <div class="image-with-text">
+        <div class="image">
+          <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/BYOGellyKit-Bundle.png?v=1650583453">
+        </div>
+
+        <div class="text">
+          <p>Say hello to next-level nails with our best-selling Gelly Tips! The cult-favorite gel-extension system is finally customizable! For a limited time only, you can build your own kit with your favorite nail shape, gel colors, nail art, and everything you need to achieve perfectly shaped salon-quality nails that last 3+ weeks! These innovative nail extensions provide a strong and lightweight alternative to traditional nail enhancements, and they can be easily removed without damage, so you can switch up your manicure as often as you’d like! A salon style manicure has never been easier.</p>
+          <h3 style="color:#ffafc7;">You choose your</h3>
+          <div class="image-wrap">
+            <div class="image-wrap__item">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/Gelly-Kit-2.png?v=1650565212">
+              <span>Gelly Tips<br>
+                Starter Kit</span>
+            </div>
+            <div class="image-wrap__item">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/gel-colors2.png?v=1650565212">
+              <span>2 Gel Colors</span>
+            </div>
+            <div class="image-wrap__item">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/gel-art-top-coat2.png?v=1650565412">
+              <span>Gel Art or Velvet<br>Matte Top Coat</span>
+            </div>
+            <div class="image-wrap__item">
+              <img src="https://cdn.shopify.com/s/files/1/0311/6551/3864/files/cuticle-oil2.png?v=1650565412">
+              <span>Cuticle Oil</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section data-section-id="bundle-product-alternate-template">
+    <form action="/cart/add" method="post" id="ProductFormBundle" class="ProductForm BundleProductForm">
+      {% section 'page-bundle' %}
+    </form>
+  </section>
+
+  <script>
+        $(document).ready(function() {
+    	$('.bundle-price').css('display', 'none');
+
+    	function formatMoney(cents, format) {
+    		if (typeof cents === 'string') {
+    			cents = cents.replace('.', '');
+    		}
+
+    		var placeholderRegex = /\{\{\s*(\w+)\s*\}\}/,
+    			formatString = format || '${{amount}}';
+
+    		function defaultTo(value, defaultValue) {
+    			return value == null || value !== value ? defaultValue : value;
+    		}
+
+    		function formatWithDelimiters(number, precision, thousands, decimal) {
+    			precision = defaultTo(precision, 2);
+    			thousands = defaultTo(thousands, ',');
+    			decimal = defaultTo(decimal, '.');
+
+    			if (isNaN(number) || number == null) {
+    				return 0;
+    			}
+
+    			number = (number / 100.0).toFixed(precision);
+
+    			var parts = number.split('.'),
+    				dollarsAmount = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands),
+    				centsAmount = parts[1] ? decimal + parts[1] : '';
+
+    			return dollarsAmount + centsAmount;
+    		}
+
+    		var value = '';
+
+    		switch (formatString.match(placeholderRegex)[1]) {
+    			case 'amount':
+    				value = formatWithDelimiters(cents, 2);
+    				break;
+    			case 'amount_no_decimals':
+    				value = formatWithDelimiters(cents, 0);
+    				break;
+    			case 'amount_with_space_separator':
+    				value = formatWithDelimiters(cents, 2, ' ', '.');
+    				break;
+    			case 'amount_no_decimals_with_comma_separator':
+    				value = formatWithDelimiters(cents, 0, ',', '.');
+    				break;
+    			case 'amount_no_decimals_with_space_separator':
+    				value = formatWithDelimiters(cents, 0, ' ');
+    				break;
+    			case 'amount_with_comma_separator':
+    				value = formatWithDelimiters(cents, 2, '.', ',');
+    				break;
+    		}
+
+    		if (formatString.indexOf('with_comma_separator') !== -1) {
+    			return formatString.replace(placeholderRegex, value).replace(',00', '');
+    		} else {
+    			return formatString.replace(placeholderRegex, value).replace('.00', '');
+    		}
+    	};
+
+    	let global_sum = 0;
+
+    	$('.step').on('click', '.bundle_button', function(e) {
+    		e.preventDefault();
+    		var productTitle = $(this).data('name');
+
+    		var productItem = $(this).data('value'),
+    			currentPrice = $(this).siblings('.bundle-product-item').data('price');
+
+    		var currentVal = $(this).data('value'),
+    			currentStep = $(this).data('step'),
+    			currentImg = $(this).siblings('img').attr('src'),
+    			countProd = $(this).parents('.step').data('count'),
+    			stepLength = $('[data-count-step="' + currentStep + '"]').length,
+    			totalProd = countProd - 1;
+
+    		var itemPrice = $(this).attr('data-price'),
+    			discountPrice = $(this).attr('data-compare-at-price');
+
+
+    		var activeBtn = false;
+
+    		if ($(this).hasClass('active-item') == false) {
+    			$(this).addClass('active-item');
+
+
+    			$(this).html('Remove');
+    			activeBtn = true;
+
+    			if (stepLength <= totalProd) {
+    				$('<input type="hidden" class="property_input" data-name="' + productTitle + '" data-price="' + itemPrice + '" data-compare-at-price="' + discountPrice + '" data-count-step="' + currentStep + '" value="' + currentVal + '" name="properties[' + currentVal + ']">').appendTo('.BundleProductForm');
+    			} else {
+    				var propertiesInputs = $('.property_input');
+
+    				if (propertiesInputs.length) {
+    					for (var i = 0; i < propertiesInputs.length; i++) {
+    						var propertiesInput = $(propertiesInputs[i]);
+    						if (propertiesInput.val() == '') {
+    							propertiesInput.val(currentVal);
+
+    							propertiesInput.attr('data-count-step', currentStep);
+    							propertiesInput.attr('data-price', itemPrice);
+    							propertiesInput.attr('data-compare-at-price', discountPrice);
+    							propertiesInput.attr('data-name', productTitle);
+
+    							var property_name = "properties[" + currentVal + "]";
+    							propertiesInput.attr('name', property_name);
+    							break;
+    						}
+    					}
+    				}
+    			}
+    			$('.option').find('img').each(function() {
+    				if ($(this).attr('src') == '') {
+    					$(this).show().attr('src', currentImg);
+    					$(this).parents('.option').siblings('.remove').show();
+    					$(this).parents('.option').css('background', 'transparent').attr('data-option', currentVal);
+    					return false;
+    				}
+    			});
+
+    		} else {
+
+    			$(this).removeClass('active-item');
+    			$(this).html('Add');
+
+    			$('.product-details .ProductForm__AddToCart').css('pointer-events', 'none');
+    			$('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+    			$('.bundle-price').css('display', 'none');
+    			$('.bundle1-compare-at-price').css('text-decoration', 'none');
+    			$('.bundle-cont').css('display', 'block');
+
+    			var property_input = $('.property_input[value="' + currentVal + '"]')
+    			var parentEl = $(this).parents('.step').data('count');
+
+    			if (property_input.length) {
+    				property_input.val('').attr('name', "").attr('data-current-step', '').attr('data-price', '').attr('data-compare-at-price', '').attr('data-name', '');
+    			}
+
+    			var activeOptionBlock = $('[data-option="' + currentVal + '"]');
+    			if (activeOptionBlock.length) {
+    				activeOptionBlock.find('img').hide().attr('src', '');
+    				activeOptionBlock.css('background', '#ffeef3');
+    				activeOptionBlock.siblings('.remove').hide();
+    				activeOptionBlock.attr('data-option', '');
+    			}
+
+    			var other_items = $(this).closest('.steps-wrap').find('.bundle_button');
+    			if (other_items.length) {
+    				other_items.each(function(index, item) {
+    					$(item).removeClass('disabled');
+    				});
+    			}
+    		}
+
+    		let sum = 0,
+
+    			discountedAmount = 0;
+
+    		var property_inputS = $('.property_input');
+    		if (property_inputS.length) {
+    			property_inputS.each(function(index, item) {
+    				if ($(item).val() != '') {
+    					var itemPrice = $(this).attr('data-price') * 1,
+    						discountPrice = $(this).attr('data-compare-at-price') * 1;
+    					sum = sum + itemPrice;
+    					sum = sum;
+
+    					discountedAmount = discountedAmount + discountPrice;
+    				}
+    			});
+    		}
+
+    		let master = 0;
+
+    
+          var inputString1 = $("#bundle_hidden1").val();
+
+          var inputString2 = $("#bundle_hidden2").val();
+
+          var inputString3 = $("#bundle_hidden3").val();
+
+
+          $('.bundle-price').html(inputString1);
+
+                          
+    	
+    		let price_sum = (Math.round((sum * 0.010) * 100) / 100).toFixed(2);
+    		let price_str = "{{cart.currency.symbol}}" + price_sum;
+
+    		$('.bundle1-compare-at-price').html(price_str);
+
+    		global_sum = sum;
+
+    		var checkedItems = $(this).closest('.steps-wrap').find('.active-item');
+    		if (checkedItems.length >= countProd) {
+
+    			var other_items = $(this).closest('.steps-wrap').find('.bundle_button:not(.active-item)');
+    			if (other_items.length) {
+    				other_items.each(function(index, item) {
+    					$(item).addClass('disabled');
+    				});
+    			}
+    		}
+
+    		$('.product-option img').each(function() {
+    			if ($(this).attr('src') != '') {
+    				$('.product-details .ProductForm__AddToCart').css('pointer-events', 'auto');
+    				$('.product-details .ProductForm__AddToCart').removeClass('btn-disabled');
+    				$('.bundle-price').css('display', 'block');
+    				$('.bundle1-compare-at-price').css('text-decoration', 'line-through');
+    				$('.bundle-cont').css('display', 'flex');
+    				$('.bundle1-compare-at-price').addClass('bundle-compare-color');
+    			} else {
+    				$('.product-details .ProductForm__AddToCart').css('pointer-events', 'none');
+    				$('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+    				$('.bundle-price').css('display', 'none');
+    				$('.bundle1-compare-at-price').css('text-decoration', 'none');
+    				$('.bundle-cont').css('display', 'block');
+    				$('.bundle1-compare-at-price').removeClass('bundle-compare-color');
+    				return false;
+    			}
+    		});
+
+    		if (activeBtn) {
+    			if (checkedItems.length >= countProd) {
+    				var newStepEl = $(this).parents('.step').next('.step');
+    				if (newStepEl.length) {
+    					newStepEl.show();
+    					if (!newStepEl.hasClass('show_block')) {
+    						newStepEl.addClass('show_block');
+    						$([document.documentElement, document.body]).animate({
+    							scrollTop: newStepEl.offset().top
+    						}, 1000);
+    					}
+    				}
+    			}
+    		}
+    	});
+
+    	$('#ProductFormBundle button').on('click', function(e) {
+    		e.preventDefault();
+
+    		var variantsArr = [];
+    		var variantsTitle = [];
+
+    		var property_inputS = $('.property_input');
+    		if (property_inputS.length) {
+    			property_inputS.each(function(index, item) {
+    				if ($(item).val() != '') {
+    					var itemID = $(this).val() * 1;
+    					variantsArr.push(itemID);
+    				}
+    			});
+    		}
+
+    		var property_inputT = $('.property_input');
+    		if (property_inputT.length) {
+    			property_inputT.each(function(index, item) {
+    				if (item.getAttribute('data-name') != null) {
+    					variantsTitle.push(item.getAttribute('data-name'));
+    				}
+    			});
+    		}
+
+    		function addItemToCart() {
+
+    			var data = {
+    				"id": variantsArr
+    			}
+                
+               var inputString1_id = $("#bundle_hidden1").attr('data-name');
+              var inputString2_id = $("#bundle_hidden2").attr('data-name');
+              var inputStrin3_id = $("#bundle_hidden3").attr('data-name');
+
+                            
+
+    			let data_att = document.getElementsByClassName('product-option');
+    			for (let i = 0; i < data_att.length; i++) {
+    				let getAtt = data_att[i].getAttribute('data-title');
+    				if (getAtt != null) {
+    					variantsTitle.push(getAtt);
+    				}
+    			}
+
+    			let top = [inputString1_id];
+    			let bundle_amount = global_sum;
+    			let unique_id = variantsArr.join('');
+    			let u_amount = global_sum;
+    			global_sum = (Math.round((global_sum * 0.010) * 100) / 100).toFixed(2);
+
+    			let values = [];
+
+    			for (let i of variantsArr) {
+    				let temp = {
+    					id: i,
+    					quantity: 1,
+    					properties: {
+    						"_bundle_id": unique_id
+    					}
+    				}
+
+    				values.push(temp);
+    			}
+
+    			let top_obj = {
+    				id: top[0],
+    				quantity: 1,
+    			};
+
+    			let properties = {};
+
+    			for (let i = 0; i < variantsTitle.length; i++) {
+    				let idx = i + 1;
+    				idx = idx.toString();
+                    let name = "- "+variantsTitle[i];
+                    properties[name] = ":";
+    			}
+
+    			properties["_bundle_idt"] = unique_id;
+    			top_obj["properties"] = properties;
+    			values.push(top_obj);
+    			axios.post('/cart/add.js', {
+    				items: values
+    			}).then(function(res) {
+    				document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+    					bubbles: true
+    				}));
+    			})
+    		}
+
+    		if (variantsArr.length) {
+    			addItemToCart();
+    		}
+    	});
+
+
+    	$(document).on('click', '.product-option .remove', function(e) {
+
+    		var productOptionParent = $(this).closest('.product-option');
+    		var productOptionBlock = productOptionParent.find('.option')
+    		var currentVal = productOptionBlock.attr('data-option') * 1;
+    		var activeProductButton = $('[data-value="' + currentVal + '"]');
+
+    		productOptionBlock.css('background', '#ffeef3');
+    		productOptionBlock.find('img').hide().attr('src', '');
+    		productOptionBlock.attr('data-option', '');
+    		$(this).hide();
+
+    		$('[data-count-step][value="' + currentVal + '"]').val('').attr('name', "").attr('data-name', "");
+    		$('[data-value="' + currentVal + '"]').text('ADD');
+
+    		if (activeProductButton.length) {
+    			activeProductButton.text('ADD');
+    			activeProductButton.removeClass('active-item');
+
+    		}
+    		var other_items = activeProductButton.closest('.steps-wrap').find('.bundle_button');
+    		if (other_items.length) {
+    			other_items.each(function(index, item) {
+    				$(item).removeClass('disabled');
+    			});
+    		}
+
+    		$('.product-option img').each(function() {
+    			if ($(this).attr('src') != '') {
+    				$('.product-details .ProductForm__AddToCart').css('pointer-events', 'auto');
+    				$('.product-details .ProductForm__AddToCart').removeClass('btn-disabled');
+    				$('.bundle-price').css('display', 'block');
+    				$('.bundle1-compare-at-price').css('text-decoration', 'line-through');
+    				$('.bundle-cont').css('display', 'flex');
+    				$('.bundle1-compare-at-price').addClass('bundle-compare-color');
+    			} else {
+    				$('.product-details .ProductForm__AddToCart').css('pointer-events', 'none');
+    				$('.product-details .ProductForm__AddToCart').addClass('btn-disabled');
+    				$('.bundle-price').css('display', 'none');
+    				$('.bundle1-compare-at-price').css('text-decoration', 'none');
+    				$('.bundle-cont').css('display', 'block');
+    				$('.bundle1-compare-at-price').removeClass('bundle-compare-color');
+    				return false
+    			}
+    		});
+
+    		let sum = 0,
+    		discountedAmount = 0;
+
+    		var property_inputS = $('.property_input');
+    		if (property_inputS.length) {
+    			property_inputS.each(function(index, item) {
+    				if ($(item).val() != '') {
+    					var itemPrice = $(this).attr('data-price') * 1,
+    						discountPrice = $(this).attr('data-compare-at-price') * 1;
+    					sum = sum + itemPrice;
+    					sum = sum;
+    					discountedAmount = discountedAmount + discountPrice;
+    				}
+    			});
+    		}
+    		$('.bundle-price').html(formatMoney(sum, window.theme.moneyFormat));
+    		$('.bundle-compare-at-price').html(formatMoney(sum, window.theme.moneyFormat));
+    	});
+    });
+
+  </script>
+</div>
