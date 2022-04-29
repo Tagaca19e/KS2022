@@ -1,6 +1,6 @@
 <!doctype html>
 
-<html class="no-js" lang="{{ shop.locale }}">
+<html  lang="{{ shop.locale }}">
   <head>
     <meta charset="utf-8"> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -9,6 +9,11 @@
     <meta name="google-site-verification" content="iPyblCMQ11fUnICDlYgxMGfrJdZaM-ncX3DI5AaXW5Q" />
     <meta name="google-site-verification" content="wkYIYynBxB7U9hQySbA0ngANMws-YgWSWAsQbqJZkhs" />
     <meta name="google-site-verification" content="1vgoY1IPZJZ4rhsJwkwkSovAqM32yNBpzNXvJqOy9rY" />
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<!--     <script type="text/javascript" defer> document.documentElement.className = document.documentElement.className.replace('no-js', 'js'); </script> -->
+
     {% comment %}
     	------------------------------
     	CSS FOR DOOFINDER STYLING
@@ -52,6 +57,8 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        max-width: 1700px;
+    	margin: auto;
       }
       .okeReviews-reviews-review {
         max-width: 500px;
@@ -75,6 +82,12 @@
       }
       .okeReviews .okeReviews-reviewsWidget--minimal.is-okeReviews-reviewsWidget-large .okeReviews-reviewsAggregate-primary-inner {
        	align-items: center;
+      }
+      .dfd-fullscreen .dfd-card-flags [data-availability=in-stock] {
+          background: none !important;
+          border-radius: 0px !important;
+          color: pink !important;
+          border: 1px solid;
       }
     </style>
     
@@ -116,10 +129,59 @@
 
     {{ content_for_header }}
 
-
-    <script src="{{ 'jquery.min.js' | asset_url }} async"></script>
     <link rel="stylesheet" href="{{ 'theme.scss.css' | asset_url }}">
     <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+
+   
+    
+  {% include "loyaltylion" %}
+
+  {{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
+  {{ shop.metafields.okendo.StyleCustomizations }}
+  {% render 'okendo-reviews-json-ld' %}
+  {% if template contains 'product' or page.title == "Reviews" %}
+  	{{ 'okendo-reviews.js' | asset_url | script_tag }}
+  {% endif %}
+  
+<!-- Start klevu-snippets DO NOT EDIT -->
+<!-- End klevu-snippets DO NOT EDIT -->
+</head>
+
+  
+  <!--DOOFINDER-SHOPIFY-->
+        {% if content_for_header contains 'doofinder-installed.js' %}
+        {% render 'doofinder-script-tag' %}
+        {% endif %}
+  <!--/DOOFINDER-SHOPIFY--></head>
+  
+  <body class="prestige--v4 {% if template.directory %}template-{{ template.directory | handle }}{% endif %} template-{{ template.name | handle }} template_suffix-{{ template.suffix | handle }}">
+
+        <a class="PageSkipLink u-visually-hidden" href="#main">{{ 'header.navigation.skip_to_content' | t }}</a>
+    <span class="LoadingBar"></span>
+    <div class="PageOverlay"></div>
+<!--     <div class="PageTransition"></div> -->
+
+    {% section 'popup' %}
+    {% section 'sidebar-menu' %}
+
+    {%- if template != 'cart' -%}
+      {% render 'cart-drawer' %}
+    {%- endif -%}
+
+    <div class="PageContainer">
+      {% section 'announcement' %}
+      {% section 'header' %}
+
+      <main id="main" role="main">
+        {{ content_for_layout }}
+      </main>
+
+      {% section 'footer' %}
+    </div>
+<!--         <script type="text/javascript" defer> document.documentElement.className = document.documentElement.className.replace('no-js', 'js'); </script> -->
+
+    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
+
     
     <script>
       // This allows to expose several variables to the global scope, to be used in scripts
@@ -162,7 +224,7 @@
         loadedClass: 'Image--lazyLoaded'
       };
 
-      document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+//       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       document.documentElement.style.setProperty('--window-height', window.innerHeight + 'px');
 
       // We do a quick detection of some features (we could use Modernizr but for so little...)
@@ -172,11 +234,11 @@
       }());
     </script>
 
-    <script src="{{ 'lazysizes.min.js' | asset_url }}" async></script>
+    <script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
     
 
     {% if settings.currency_conversion_enabled %}
-      <script src="//cdn.shopify.com/s/javascripts/currencies.js" async></script>
+      <script src="//cdn.shopify.com/s/javascripts/currencies.js" defer></script>
     {% endif %}
 
     {%- if template == 'customers/addresses' -%}
@@ -211,10 +273,11 @@
     </script>
 
     {% render 'microdata-schema' %}
-<script src='https://affilo.io/libs/affiliate.lib.js' async></script> 
+<script src='https://affilo.io/libs/affiliate.lib.js' ></script> 
     
 <!-- Global site tag (gtag.js) - Google Ads: 853368055 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-853368055"></script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -222,52 +285,10 @@
 
   gtag('config', 'AW-853368055');
 </script>
-    
-<script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"17214689"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>    
-    
-  {% include "loyaltylion" %}
-
-  {{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
-  {{ shop.metafields.okendo.StyleCustomizations }}
-  {% render 'okendo-reviews-json-ld' %}
-  {% if template contains 'product' or page.title == "Reviews" %}
-  	{{ 'okendo-reviews.js' | asset_url | script_tag }}
-  {% endif %}
-  
-<!-- Start klevu-snippets DO NOT EDIT -->
-<!-- End klevu-snippets DO NOT EDIT -->
-<!--DOOFINDER-SHOPIFY-->
-        {% if content_for_header contains 'doofinder-installed.js' %}
-        {% render 'doofinder-script-tag' %}
-        {% endif %}
-        <!--/DOOFINDER-SHOPIFY--></head>
-
-  <body class="prestige--v4 {% if template.directory %}template-{{ template.directory | handle }}{% endif %} template-{{ template.name | handle }} template_suffix-{{ template.suffix | handle }}">
-
+    <script>(function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:"17214689"};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&s!=="loaded"&&s!=="complete"||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");</script>    
     
 
-    <a class="PageSkipLink u-visually-hidden" href="#main">{{ 'header.navigation.skip_to_content' | t }}</a>
-    <span class="LoadingBar"></span>
-    <div class="PageOverlay"></div>
-    <div class="PageTransition"></div>
 
-    {% section 'popup' %}
-    {% section 'sidebar-menu' %}
-
-    {%- if template != 'cart' -%}
-      {% render 'cart-drawer' %}
-    {%- endif -%}
-
-    <div class="PageContainer">
-      {% section 'announcement' %}
-      {% section 'header' %}
-
-      <main id="main" role="main">
-        {{ content_for_layout }}
-      </main>
-
-      {% section 'footer' %}
-    </div>
     
 <!--     <script type="text/javascript" src="https://s3.amazonaws.com/lastsecondcoupon/js/quickannouncementbar.js?shop=kiara-sky-professional-nails.myshopify.com"></script> -->
     
@@ -291,7 +312,7 @@ try{
     
     
 <!---K Back in Stock--->
-<script src="https://a.klaviyo.com/media/js/onsite/onsite.js" async></script>
+<script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
 <script>
     var klaviyo = klaviyo || [];
     klaviyo.init({
@@ -345,7 +366,7 @@ try{
  src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WWqy8V"></script>    
     
 <!---Attentive Tag--->
-<script src="https://cdn.attn.tv/kiarasky/dtag.js" async ></script>
+<script src="https://cdn.attn.tv/kiarasky/dtag.js"></script>
 
 
 <!-- **BEGIN** Hextom QAB Integration // Main Include - DO NOT MODIFY -->
@@ -362,7 +383,7 @@ try{
   <!-- PickyStory code end -->
   <!-- PickyStory snippet "main_widget_script", do not modify. Safe to remove after the app is uninstalled -->
   {% if content_for_header contains 'pickystory' %}
-    <script async src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
+    <script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
   {% endif %}
   <!-- PickyStory end snippet "main_widget_script" -->
 <!--Gorgias Chat Widget Start-->
@@ -370,5 +391,9 @@ try{
 <script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
 {% render 'th-subscription-scripts' %}
 
-  </body>
+    {{ 'bundles.js' | asset_url | script_tag }}
+      <script>
+    document.getElementById('cls').style = "display: flex !important"; 
+  </script>
+</body>
 </html>
