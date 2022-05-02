@@ -9,9 +9,14 @@
     <meta name="google-site-verification" content="iPyblCMQ11fUnICDlYgxMGfrJdZaM-ncX3DI5AaXW5Q" />
     <meta name="google-site-verification" content="wkYIYynBxB7U9hQySbA0ngANMws-YgWSWAsQbqJZkhs" />
     <meta name="google-site-verification" content="1vgoY1IPZJZ4rhsJwkwkSovAqM32yNBpzNXvJqOy9rY" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<!--     <script type="text/javascript" defer> document.documentElement.className = document.documentElement.className.replace('no-js', 'js'); </script> -->
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
+        {% if template.name == 'index' %}
+    <link rel="stylesheet" href="{{ 'pre_theme.scss.css' | asset_url }}">
+	{% else %}
+    <link rel="stylesheet" href="{{ 'theme.scss.css' | asset_url }}">
+    {% endif %}
+    
     {% comment %}
     	------------------------------
     	CSS FOR DOOFINDER STYLING
@@ -55,6 +60,8 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
+        max-width: 1700px;
+    	margin: auto;
       }
       .okeReviews-reviews-review {
         max-width: 500px;
@@ -79,6 +86,24 @@
       .okeReviews .okeReviews-reviewsWidget--minimal.is-okeReviews-reviewsWidget-large .okeReviews-reviewsAggregate-primary-inner {
        	align-items: center;
       }
+      .dfd-fullscreen .dfd-card-flags [data-availability=in-stock] {
+          background: none !important;
+          border-radius: 0px !important;
+          color: pink !important;
+          border: 1px solid;
+      }
+
+      @media screen and (min-width: 1240px) {
+			.Header--center .Header__MainNav {
+             	bottom: 1px;  
+            }
+              .Header__FlexItem {
+        	margin-bottom:40px
+        }
+        
+      }
+
+      
     </style>
     
     {% if page_title.size < 35 %}
@@ -113,36 +138,54 @@
 
     {% render 'social-meta-tags' %}
 
-    {% if settings.app_wk_enabled %}
-    {% include 'appmate-wishlist-king' %}
-    {% endif %}
+
 
     {{ content_for_header }}
-
-    <link rel="stylesheet" href="{{ 'theme.scss.css' | asset_url }}">
-    <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
-
-   
+	    	<script>
+    console.log("THIS IS TEMPLATE NAME:", {{template.name}});
+    </script>
     
-  {% include "loyaltylion" %}
 
+
+    {% comment %}  
+
+    {% include "loyaltylion" %}
+
+    {% endcomment %}
+    
   {{ shop.metafields.okendo.ReviewsWidgetStyleTag }}
   {{ shop.metafields.okendo.StyleCustomizations }}
+            {% if settings.app_wk_enabled %}
+    {% include 'appmate-wishlist-king' %}
+    {% endif %}
+    
+        {% comment %}  
+
+    
   {% render 'okendo-reviews-json-ld' %}
   {% if template contains 'product' or page.title == "Reviews" %}
   	{{ 'okendo-reviews.js' | asset_url | script_tag }}
   {% endif %}
   
+        {% endcomment %}
+
+    
 <!-- Start klevu-snippets DO NOT EDIT -->
 <!-- End klevu-snippets DO NOT EDIT -->
-</head>
 
+{% comment %}
   
   <!--DOOFINDER-SHOPIFY-->
         {% if content_for_header contains 'doofinder-installed.js' %}
         {% render 'doofinder-script-tag' %}
         {% endif %}
-  <!--/DOOFINDER-SHOPIFY--></head>
+  <!--/DOOFINDER-SHOPIFY-->
+  
+{% endcomment %}
+  
+
+    
+  </head>
   
   <body class="prestige--v4 {% if template.directory %}template-{{ template.directory | handle }}{% endif %} template-{{ template.name | handle }} template_suffix-{{ template.suffix | handle }}">
 
@@ -168,11 +211,12 @@
 
       {% section 'footer' %}
     </div>
-<!--         <script type="text/javascript" defer> document.documentElement.className = document.documentElement.className.replace('no-js', 'js'); </script> -->
+        <link rel="stylesheet" href="{{ 'custom.css' | asset_url }}">
+        {% if template.name == 'index' %}
+        <link rel="stylesheet" href="{{ 'theme.scss.css' | asset_url }}">
+        {% endif %}
+<!--         <link rel="stylesheet" href="{{ 'theme.scss.css' | asset_url }}"> -->
 
-    <script src="{{ 'jquery.min.js' | asset_url }}" defer></script>
-
-    
     <script>
       // This allows to expose several variables to the global scope, to be used in scripts
       window.theme = {
@@ -214,7 +258,6 @@
         loadedClass: 'Image--lazyLoaded'
       };
 
-//       document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
       document.documentElement.style.setProperty('--window-height', window.innerHeight + 'px');
 
       // We do a quick detection of some features (we could use Modernizr but for so little...)
@@ -224,24 +267,24 @@
       }());
     </script>
 
-    <script src="{{ 'lazysizes.min.js' | asset_url }}" defer></script>
+    <script async src="{{ 'lazysizes.min.js' | asset_url }}"></script>
     
 
     {% if settings.currency_conversion_enabled %}
-      <script src="//cdn.shopify.com/s/javascripts/currencies.js" defer></script>
+      <script async src="//cdn.shopify.com/s/javascripts/currencies.js"></script>
     {% endif %}
 
     {%- if template == 'customers/addresses' -%}
-      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer></script>
-      <script src="{{ 'customer_area.js' | shopify_asset_url }}" defer></script>
+      <script async src="{{ 'shopify_common.js' | shopify_asset_url }}"></script>
+      <script async src="{{ 'customer_area.js' | shopify_asset_url }}"></script>
     {%- endif -%}
-
-    <script src="https://cdn.polyfill.io/v3/polyfill.min.js?unknown=polyfill&features=fetch,Element.prototype.closest,Element.prototype.remove,Element.prototype.classList,Array.prototype.includes,Array.prototype.fill,Object.assign,CustomEvent,IntersectionObserver,IntersectionObserverEntry,URL" defer></script>
-    <script src="{{ 'libs.min.js' | asset_url }}" defer></script>
-    <script src="{{ 'ajaxinate.min.js' | asset_url }}" defer></script>
-    <script src="{{ 'theme.js' | asset_url }}" defer></script>
-    <script src="{{ 'custom.js' | asset_url }}" defer></script>
-
+    <script async src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script async src="https://cdn.polyfill.io/v3/polyfill.min.js?unknown=polyfill&features=fetch,Element.prototype.closest,Element.prototype.remove,Element.prototype.classList,Array.prototype.includes,Array.prototype.fill,Object.assign,CustomEvent,IntersectionObserver,IntersectionObserverEntry,URL"></script>
+    <script async src="{{ 'libs.min.js' | asset_url }}"></script>
+    <script async src="{{ 'ajaxinate.min.js' | asset_url }}"></script>
+    <script async src="{{ 'theme.js' | asset_url }}"></script>
+    <script async src="{{ 'custom.js' | asset_url }}"></script>
+	<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
     <script>
       (function () {
         window.onpageshow = function() {
@@ -263,7 +306,7 @@
     </script>
 
     {% render 'microdata-schema' %}
-<script src='https://affilo.io/libs/affiliate.lib.js' ></script> 
+<script async src='https://affilo.io/libs/affiliate.lib.js' ></script> 
     
 <!-- Global site tag (gtag.js) - Google Ads: 853368055 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-853368055"></script>
@@ -302,7 +345,7 @@ try{
     
     
 <!---K Back in Stock--->
-<script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+<script async src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
 <script>
     var klaviyo = klaviyo || [];
     klaviyo.init({
@@ -356,7 +399,7 @@ try{
  src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=WWqy8V"></script>    
     
 <!---Attentive Tag--->
-<script src="https://cdn.attn.tv/kiarasky/dtag.js"></script>
+<script async src="https://cdn.attn.tv/kiarasky/dtag.js"></script>
 
 
 <!-- **BEGIN** Hextom QAB Integration // Main Include - DO NOT MODIFY -->
@@ -373,14 +416,46 @@ try{
   <!-- PickyStory code end -->
   <!-- PickyStory snippet "main_widget_script", do not modify. Safe to remove after the app is uninstalled -->
   {% if content_for_header contains 'pickystory' %}
-    <script defer src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
+    <script async src="https://cdn.pickystory.com/widget/dist/latest/pickystory-widget.min.js"></script>
   {% endif %}
   <!-- PickyStory end snippet "main_widget_script" -->
 <!--Gorgias Chat Widget Start-->
-    <script type="text/javascript" async defer id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=9316"></script>
-<script id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
+    <script type="text/javascript" async id="gorgias-chat-widget-install-v2" src="https://config.gorgias.chat/gorgias-chat-bundle-loader.js?applicationId=9316"></script>
+<script async id="gorgias-chat-shopify-install">!function(_){_.SHOPIFY_PERMANENT_DOMAIN="{{shop.permanent_domain}}",_.SHOPIFY_CUSTOMER_ID="{{customer.id}}",_.SHOPIFY_CUSTOMER_EMAIL="{{customer.email}}"}(window||{});</script><!--Gorgias Chat Widget End-->
 {% render 'th-subscription-scripts' %}
+    
+    
 
-  {% render 'mbc-bundles' %}
+
+    
+    {{ 'bundles.js' | asset_url | script_tag }} 
+    
+    {% comment %}
+    	This is implemented for speed performace by reducing CLS.
+    {% endcomment %}
+    
+    <script>
+      let speed_cls = document.getElementsByClassName('cls');
+
+      for (let cl of speed_cls) {
+        cl.classList.add("flex-it");
+      }
+
+
+    </script>
+    
+
+    
+ 
+    {% render 'okendo-reviews-json-ld' %}
+      {% if template contains 'product' or page.title == "Reviews" %}
+      {{ 'okendo-reviews.js' | asset_url | script_tag }}
+      {% endif %}
+
+    <!--DOOFINDER-SHOPIFY-->
+    {% if content_for_header contains 'doofinder-installed.js' %}
+    {% render 'doofinder-script-tag' %}
+    {% endif %}
+    <!--/DOOFINDER-SHOPIFY-->
 </body>
 </html>
