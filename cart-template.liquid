@@ -1,0 +1,428 @@
+{% capture bb_checkout_link %}{% render 'bb', type: 'bb_checkout_link' %}{% endcapture %}
+
+{% capture bb_total_price %}{% render 'bb', type: 'bb_total_price' %}{% endcapture %}{% assign bb_total_price = bb_total_price | plus: 0 %}
+
+{%- capture section_settings -%}
+{
+  "type": {{ settings.cart_type | json }},
+  "itemCount": {{ cart.item_count }},
+  "drawer": false,
+  "hasShippingEstimator": {% if section.settings.show_shipping_estimator and cart.item_count > 0 %}true{% else %}false{% endif %}
+}
+{%- endcapture -%}
+
+{% assign taggedCount = 0 %}
+{% assign isInsurance = false %}
+{% assign protection_found = false %}
+{% assign cartSize = cart.items.size %}
+
+{%- assign first_variant = 39553534853256 -%}
+{%- assign second_variant = 39553534886024 -%}
+{%- assign third_variant = 39553534918792 -%}
+{%- assign fourth_variant = 39553534951560 -%}
+{%- assign fifth_variant = 39553534984328 -%}
+{%- assign sixth_variant = 39553535017096 -%}
+
+{% for line_item in cart.items %}
+{% if line_item.product.handle contains 'gift' %}
+{% assign taggedCount = taggedCount | plus:1 %}
+{% endif %}
+
+{% if line_item.product.selected_or_first_available_variant.id == first_variant or line_item.product.selected_or_first_available_variant.id == second_variant or line_item.product.selected_or_first_available_variant.id == third_variant or line_item.product.selected_or_first_available_variant.id == fourth_variant or line_item.product.selected_or_first_available_variant.id == fifth_variant or line_item.product.selected_or_first_available_variant.id == sixth_variant %}
+{%- assign protection_found = true -%}
+{% endif %}
+{% endfor %}
+
+{% if cart.items.size == taggedCount %}
+	{% assign isInsurance = false %}
+{% elsif taggedCount > 0 %}
+	{% assign isInsurance = true %}
+
+{% if protection_found %}
+{% assign cartSize = cart.items.size | minus:1 %}
+{% endif %}
+
+{% if cartSize == taggedCount %}
+<script>
+  $(document).ready(function() {
+
+    {% assign protection_item = '' %}
+
+    {% for item in cart.items %}
+    {% if item.id == first_variant or item.id == second_variant or item.id == third_variant or item.id == fourth_variant or item.id == fifth_variant or item.id == sixth_variant %}
+    {% assign protection_item = item.id %}
+    {% endif %}
+    {% endfor %}
+
+    var protection_item = {{protection_item}};
+
+
+    var data = {
+      "id": protection_item,
+      "quantity": 0
+    }
+    $.ajax({
+      type: 'POST',
+      url: '/cart/change.js',
+      data: data,
+      dataType: 'json',
+      success: function() {
+        document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+          bubbles: true
+        }));
+      }
+    });
+  });
+</script>
+{% else %}
+{% endif %}
+
+{% else %}
+	{% assign isInsurance = true %}
+{% endif %}
+
+{% if isInsurance %}
+{% render 'add-insurance-cart' %}
+{% endif %}
+
+{% render 'shipping-insurance' %}
+
+
+   
+
+
+{%- assign tagCount = 0 -%}        
+        {%- for item in cart.items -%}
+        	{%- assign renderList = false -%}
+        		{%- for tag in item.product.tags -%}
+    				{%- if tag contains '__INCART' -%}
+        				{%- assign tagCount = tagCount | plus: 1 -%}
+        				{%- if tagCount == 1 -%}
+                  {%- assign tagArr = tag | split: ':' -%}
+
+        				{%- elsif tagCount == 2 -%}
+        					{%- assign tagArr2 = tag | split: ':' -%}
+
+                {%- elsif tagCount == 3 -%}
+                  {%- assign tagArr3 = tag | split: ':' -%}
+
+                {%- elsif tagCount == 4 -%}
+                  {%- assign tagArr4 = tag | split: ':' -%}
+
+        				{%- endif -%}
+  				 		{%- assign renderList = true -%}
+              				
+    				{%- endif -%}
+    			{%- endfor -%}
+        {%- endfor -%}
+
+        
+        
+        {%- assign hideFirstItem = false -%}
+        {%- assign hideSecondItem = false -%}
+        {%- assign hideThirdItem = false -%}
+        {%- assign hideFourthItem = false -%}
+        {%- for item in cart.items -%}
+
+
+         {%- assign inCartCount = 0 -%}
+         {%- if item.id == all_products[tagArr[1]].selected_or_first_available_variant.id -%}
+        	{%- assign hideFirstItem = true -%}
+          {%- assign newCount = inCartCount | plus: 1 -%}
+
+         {%- elsif item.id == all_products[tagArr2[1]].selected_or_first_available_variant.id -%}
+        	{%- assign hideSecondItem = true -%}
+          {%- assign newCount = inCartCount | plus: 1 -%}
+
+         {%- elsif item.id == all_products[tagArr3[1]].selected_or_first_available_variant.id -%}
+        	{%- assign hideThirdItem = true -%}
+          {%- assign newCount = inCartCount | plus: 1 -%}
+
+         {%- elsif item.id == all_products[tagArr4[1]].selected_or_first_available_variant.id -%}
+        	{%- assign hideFourthItem = true -%}
+          {%- assign newCount = inCartCount | plus: 1 -%}
+          
+
+         {%- endif -%}
+
+
+
+
+        {%- if hideFirstItem and hideSecondItem -%}
+            {%- assign renderList = false -%}
+		    {%- elsif hideFirstItem and tagArr2 == nil -%}
+			      {%- assign renderList = false -%}
+         {%- endif -%}
+        {%- endfor -%}
+
+        {%- assign firstRecommendation = all_products[tagArr[1]] -%}
+        {%- assign secondRecommendation = all_products[tagArr2[1]] -%}
+        {%- assign thirdRecommendation = all_products[tagArr3[1]] -%}
+
+        
+
+        {%- if secondRecommendation.selected_or_first_available_variant.id == firstRecommendation.selected_or_first_available_variant.id or secondRecommendation.selected_or_first_available_variant.id == thirdRecommendation.selected_or_first_available_variant.id or secondRecommendation.selected_or_first_available_variant.id == fourthRecommendation.selected_or_first_available_variant.id -%}
+          {%- assign hideSecondItem = true -%}
+        {%- endif -%}
+
+        {%- if thirdRecommendation.selected_or_first_available_variant.id == firstRecommendation.selected_or_first_available_variant.id or thirdRecommendation.selected_or_first_available_variant.id == secondRecommendation.selected_or_first_available_variant.id or thirdRecommendation.selected_or_first_available_variant.id == fourthRecommendation.selected_or_first_available_variant.id -%}
+          {%- assign hideThirdItem = true -%}
+        {%- endif -%}
+
+        {%- if fourthRecommendation.selected_or_first_available_variant.id == firstRecommendation.selected_or_first_available_variant.id or fourthRecommendation.selected_or_first_available_variant.id == secondRecommendation.selected_or_first_available_variant.id or fourthRecommendation.selected_or_first_available_variant.id == thirdRecommendation.selected_or_first_available_variant.id -%}
+          {%- assign hideFourthItem = true -%}
+        {%- endif -%}
+
+        {%- unless firstRecommendation.empty? or firstRecommendation.available -%}
+          {%- assign hideFirstItem = true -%}
+          {%- assign tagCount = tagCount | minus: 1 -%}
+
+        {%- endunless -%}
+
+        {%- unless secondRecommendation.empty? or secondRecommendation.available-%}
+          {%- assign hideSecondItem = true -%}
+          {%- assign tagCount = tagCount | minus: 1 -%}
+        {%- endunless -%}
+
+        {%- unless thirdRecommendations.empty? or thirdRecommendation.available -%}
+          {%- assign hideThirdItem = true -%}
+          {%- assign tagCount = tagCount | minus: 1 -%}
+
+        {%- endunless -%}
+
+
+
+        {%- assign suggestionsNotEmpty = true -%}
+        {%- if newCount != nil and tagCount <= newCount -%}
+          {%- assign suggestionsNotEmpty = false -%}
+        {%- endif -%}
+
+
+<section class="Cart" data-section-id="{{ section.id }}" data-section-type="cart" data-section-settings='{{ section_settings }}'>
+  {%- if cart.item_count == 0 -%}
+    <div class="EmptyState">
+      <div class="Container">
+        <h1 class="EmptyState__Title Heading u-h5">{{ 'cart.general.empty' | t }}</h1>
+
+        {%- if settings.cart_show_free_shipping_threshold -%}
+          {%- assign threshold_in_cents = settings.cart_free_shipping_threshold | times: 100 -%}
+          {%- capture remaining_amount -%}<span>{{ bb_total_price | minus: threshold_in_cents | abs | money_without_trailing_zeros }}</span>{%- endcapture -%}
+
+          <p class="Text--subdued">{{- 'cart.general.free_shipping_remaining_html' | t: remaining_amount: remaining_amount -}}</p>
+        {%- endif -%}
+
+        <a href="{{ routes.all_products_collection_url }}" class="EmptyState__Action Button Button--primary">{{ 'cart.general.empty_button' | t }}</a>
+      </div>
+    </div>
+  {%- else -%}
+    <div class="Container">
+      <header class="PageHeader">
+        <div class="SectionHeader SectionHeader--center">
+          <h1 class="SectionHeader__Heading Heading u-h1">{{ 'cart.general.title' | t }}</h1>
+
+          {%- if settings.cart_show_free_shipping_threshold -%}
+            {%- assign threshold_in_cents = settings.cart_free_shipping_threshold | times: 100 -%}
+
+            <p class="SectionHeader__Description Text--subdued">
+              {%- if bb_total_price >= threshold_in_cents -%}
+                {{- 'cart.general.free_shipping' | t -}}
+              {%- else -%}
+                {%- capture remaining_amount -%}<span>{{ bb_total_price | minus: threshold_in_cents | abs | money_without_trailing_zeros }}</span>{%- endcapture -%}
+                {{- 'cart.general.free_shipping_remaining_html' | t: remaining_amount: remaining_amount -}}
+              {%- endif -%}
+            </p>
+          {%- endif -%}
+        </div>
+      </header>
+      <div class="PageContent">
+        <style>
+           .lamp_button {
+           border: 1px solid #feb4c4;
+           padding: 5px;
+           width: 100%;
+           color: #feb4c4;
+           }
+           .lamp_selected {
+           color: white;
+           background: #feb4c4;
+           }
+           .lamp_prompt {
+           display: none;
+           max-width: 560px;
+           text-align: center;
+           padding: 20px;
+           border: 1px solid #feb4c4;
+           margin: auto;
+           }
+           #lamp_prompt {
+           animation: fadeIn 1000ms both
+           }
+           @keyframes fadeIn {
+           from {
+           opacity: 0;
+           }
+           to {
+           opacity: 1;
+           }
+           }
+        </style>
+        <div id="lamp_prompt" class ="lamp_prompt" style="">
+           <div>
+              <img src="//cdn.shopify.com/s/files/1/0311/6551/3864/products/KS-Beyond-Home-Lamp-white-1-Web_240x.png?v=1605142400">
+           </div>
+           <div  style="margin-top: 20px; max-width: 200px;">
+              <h4 style="font-weight: 600; text-transform: uppercase;"> You Get a Free Lamp! </h4>
+              <p> Choose your color! </p>
+              <div style="display: flex; grid-gap: 1em;">
+                 <a class="lamp_button {% if line_item.id == 34589049290888 %} lamp_selected {% endif %}" onclick="promiseResolve(34589049290888)"> White </a>
+                 <a class="lamp_button {% if line_item.id == 34589312155784 %} lamp_selected {% endif %}" onclick="promiseResolve(34589312155784)"> Pink </a>
+              </div>
+           </div>
+           <div>
+              <img src="//cdn.shopify.com/s/files/1/0311/6551/3864/products/KS-Beyond-Home-Lamp-pink_240x.png?v=1637777212">
+           </div>
+        </div>
+        
+        <form action="{% if bb_checkout_link != blank %}{{ bb_checkout_link }}{% else %}{{ routes.cart_url }}{% endif %}" method="POST" class="Cart Cart--expanded" novalidate>
+       
+          
+          {% render 'bb', type: 'cart' %}
+                 
+          <input type="hidden" name="attributes[collection_mobile_items_per_row]" value="">
+          <input type="hidden" name="attributes[collection_desktop_items_per_row]" value="">
+
+          {% render 'cart-items' %}
+
+           <footer class="Cart__Footer" {% if renderList and suggestionsNotEmpty %}style='border-top: 2px solid #feb4c4'{% endif %}>
+
+            {%- if renderList and suggestionsNotEmpty -%}
+              <div class='recommendations-container'>
+                  <h3 class='Text--subdued' style='font-size: 16px'>Did you forget...</h3>
+                  
+                  <div class="product-recommendations__list" data-base-url="{{ routes.product_recommendations_url }}" data-product-id="{{ itemToPost }}">
+                    {%- if firstRecommendation.available and hideFirstItem != true -%}
+                      {%- render 'product-item', product: firstRecommendation, passed_down_id: firstRecommendation.selected_or_first_available_variant.id -%}
+                    {%- endif -%}
+                    {%- if tagArr2.size > 0 and hideSecondItem != true -%}
+                      {%- render 'product-item', product: secondRecommendation, passed_down_id: secondRecommendation.selected_or_first_available_variant.id -%}
+                    {%- endif -%}
+                    {%- if tagArr3.size > 0 and hideThirdItem != true and hideSecondItem == true or hideFirstItem == true -%}
+                      {%- render 'product-item', product: thirdRecommendation, passed_down_id: thirdRecommendation.selected_or_first_available_variant.id  -%}
+                    {%- endif -%}
+                    </div>
+                </div>
+         {%- endif -%}
+            {%- if settings.cart_enable_notes -%}
+             {% if renderList %}<div class='Cart_Taxes__Container'>{% endif %}
+              <div class="Cart__NoteContainer">
+                <span class="Cart__NoteButton">{{ 'cart.general.add_note' | t }}</span>
+                <textarea class="Cart__Note Form__Textarea" name="note" id="cart-note" rows="4" placeholder="{{ 'cart.general.note_placeholder' | t }}">{{ cart.note }}</textarea>
+              </div>
+            {%- endif -%}
+
+            <div class="Cart__Recap">
+              {%- capture shipping_and_taxes_notice -%}{{ 'cart.general.shipping_and_taxes_notice' | t }}{%- endcapture -%}
+
+              {%- if cart.cart_level_discount_applications != blank -%}
+                {%- for discount_application in cart.cart_level_discount_applications -%}
+                  <p class="Cart__Discount Heading u-h6">{{ 'cart.general.discount' | t }} ({{ discount_application.title }}): -<span data-money-convertible>{{ discount_application.total_allocated_amount | money_without_trailing_zeros }}</span></p>
+                {%- endfor -%}
+              {%- endif -%}
+
+              <p class="Cart__Total Heading u-h6">{{ 'cart.general.total' | t }}: <span data-money-convertible>{{ bb_total_price | money_without_trailing_zeros }}</span></p>
+
+              {%- if shipping_and_taxes_notice != blank -%}
+                <p class="Cart__Taxes Text--subdued">{{ shipping_and_taxes_notice }}</p>
+              {%- endif -%}
+
+              <div class="cart-actions">
+                <a onclick="clear_cart()" class="Button Button--primary">Clear Cart</a>
+
+                <button type="submit" name="checkout" class="Cart__Checkout Button Button--primary Button--full">{{ 'cart.general.checkout' | t }}</button>
+                                  <script>
+               
+                                    function clear_cart() {
+                                      jQuery
+                                      .post("/cart/clear.js", {
+                                      })
+                                      .then(function (res) {
+                                        document.documentElement.dispatchEvent(
+                                          new CustomEvent("cart:refresh", {
+                                            bubbles: true,
+                                          })
+                                        );
+                                      });
+                                    }
+                
+                
+                
+              </script>
+              </div>
+         
+
+                
+             </div>
+              
+              </div>
+          </footer>
+        </form>
+
+        {%- if section.settings.show_shipping_estimator -%}
+          <div class="Section Section--spacingExtraLarge">
+            <div class="Panel">
+              <h2 class="Panel__Title Heading u-h2">{{ 'cart.shipping_estimator.title' | t }}</h2>
+
+              <div class="Panel__Content">
+                <div class="ShippingEstimator">
+                  <div class="ShippingEstimator__Form">
+                    <div class="ShippingEstimator__Country Form__Select Select Select--primary">
+                      {%- render 'icon' with 'select-arrow' -%}
+                      <select name="country" title="{{ 'cart.shipping_estimator.country' | t }}" data-default="{% if customer %}{{ customer.default_address.country }}{% elsif section.settings.shipping_estimator_default_country != '' %}{{ section.settings.shipping_estimator_default_country }}{% endif %}">{{ all_country_option_tags }}</select>
+                    </div>
+
+                    <div class="ShippingEstimator__Province Form__Select Select Select--primary" style="display: none">
+                      {%- render 'icon' with 'select-arrow' -%}
+                      <select name="province" title="{{ 'cart.shipping_estimator.province' | t }}"></select>
+                    </div>
+
+                    <input type="text" class="ShippingEstimator__Zip Form__Input" name="zip" placeholder="{{ 'cart.shipping_estimator.zip_code' | t }}">
+
+                    <button type="button" class="ShippingEstimator__Submit Button Button--primary">{{ 'cart.shipping_estimator.estimate' | t }}</button>
+                  </div>
+
+                  <div class="ShippingEstimator__Error Alert Alert--error" style="display: none"></div>
+                  <div class="ShippingEstimator__Results">
+                    <div class="ShippingEstimator__ResultsInner"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+         
+      </div>
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "Cart page",
+  "class": "shopify-section--bordered",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_shipping_estimator",
+      "label": "Show shipping rates calculator",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "shipping_estimator_default_country",
+      "label": "Default country to use",
+      "info": "If your customer is logged-in, the country in his default shipping address will be selected.",
+      "default": "United States"
+    }
+  ]
+}
+{% endschema %}
