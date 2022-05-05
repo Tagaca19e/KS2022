@@ -1,3 +1,4 @@
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
 {% capture bb_checkout_link %}{% render 'bb', type: 'bb_checkout_link' %}{% endcapture %}
 
 {% capture bb_total_price %}{% render 'bb', type: 'bb_total_price' %}{% endcapture %}{% assign bb_total_price = bb_total_price | plus: 0 %}
@@ -198,9 +199,9 @@
         {%- endif -%}
 
 
-<section class="Cart" data-section-id="{{ section.id }}" data-section-type="cart" data-section-settings='{{ section_settings }}'>
+<section data-section-id="{{ section.id }}"  data-section-type="cart" data-section-settings='{{ section_settings }}'>
   {%- if cart.item_count == 0 -%}
-    <div class="EmptyState">
+    <div class="EmptyState Cart">
       <div class="Container">
         <h1 class="EmptyState__Title Heading u-h5">{{ 'cart.general.empty' | t }}</h1>
 
@@ -215,7 +216,7 @@
       </div>
     </div>
   {%- else -%}
-    <div class="Container">
+    <div class="Container Cart">
       <header class="PageHeader">
         <div class="SectionHeader SectionHeader--center">
           <h1 class="SectionHeader__Heading Heading u-h1">{{ 'cart.general.title' | t }}</h1>
@@ -283,7 +284,7 @@
            </div>
         </div>
         
-        <form action="{% if bb_checkout_link != blank %}{{ bb_checkout_link }}{% else %}{{ routes.cart_url }}{% endif %}" method="POST" class="Cart Cart--expanded" novalidate>
+        <form action="{% if bb_checkout_link != blank %}{{ bb_checkout_link }}{% else %}{{ routes.cart_url }}{% endif %}" method="POST" class="Cart--expanded" novalidate>
        
           
           {% render 'bb', type: 'cart' %}
@@ -369,7 +370,7 @@
 
         {%- if section.settings.show_shipping_estimator -%}
           <div class="Section Section--spacingExtraLarge">
-            <div class="Panel">
+            <div class="Panel" style="max-width: 700px; margin: auto;">
               <h2 class="Panel__Title Heading u-h2">{{ 'cart.shipping_estimator.title' | t }}</h2>
 
               <div class="Panel__Content">
@@ -402,6 +403,7 @@
          
       </div>
     </div>
+  
   {%- endif -%}
 </section>
 
