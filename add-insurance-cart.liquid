@@ -1,0 +1,227 @@
+{% comment %}
+==================================================================
+  Insurance Script
+  EDITED: 4/12/22
+  BY: WEBDEV
+==================================================================
+{% endcomment %}
+
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.4/axios.min.js" integrity="sha512-lTLt+W7MrmDfKam+r3D2LURu0F47a3QaW5nF0c6Hl0JDZ57ruei+ovbg7BrZ+0bjVJ5YgzsAWE+RreERbpPE1g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+
+    {% assign item_found = false %}
+    {%- assign first_variant = 39553534853256 -%}
+    {%- assign second_variant = 39553534886024 -%}
+    {%- assign third_variant = 39553534918792 -%}
+    {%- assign fourth_variant = 39553534951560 -%}
+    {%- assign fifth_variant = 39553534984328 -%}
+    {%- assign sixth_variant = 39553535017096 -%}
+
+  {% for item in cart.items %}
+    {% if item.id == first_variant or item.id == second_variant or item.id == third_variant or item.id == fourth_variant or item.id == fifth_variant or item.id == sixth_variant %}
+    	{% assign item_found = true %}
+        {% assign item_id = item.id %}
+        {% assign item_key = item.key | json %}
+    {% endif %}
+  {% endfor %}
+
+  {% comment %}
+  - Enable for testing - {{cart.total_price}}
+  ------------------------------------------------------
+  <script> 
+    console.log("This is total: ", {{cart.total_price}});
+  </script>
+  ------------------------------------------------------
+  {% endcomment %}
+
+  {% if item_found %}
+    <script>
+
+      document.addEventListener('DOMContentLoaded', () => {
+                                
+        let init_total = {{ cart.total_price }}
+        let item_id = {{ item_id }}                    
+     	let dataVar = {
+            39553534853256 : 275, 
+            39553534886024 : 375, 
+            39553534918792 : 475, 
+            39553534951560 : 575, 
+            39553534984328 : 799, 
+            39553535017096 : 999};
+
+		let cart_total = init_total - dataVar[item_id];
+        const switch_insurance_item = (found, replace_with) => {   
+         const items = [{ id: replace_with, quantity: 1 }]
+          axios.post('/cart/change.js', {
+            'id': found,
+            'quantity': 0
+          }).then(function() {
+            axios.post('/cart/add.js', {
+        	items: [
+          	{
+            	id:	replace_with,
+            	quantity: 1
+          	}]
+      		}).then(function(res) {
+                         document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+          })                              
+        }
+                 
+        if (cart_total >= 14999 && cart_total <= 24998 && (item_id !== {{second_variant}}) ) {
+          switch_insurance_item({{ item_key }}, {{ second_variant }});
+        } else if (cart_total >= 24999 && cart_total <= 34998 && (item_id !== {{third_variant}})) {
+          switch_insurance_item({{ item_key }}, {{ third_variant }});
+        } else if (cart_total >= 34999 && cart_total <= 44998  && (item_id !== {{fourth_variant}})) {
+          switch_insurance_item({{ item_key }}, {{ fourth_variant }});
+        } else if (cart_total >= 44999 && cart_total <= 60100 && (item_id !== {{fifth_variant}})) {
+          switch_insurance_item({{ item_key }}, {{ fifth_variant }});
+        } else if (cart_total >= 60101 && (item_id !== {{sixth_variant}})) {
+          switch_insurance_item({{ item_key }}, {{ sixth_variant }});
+      	} else if (cart_total <= 14998 && (item_id !== {{first_variant}})){
+          switch_insurance_item({{ item_key }}, {{ first_variant }});
+      	} else if (cart_total == 0) {
+      	     axios.post('/cart/change.js', {
+               'id': {{item_key}},
+            'quantity': 0
+          }).then(function(res) {
+               document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+          
+      	}
+      })
+      
+  </script>
+  {% elsif cart.total_price <= 14998 %}
+
+    <script>
+      if (!sessionStorage.getItem('removed_insurance')){
+      	axios.post('/cart/add.js', {
+        items: [
+          {
+            id:	{{ first_variant }},
+            quantity: 1
+          }
+        ]
+      }).then(function(res) {
+                         document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+      }
+    </script>
+
+   {% elsif cart.total_price >= 14999 and cart.total_price <= 24998 %}
+
+    <script>      
+      if (!sessionStorage.getItem('removed_insurance')){
+        axios.post('/cart/add.js', {
+          items: [
+            {
+              id:	{{ second_variant }},
+              quantity: 1
+            }
+          ]
+        }).then(function(res) {
+                         document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+      }
+    </script>
+
+    {% elsif cart.total_price >= 24999 and cart.total_price <= 34998 %}
+
+    <script>
+      if (!sessionStorage.getItem('removed_insurance')){
+        axios.post('/cart/add.js', {
+          items: [
+            {
+              id:	{{ third_variant }},
+              quantity: 1
+            }
+          ]
+        }).then(function(res) {
+                         document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+      }
+    </script>
+
+    {% elsif cart.total_price >= 34999 and cart.total_price <= 44998 %}
+
+    <script>
+      if (!sessionStorage.getItem('removed_insurance')){
+        axios.post('/cart/add.js', {
+          items: [
+            {
+              id:	{{ fourth_variant }},
+              quantity: 1
+            }
+          ]
+        }).then(function(res) {
+                         document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+      }
+    </script>
+
+    {% elsif cart.total_price >= 44999 and cart.total_price <= 60100 %}
+
+    <script>
+      if (!sessionStorage.getItem('removed_insurance')){
+        axios.post('/cart/add.js', {
+          items: [
+            {
+              id:	{{ fifth_variant }},
+              quantity: 1
+            }
+          ]
+        }).then(function(res) {
+                         document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+      }
+    </script>
+
+    {% elsif cart.total_price >= 60101 %}
+
+    <script>
+      if (!sessionStorage.getItem('removed_insurance')){
+        axios.post('/cart/add.js', {
+          items: [
+            {
+              id:	{{ sixth_variant }},
+              quantity: 1
+            }
+          ]
+        }).then(function(res) {
+                         document.documentElement.dispatchEvent(
+                 new CustomEvent("cart:refresh", {
+                   bubbles: true,
+                 })
+               );
+          })
+      }
+    </script>
+  {% endif %}
