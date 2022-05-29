@@ -1,0 +1,627 @@
+function clear_cart() {
+  jQuery
+  .post("/cart/clear.js", {
+  })
+  .then(function (res) {
+    document.documentElement.dispatchEvent(
+      new CustomEvent("cart:refresh", {
+        bubbles: true,
+      })
+    );
+  });
+}
+
+// $('#ProductFormBundle button').on('click', function(e) {
+//   e.preventDefault();
+
+//   var variantsArr = [];
+//   var variantsTitle = [];
+
+//   var property_inputS = $('.property_input');
+//   if (property_inputS.length) {
+//     property_inputS.each(function(index, item) {
+//       if ($(item).val() != '') {
+//         var itemID = $(this).val() * 1;
+//         variantsArr.push(itemID);
+//       }
+//     });
+//   }
+
+//   var property_inputT = $('.property_input');
+//   if (property_inputT.length) {
+//     property_inputT.each(function(index, item) {
+//       if (item.getAttribute('data-name') != null) {
+//         variantsTitle.push(item.getAttribute('data-name'));
+//       }
+//     });
+//   }
+
+//   function addItemToCart() {
+
+//     var data = {
+//       "id": variantsArr
+//     }
+
+//     var inputString1_id = $("#bundle_hidden1").attr('data-name');
+//     var inputString2_id = $("#bundle_hidden2").attr('data-name');
+//     var inputStrin3_id = $("#bundle_hidden3").attr('data-name');
+
+
+
+//     let data_att = document.getElementsByClassName('product-option');
+//     for (let i = 0; i < data_att.length; i++) {
+//       let getAtt = data_att[i].getAttribute('data-title');
+//       if (getAtt != null) {
+//         variantsTitle.push(getAtt);
+//       }
+//     }
+
+//     let top = [inputString1_id];
+ 
+//     let unique_id = variantsArr.join('');
+
+
+//     let values = [];
+
+//     for (let i of variantsArr) {
+//       let temp = {
+//         id: i,
+//         quantity: 1,
+//         properties: {
+//           "_bundle_id": unique_id
+//         }
+//       }
+
+//       values.push(temp);
+//     }
+
+//     let top_obj = {
+//       id: top[0],
+//       quantity: 1,
+//     };
+
+//     let properties = {};
+
+//     for (let i = 0; i < variantsTitle.length; i++) {
+//       let idx = i + 1;
+//       idx = idx.toString();
+//       let name = "- "+variantsTitle[i];
+//       properties[name] = ":";
+//     }
+
+//     properties["_bundle_idt"] = unique_id;
+//     top_obj["properties"] = properties;
+//     values.push(top_obj);
+//     axios.post('/cart/add.js', {
+//       items: values
+//     })
+//     .then(function(res) {
+//       insurance_checker();
+//     })
+//     .then(function(res) {
+//       document.documentElement.dispatchEvent(new CustomEvent('cart:refresh', {
+//         bubbles: true
+//       }));
+//     })
+//   }
+
+//   if (variantsArr.length) {
+//     addItemToCart();
+//   }
+// });
+
+function insurance_checker() {
+	
+
+  
+    jQuery.getJSON("/cart.js", function(cart) {
+      
+		let body = document.getElementsByTagName('body');
+
+//         body[0].style ="pointer-events: none !important;";
+        console.log("This is start body: ", body[0]);
+      
+      
+        let first_variant = 39553534853256;
+        let second_variant = 39553534886024;
+        let third_variant = 39553534918792;
+        let fourth_variant = 39553534951560;
+        let fifth_variant = 39553534984328;
+        let sixth_variant = 39553535017096;
+
+
+        let items = cart.items;
+        let cart_total = cart.total_price;
+        console.log("Function hello fired are items: ", items, cart.total_price);
+        let package_present = false;
+        let package_present_id = 0;
+        let package_present_price = 0;
+      	let package_present_key = "";
+      
+        for (let item of items) {
+            console.log(item);
+
+            if (item.handle == "kiara-sky-package-protection") {
+                package_present = true;
+                package_present_id = item.id;
+              	package_present_key = item.key;
+            }
+        }
+
+        let dataVar = {
+            0: 0,
+            39553534853256: 275,
+            39553534886024: 375,
+            39553534918792: 475,
+            39553534951560: 575,
+            39553534984328: 799,
+            39553535017096: 999
+        };
+
+        let final_cart_total = cart_total - dataVar[package_present_id];
+
+        console.log("This is cart total: ", final_cart_total, package_present_id);
+
+
+        function add_insurance(id) {
+
+
+            axios
+                .post("/cart/add.js", {
+                    items: [{
+                        id: id,
+                        quantity: 1,
+                    }, ],
+                })
+                .then(function(res) {
+                    document.documentElement.dispatchEvent(
+                        new CustomEvent("cart:refresh", {
+                            bubbles: true,
+                        })
+                    );
+                  console.log("just added it");
+  
+//                   body[0].style ="pointer-events: unset !important;";
+                  console.log("This is end body: ", body[0]);
+                });
+
+
+        }
+
+
+        function change_insurance(to_remove, to_add) {
+          
+
+          
+            jQuery
+                .post("/cart/change.js", {
+                    quantity: 0,
+                    id: to_remove,
+                }).then(function(res) {
+                    axios
+                        .post("/cart/add.js", {
+                            items: [{
+                                id: to_add,
+                                quantity: 1,
+                            }, ],
+                        }).then(function(res) {
+                            document.documentElement.dispatchEvent(
+                                new CustomEvent("cart:refresh", {
+                                    bubbles: true,
+                                })
+                            );
+                      
+                      console.log("just changed it");
+  
+                    body[0].style ="pointer-events: unset !important;";
+                    console.log("This is end body: ", body[0]);
+                        });
+                })
+
+        }
+
+        if (package_present == false) {
+          console.log("This is insurance, ", sessionStorage.getItem('removed_insurance'));
+			if (!sessionStorage.getItem('removed_insurance')) {
+
+            if (final_cart_total <= 14998 && final_cart_total >= 1) {
+                add_insurance(first_variant);
+            } else if (final_cart_total >= 14999 && final_cart_total <= 24998) {
+                add_insurance(second_variant);
+            } else if (final_cart_total >= 24999 && final_cart_total <= 34998) {
+                add_insurance(third_variant);
+
+            } else if (final_cart_total >= 34999 && final_cart_total <= 44998) {
+                add_insurance(fourth_variant);
+
+            } else if (final_cart_total >= 44999 && final_cart_total <= 60100) {
+                add_insurance(fifth_variant);
+
+            } else if (final_cart_total >= 60101) {
+                add_insurance(sixth_variant);
+            } else {
+                    body[0].style ="pointer-events: unset !important;";
+                  console.log("This is end body: ", body[0]);
+            }
+            }
+
+        } else {
+			
+          
+                if (final_cart_total >= 14999 && final_cart_total <= 24998 && (package_present_id !== second_variant)) {
+                    change_insurance(package_present_id, second_variant);
+                } else if (final_cart_total >= 24999 && final_cart_total <= 34998 && (package_present_id !== third_variant)) {
+                    change_insurance(package_present_id, third_variant);
+                } else if (final_cart_total >= 34999 && final_cart_total <= 44998 && (package_present_id !== fourth_variant)) {
+                    change_insurance(package_present_id, fourth_variant);
+                } else if (final_cart_total >= 44999 && final_cart_total <= 60100 && (package_present_id !== fifth_variant)) {
+                    console.log("fifth fired");
+                    change_insurance(package_present_id, fifth_variant);
+                } else if (final_cart_total >= 60101 && (package_present_id !== sixth_variant)) {
+                    change_insurance(package_present_id, sixth_variant);
+                } else if (final_cart_total <= 14998 && final_cart_total >= 1 && (package_present_id !== first_variant)) {
+                    change_insurance(package_present_id, first_variant);
+                } else if (final_cart_total == 0) {
+
+                  remove_quantity_v2(package_present_key);
+                  
+                } else {
+                  body[0].style ="pointer-events: unset !important;";
+                  console.log("This is end body: ", body[0]);
+                }
+            }
+    
+    });
+  
+
+
+  
+}
+
+function add_quant_v2(item) {
+
+    axios
+        .post("/cart/add.js", {
+            items: [{
+                id: item,
+                quantity: 1,
+            }, ],
+        })
+        .then(function(res) {
+
+
+            insurance_checker();
+
+
+
+        })
+        .then(function(res) {
+            document.documentElement.dispatchEvent(
+                new CustomEvent("cart:refresh", {
+                    bubbles: true,
+                })
+            );
+        });
+}
+
+
+
+function minus_cart_v2(item) {
+    jQuery.getJSON("/cart.js", function(cart) {
+        let items = cart.items;
+        let temp_cart = [];
+        let original_quantity = 0;
+        for (let i = 0; i < items.length; i++) {
+            console.log(items[i].product_id, item);
+            if (items[i].key == item) {
+                temp_cart.push(items[i].quantity - 1);
+            } else {
+                temp_cart.push(items[i].quantity);
+            }
+        }
+
+        minQuantExecute(temp_cart);
+
+    });
+}
+
+
+function remove_quantity_v2(item) {
+    jQuery.getJSON("/cart.js", function(cart) {
+        let items = cart.items;
+        let temp_cart = [];
+        let original_quantity = 0;
+        for (let i = 0; i < items.length; i++) {
+            console.log(items[i].product_id, item);
+            if (items[i].key == item) {
+                temp_cart.push(0);
+            } else {
+                temp_cart.push(items[i].quantity);
+            }
+        }
+
+        console.log("This is remove item, ", temp_cart);
+        minQuantExecute(temp_cart);
+
+    });
+}
+
+
+function removeInsurance(id) {
+
+    jQuery
+        .post("/cart/change.js", {
+            quantity: 0,
+            id: id,
+        }).then(function(res) {
+
+			sessionStorage.setItem('removed_insurance', true);
+
+        })
+        .then(function(res) {
+            document.documentElement.dispatchEvent(
+                new CustomEvent("cart:refresh", {
+                    bubbles: true,
+                })
+            );
+        });
+
+}
+
+
+
+
+function addQuantity(unique_id) {
+    let updated_quant = [];
+
+    jQuery.getJSON("/cart.js", function(cart) {
+        let items = cart.items;
+
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].properties == null) {
+                updated_quant[i] = items[i].quantity;
+            } else if (
+                (items[i].properties["_bundle_idt"] != null &&
+                    items[i].properties["_bundle_idt"] == unique_id) ||
+                (items[i].properties["_bundle_id"] != undefined &&
+                    items[i].properties["_bundle_id"] == unique_id)
+            ) {
+                updated_quant[i] = items[i].quantity + 1;
+            } else {
+                updated_quant[i] = items[i].quantity;
+            }
+        }
+        minQuantExecute(updated_quant);
+    });
+}
+
+function minusQuantity(unique_id) {
+    let updated_quant = [];
+
+    jQuery.getJSON("/cart.js", function(cart) {
+        let items = cart.items;
+
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].properties == null) {
+                updated_quant[i] = items[i].quantity;
+            } else if (
+                (items[i].properties["_bundle_idt"] != null &&
+                    items[i].properties["_bundle_idt"] == unique_id) ||
+                (items[i].properties["_bundle_id"] != undefined &&
+                    items[i].properties["_bundle_id"] == unique_id)
+            ) {
+                updated_quant[i] = items[i].quantity - 1;
+            } else {
+                updated_quant[i] = items[i].quantity;
+            }
+        }
+        minQuantExecute(updated_quant);
+    });
+}
+
+function minQuantExecute(updated_quant) {
+    axios
+        .post("/cart/update.js", {
+            updates: updated_quant,
+        })
+        .then(function(res) {
+            insurance_checker();
+
+        })
+        .then(function(res) {
+            document.documentElement.dispatchEvent(
+                new CustomEvent("cart:refresh", {
+                    bubbles: true,
+                })
+            );
+        });
+}
+
+function removeQuantity(unique_id) {
+    let updated_quant = [];
+
+    jQuery.getJSON("/cart.js", function(cart) {
+        let items = cart.items;
+        for (let i = 0; i < items.length; i++) {
+            if (items[i].properties == null) {
+                updated_quant[i] = items[i].quantity;
+            } else if (
+                (items[i].properties["_bundle_idt"] != null &&
+                    items[i].properties["_bundle_idt"] == unique_id) ||
+                (items[i].properties["_bundle_id"] != undefined &&
+                    items[i].properties["_bundle_id"] == unique_id)
+            ) {
+                updated_quant[i] = 0;
+            } else {
+                updated_quant[i] = items[i].quantity;
+            }
+        }
+        minQuantExecute(updated_quant);
+    });
+}
+
+
+// ----------------------------------------
+// This section is for the Mothers Day sale
+// ----------------------------------------
+// let global_lamp_supposed = 0;
+
+// function promiseResolve(id) {
+
+//     axios
+//         .post("/cart/add.js", {
+//             items: [{
+//                 id: id,
+//                 quantity: global_lamp_supposed,
+//             }, ],
+//         })
+//         .then(function(res) {
+//             document.documentElement.dispatchEvent(
+//                 new CustomEvent("cart:refresh", {
+//                     bubbles: true,
+//                 })
+//             );
+//         });
+
+//     document.getElementById('lamp_prompt').style = "display: none;"
+// }
+
+// function detector() {
+//     let global_gel_present = 0;
+//     let total_gel = 0;
+//     let lamp_present = [0, 0];
+//     jQuery.getJSON("/cart.js", function(cart) {
+
+//         let items = cart.items;
+//         let cart_array = [];
+//         let gel_builder_present = 0;
+//         let gel_builder_total = 0;
+
+//         for (let item of items) {
+
+//             if (item.id == 34589049290888 || item.id == 34589312155784) {
+//                 lamp_present[0] = 1;
+//                 lamp_present[1] += item.quantity;
+//             }
+
+//             if ((
+//                     item.product_type == "GEL POLISH" ||
+//                     item.product_type == "GEL EFFECT" ||
+//                     item.product_type == "gel essential" ||
+//                     item.product_type == "Gel Essential") && item.discounts.length == 0) {
+//                 total_gel += item.quantity;
+//             }
+
+
+//             if (item.product_id == 4670444896392 && item.final_price == 0) {
+//                 gel_builder_present += item.quantity;
+//             } else if (item.product_id == 4670444896392 && item.final_price > 0) {
+//                 gel_builder_total += item.quantity;
+//             }
+//         }
+
+//         let gel_required = gel_builder_total - gel_builder_present;
+//         let lamp_needed = Math.trunc(total_gel / 10);
+//         let lamp_supposed = lamp_needed - lamp_present[1];
+
+
+//         global_gel_present = gel_builder_total;
+
+//         if (lamp_supposed > 0) {
+//             document.getElementById('lamp_prompt').style = "display: flex; !important";
+//             global_lamp_supposed = lamp_supposed;
+
+//         } else if (lamp_supposed <= 0) {
+//         }
+
+//         if (gel_required > 0) {
+//             axios
+//                 .post("/cart/add.js", {
+//                     items: [{
+//                         id: 32764401287304,
+//                         quantity: gel_required,
+//                     }, ],
+//                 })
+//                 .then(function(res) {
+//                     document.documentElement.dispatchEvent(
+//                         new CustomEvent("cart:refresh", {
+//                             bubbles: true,
+//                         })
+//                     );
+//                 });
+//         }
+//     });
+// }
+// let pointer_event = document.getElementById("pointer_event");
+
+// if (pointer_event !== null) {
+//     pointer_event.addEventListener("click", delayer);
+// }
+
+// function delayer() {
+
+
+//     setTimeout(function() {
+//         detector();
+//     }, 700);
+//     //   detector();
+// }
+
+// delayer();
+
+// function minusQuantityGels(id) {
+//     jQuery.getJSON("/cart.js", function(cart) {
+//         let items = cart.items;
+
+//         let gel_builder_quant = 0;
+
+//         for (let item of items) {
+//             if (item.id == 32764401287304 && item.final_price > 0) {
+//                 gel_builder_quant += item.quantity;
+//             }
+//         }
+
+//         jQuery
+//             .post("/cart/change.js", {
+//                 quantity: gel_builder_quant - 1,
+//                 id: 32764401287304,
+//             })
+//             .then(function(res) {
+//                 document.documentElement.dispatchEvent(
+//                     new CustomEvent("cart:refresh", {
+//                         bubbles: true,
+//                     })
+//                 );
+//             });
+//     });
+// }
+
+// function addQuantityGels(id) {
+//     jQuery.getJSON("/cart.js", function(cart) {
+//         let items = cart.items;
+//         let gel_builder_quant = 0;
+
+//         for (let item of items) {
+//             if (item.id == 32764401287304 && item.final_price > 0) {
+//                 gel_builder_quant += item.quantity;
+//             }
+//         }
+//         jQuery
+//             .post("/cart/change.js", {
+//                 quantity: gel_builder_quant + 1,
+//                 id: 32764401287304,
+//             })
+//             .then(function(res) {
+//                 document.documentElement.dispatchEvent(
+//                     new CustomEvent("cart:refresh", {
+//                         bubbles: true,
+//                     })
+//                 );
+//             });
+//     });
+// }
+
+
+// window.addEventListener("click", function() {
+//     delayer();
+// });
